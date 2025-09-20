@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur de Poutrelles Ajourées</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fef7f2;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: #2E8B57;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            min-height: 600px;
+        }
+
+        .input-section {
+            padding: 40px;
+            background: #f0f8f0;
+            border-right: 1px solid #e9ecef;
+        }
+
+        .results-section {
+            padding: 40px;
+            background: white;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            color: #2E8B57;
+            margin-bottom: 25px;
+            font-weight: 600;
+            border-bottom: 3px solid #32CD32;
+            padding-bottom: 10px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .input-field {
+            flex: 1;
+        }
+
+        .dimension-input {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .dimension-input input {
+            flex: 1;
+        }
+
+        .dimension-input span {
+            font-size: 0.9em;
+            color: #666;
+            min-width: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2E8B57;
+            font-size: 0.95em;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #32CD32;
+            box-shadow: 0 0 0 3px rgba(50, 205, 50, 0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .result-card {
+            background: #f0f8f0;
+            border-radius: 4px;
+            padding: 20px;
+            border-left: 4px solid #32CD32;
+        }
+
+        .result-label {
+            font-size: 0.9em;
+            color: #2E8B57;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .result-value {
+            font-size: 1.3em;
+            color: #2E8B57;
+            font-weight: 700;
+        }
+
+        .poutrelle-options {
+            background: #f6fdf6;
+            border-radius: 4px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .poutrelle-option {
+            background: #fefffe;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            border: 1px solid #e9ecef;
+        }
+
+        .poutrelle-option:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .poutrelle-option.selected {
+            border-left: 4px solid #32CD32;
+            background: #f0fdf0;
+        }
+
+        .poutrelle-title {
+            font-weight: 700;
+            color: #2E8B57;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .poutrelle-specs {
+            font-size: 0.9em;
+            color: #228B22;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .no-solution {
+            background: #fdf2f2;
+            border: 2px solid #e74c3c;
+            border-radius: 4px;
+            padding: 20px;
+            text-align: center;
+            color: #c0392b;
+            font-weight: 600;
+        }
+
+        .charge-preset {
+            background: #e8f5e8;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .preset-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .preset-btn {
+            background: #32CD32;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .preset-btn:hover {
+            background: #228B22;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .input-section {
+                border-right: none;
+                border-bottom: 1px solid #e9ecef;
+            }
+
+            .input-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .poutrelle-specs {
+                grid-template-columns: 1fr;
+            }
+
+            .checkbox-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Calculateur de Poutrelles Ajourées</h1>
+            <p>Dimensionnement selon les tableaux CECOBOIS</p>
+        </div>
+
+        <div class="main-content">
+            <div class="input-section">
+                <h2 class="section-title">Paramètres de conception</h2>
+                
+                <div class="input-group">
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label for="portee">Portée libre</label>
+                            <div class="dimension-input">
+                                <input type="number" id="porteePieds" step="1" min="10" max="40" placeholder="Pieds">
+                                <span>pi</span>
+                                <input type="number" id="porteePouces" step="0.5" min="0" max="11.5" placeholder="Pouces">
+                                <span>po</span>
+                            </div>
+                        </div>
+                        <div class="input-field">
+                            <label for="espacement">Espacement</label>
+                            <select id="espacement">
+                                <option value="">Sélectionner</option>
+                                <option value="305">12" (305 mm)</option>
+                                <option value="406">16" (406 mm)</option>
+                                <option value="488">19.2" (488 mm)</option>
+                                <option value="610">24" (610 mm)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label for="typePlancher">Type de plancher</label>
+                            <select id="typePlancher">
+                                <option value="">Sélectionner</option>
+                                <option value="etage">Plancher d'étage</option>
+                                <option value="rdc">Plancher du rez-de-chaussée</option>
+                            </select>
+                        </div>
+                        <div class="input-field">
+                            <label for="typePortee">Type de portée</label>
+                            <select id="typePortee">
+                                <option value="">Sélectionner</option>
+                                <option value="simple">Portée simple</option>
+                                <option value="multiple">Portée multiple</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Configuration du plancher</label>
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label for="epaisseurSousPlancher">Épaisseur sous-plancher</label>
+                            <select id="epaisseurSousPlancher">
+                                <option value="">Sélectionner</option>
+                                <option value="16">5/8" (16 mm)</option>
+                                <option value="19">3/4" (19 mm)</option>
+                            </select>
+                        </div>
+                        <div class="input-field">
+                            <label for="fixation">Fixation</label>
+                            <select id="fixation">
+                                <option value="">Sélectionner</option>
+                                <option value="cloue_colle">Cloué et collé</option>
+                                <option value="cloue_seul">Cloué seulement</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="input-field">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="plafondGypse">
+                                <label for="plafondGypse">Plafond gypse 1/2"</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Charges (lb/pi²)</label>
+                    <div class="charge-preset">
+                        <div class="preset-buttons">
+                            <button class="preset-btn" onclick="appliquerPreset('residentiel')">Résidentiel</button>
+                        </div>
+                        <small>Résidentiel: 40 lb/pi² (charge vive) + 15 lb/pi² (charge morte)</small>
+                    </div>
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label for="chargeVive">Charge vive (surcharge)</label>
+                            <input type="number" id="chargeVive" step="1" min="0" placeholder="lb/pi²">
+                        </div>
+                        <div class="input-field">
+                            <label for="chargeMorte">Charge morte (permanente)</label>
+                            <input type="number" id="chargeMorte" step="1" min="0" placeholder="lb/pi²">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Contraintes dimensionnelles</label>
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label for="hauteurMax">Hauteur max (pouces)</label>
+                            <input type="number" id="hauteurMax" step="0.25" min="0" placeholder="Aucune contrainte">
+                        </div>
+                        <div class="input-field">
+                            <label for="optimisation">Critère d'optimisation</label>
+                            <select id="optimisation">
+                                <option value="">Sélectionner</option>
+                                <option value="hauteur">Hauteur minimale</option>
+                                <option value="espacement">Espacement maximal</option>
+                                <option value="economique">Plus économique</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-section">
+                <h2 class="section-title">Résultats de calcul</h2>
+                
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="result-label">Portée de calcul</div>
+                        <div class="result-value" id="resultPortee">-</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Charges combinées</div>
+                        <div class="result-value" id="resultCharges">-</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Configuration</div>
+                        <div class="result-value" id="resultConfig">-</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Espacement</div>
+                        <div class="result-value" id="resultEspacement">-</div>
+                    </div>
+                </div>
+
+                <div id="poutrelleResults">
+                    <p style="text-align: center; color: #228B22; margin-top: 50px;">
+                        Entrez les paramètres pour voir les options de poutrelles.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="poutrelles-script.js"></script>
+</body>
+</html>
