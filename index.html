@@ -12,52 +12,68 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
             color: #333;
         }
 
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
         .header {
-            background-color: #8B4513;
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
             color: white;
             text-align: center;
-            padding: 20px;
-            font-size: 28px;
-            font-weight: bold;
+            padding: 30px;
+            border-radius: 15px 15px 0 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
 
         .tabs {
             display: flex;
-            background-color: #ddd;
-            border-bottom: 2px solid #8B4513;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 0;
+            overflow: hidden;
         }
 
         .tab {
             flex: 1;
-            padding: 15px;
+            padding: 18px 24px;
             text-align: center;
-            background-color: #ddd;
+            background: rgba(255,255,255,0.8);
             cursor: pointer;
             border: none;
             font-size: 16px;
-            font-weight: bold;
-            transition: background-color 0.3s;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .tab.active {
-            background-color: #8B4513;
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
             color: white;
+            transform: translateY(-2px);
         }
 
         .tab:hover:not(.active) {
-            background-color: #bbb;
+            background: rgba(139, 69, 19, 0.1);
+            transform: translateY(-1px);
         }
 
         .tab-content {
             display: none;
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+            background: white;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
 
         .tab-content.active {
@@ -66,508 +82,547 @@
 
         .calculator-container {
             display: flex;
-            gap: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            overflow: hidden;
+            min-height: 600px;
         }
 
         .parameters-panel {
             flex: 1;
-            background-color: #f8f8f8;
-            padding: 20px;
-            border-right: 2px solid #ddd;
+            background: linear-gradient(145deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 30px;
+            border-right: 3px solid #dee2e6;
         }
 
         .results-panel {
             flex: 1;
-            padding: 20px;
-            background-color: white;
+            padding: 30px;
+            background: white;
         }
 
         .section-title {
             color: #8B4513;
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #8B4513;
-            padding-bottom: 5px;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #8B4513;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #8B4513, #A0522D);
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 25px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-left: 4px solid #8B4513;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #333;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #495057;
+            font-size: 14px;
         }
 
         .dimension-input {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             align-items: center;
         }
 
         .dimension-input input {
             width: 80px;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
             text-align: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .dimension-input span {
+            font-weight: 600;
+            color: #6c757d;
         }
 
         select, input[type="text"], input[type="number"] {
             width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 12px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
             font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
 
         select:focus, input:focus {
             outline: none;
             border-color: #8B4513;
-            box-shadow: 0 0 5px rgba(139, 69, 19, 0.3);
+            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+            transform: translateY(-1px);
         }
 
         .checkbox-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 12px;
         }
 
         .checkbox-item {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            padding: 8px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
         }
 
-        .checkbox-item input[type="checkbox"] {
-            width: auto;
+        .checkbox-item:hover {
+            background-color: rgba(139, 69, 19, 0.05);
+        }
+
+        .checkbox-item input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #8B4513;
         }
 
         .result-box {
-            background-color: #f0f8ff;
+            background: linear-gradient(145deg, #f8f9ff 0%, #e6f3ff 100%);
             border: 2px solid #8B4513;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.1);
         }
 
         .result-label {
-            font-weight: bold;
+            font-weight: 600;
             color: #8B4513;
             margin-bottom: 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .result-value {
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
+            font-size: 20px;
+            font-weight: 700;
+            color: #2c3e50;
         }
 
         .calculate-btn {
-            background-color: #8B4513;
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
             color: white;
-            padding: 12px 30px;
+            padding: 16px 32px;
             border: none;
-            border-radius: 5px;
+            border-radius: 50px;
             cursor: pointer;
             font-size: 16px;
-            font-weight: bold;
-            margin-top: 20px;
+            font-weight: 600;
             width: 100%;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .calculate-btn:hover {
-            background-color: #6B3410;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+        }
+
+        .calculate-btn:active {
+            transform: translateY(0);
         }
 
         .info-text {
             font-style: italic;
-            color: #666;
+            color: #6c757d;
             text-align: center;
-            margin-top: 20px;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(139, 69, 19, 0.05);
+            border-radius: 8px;
         }
 
-        .stage-group {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 10px;
-            margin-bottom: 10px;
-            background-color: white;
-        }
-
-        .stage-title {
-            font-weight: bold;
-            color: #8B4513;
-            margin-bottom: 8px;
-        }
-
-        .load-inputs {
+        .load-group {
             display: flex;
-            gap: 10px;
+            gap: 15px;
+            margin-bottom: 15px;
         }
 
-        .load-inputs input {
+        .load-group > div {
             flex: 1;
+        }
+
+        .load-group label {
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .results-grid .result-box {
+            margin-bottom: 0;
+        }
+
+        .status-success {
+            background: linear-gradient(145deg, #d4edda 0%, #c3e6cb 100%);
+            border-color: #28a745;
+        }
+
+        .status-success .result-value {
+            color: #28a745;
+        }
+
+        .status-warning {
+            background: linear-gradient(145deg, #fff3cd 0%, #ffeaa7 100%);
+            border-color: #ffc107;
+        }
+
+        .status-warning .result-value {
+            color: #856404;
+        }
+
+        .status-error {
+            background: linear-gradient(145deg, #f8d7da 0%, #f5c6cb 100%);
+            border-color: #dc3545;
+        }
+
+        .status-error .result-value {
+            color: #dc3545;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-container {
+                flex-direction: column;
+            }
+            
+            .parameters-panel {
+                border-right: none;
+                border-bottom: 3px solid #dee2e6;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        Calculateur Poutrelles Versa-Lam® 2.0E
-    </div>
+    <div class="container">
+        <div class="header">
+            Calculateur Poutrelles Versa-Lam® 2.0E
+        </div>
 
-    <div class="tabs">
-        <button class="tab active" onclick="showTab('poutrelles-i')">Poutrelles en I</button>
-        <button class="tab" onclick="showTab('poutrelles-ajourees')">Poutrelles Ajourées</button>
-    </div>
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('poutrelles-i')">Poutrelles en I</button>
+            <button class="tab" onclick="showTab('poutrelles-ajourees')">Poutrelles Ajourées</button>
+        </div>
 
-    <!-- Onglet Poutrelles en I -->
-    <div id="poutrelles-i" class="tab-content active">
-        <div class="calculator-container">
-            <div class="parameters-panel">
-                <div class="section-title">Paramètres de conception</div>
-                
-                <div class="form-group">
-                    <label>Portée de la poutrelle</label>
-                    <div class="dimension-input">
-                        <input type="number" id="span-ft-i" placeholder="0" min="0">
-                        <span>pi</span>
-                        <input type="number" id="span-in-i" placeholder="0" min="0" max="11">
-                        <span>po</span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Nombre d'étages supportés</label>
-                    <select id="floors-i">
-                        <option value="1">1 étage</option>
-                        <option value="2">2 étages</option>
-                        <option value="3">3 étages</option>
-                    </select>
-                </div>
-
-                <div id="tributary-widths-i">
-                    <div class="stage-group">
-                        <div class="stage-title">L.T. Étage 1</div>
+        <!-- Onglet Poutrelles en I -->
+        <div id="poutrelles-i" class="tab-content active">
+            <div class="calculator-container">
+                <div class="parameters-panel">
+                    <div class="section-title">Paramètres de conception</div>
+                    
+                    <div class="form-group">
+                        <label>Portée de la poutrelle</label>
                         <div class="dimension-input">
-                            <input type="number" id="trib-1-ft-i" placeholder="0" min="0">
+                            <input type="number" id="span-ft-i" placeholder="0" min="0">
                             <span>pi</span>
-                            <input type="number" id="trib-1-in-i" placeholder="0" min="0" max="11">
+                            <input type="number" id="span-in-i" placeholder="0" min="0" max="11">
                             <span>po</span>
                         </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label>Charges (lb/pi.ca.)</label>
-                    <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-                        <div style="flex: 1;">
-                            <label style="font-size: 12px;">Charge morte (CM)</label>
-                            <select id="dead-load-i">
-                                <option value="">Valeur CM</option>
-                                <option value="10">10 lb/pi.ca.</option>
-                                <option value="15">15 lb/pi.ca.</option>
-                                <option value="20">20 lb/pi.ca.</option>
-                                <option value="25">25 lb/pi.ca.</option>
-                            </select>
+                    <div class="form-group">
+                        <label>Largeur tributaire</label>
+                        <div class="dimension-input">
+                            <input type="number" id="trib-ft-i" placeholder="0" min="0">
+                            <span>pi</span>
+                            <input type="number" id="trib-in-i" placeholder="0" min="0" max="11">
+                            <span>po</span>
                         </div>
-                        <div style="flex: 1;">
-                            <label style="font-size: 12px;">Charge vive (CV) (occupation)</label>
-                            <select id="live-load-i">
-                                <option value="">Valeur CV</option>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Charges (lb/pi.ca.)</label>
+                        <div class="load-group">
+                            <div>
+                                <label>Charge morte (CM)</label>
+                                <select id="dead-load-i">
+                                    <option value="">Valeur CM</option>
+                                    <option value="10">10 lb/pi.ca.</option>
+                                    <option value="15">15 lb/pi.ca.</option>
+                                    <option value="20">20 lb/pi.ca.</option>
+                                    <option value="25">25 lb/pi.ca.</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Charge vive (CV) occupation</label>
+                                <select id="live-load-i">
+                                    <option value="">Valeur CV</option>
+                                    <option value="40">40 lb/pi.ca.</option>
+                                    <option value="50">50 lb/pi.ca.</option>
+                                    <option value="60">60 lb/pi.ca.</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label>Charge vive (CV) neige</label>
+                            <select id="snow-load-i">
+                                <option value="">Valeur CV neige</option>
+                                <option value="30">30 lb/pi.ca.</option>
                                 <option value="40">40 lb/pi.ca.</option>
                                 <option value="50">50 lb/pi.ca.</option>
-                                <option value="60">60 lb/pi.ca.</option>
                             </select>
                         </div>
                     </div>
-                    <div>
-                        <label style="font-size: 12px;">Charge vive (CV) (neige)</label>
-                        <select id="snow-load-i">
-                            <option value="">Valeur CV neige</option>
-                            <option value="30">30 lb/pi.ca.</option>
-                            <option value="40">40 lb/pi.ca.</option>
-                            <option value="50">50 lb/pi.ca.</option>
+
+                    <div class="form-group">
+                        <label>Sous-plancher</label>
+                        <div style="margin-bottom: 15px;">
+                            <select id="subfloor-thickness-i">
+                                <option value="5/8">⅝" ou 19⁄32"</option>
+                                <option value="3/4">¾" ou 23⁄32"</option>
+                            </select>
+                        </div>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="radio" id="nailed-only-i" name="subfloor-attachment-i" value="nailed">
+                                <label for="nailed-only-i">Cloué seulement</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="radio" id="glued-nailed-i" name="subfloor-attachment-i" value="glued-nailed" checked>
+                                <label for="glued-nailed-i">Collé et cloué</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Type de portée</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="radio" id="simple-span-i" name="span-type-i" value="simple" checked>
+                                <label for="simple-span-i">Portée simple</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="radio" id="multiple-span-i" name="span-type-i" value="multiple">
+                                <label for="multiple-span-i">Portée multiple</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Plafond gypse</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="radio" id="no-gypsum-i" name="gypsum-i" value="no" checked>
+                                <label for="no-gypsum-i">Sans panneau de gypse</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="radio" id="gypsum-half-i" name="gypsum-i" value="half">
+                                <label for="gypsum-half-i">Avec panneau de gypse de ½"</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Hauteur maximale (po)</label>
+                        <select id="max-height-i">
+                            <option value="">Aucune contrainte</option>
+                            <option value="9.5">9½"</option>
+                            <option value="11.875">11⅞"</option>
+                            <option value="14">14"</option>
+                            <option value="16">16"</option>
+                            <option value="18">18"</option>
+                            <option value="20">20"</option>
+                            <option value="22">22"</option>
+                            <option value="24">24"</option>
                         </select>
                     </div>
+
+                    <button class="calculate-btn" onclick="calculateI()">Calculer</button>
                 </div>
 
-                <div class="form-group">
-                    <label>Sous-plancher</label>
-                    <div style="margin-bottom: 10px;">
-                        <select id="subfloor-thickness-i">
-                            <option value="5/8">⅝" ou 19⁄32"</option>
-                            <option value="3/4">¾" ou 23⁄32"</option>
-                        </select>
+                <div class="results-panel">
+                    <div class="section-title">Résultats de calcul</div>
+                    
+                    <div class="result-box">
+                        <div class="result-label">Série recommandée</div>
+                        <div class="result-value" id="series-result-i">-</div>
                     </div>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item">
-                            <input type="radio" id="nailed-only-i" name="subfloor-attachment-i" value="nailed">
-                            <label for="nailed-only-i">Cloué seulement</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="radio" id="glued-nailed-i" name="subfloor-attachment-i" value="glued-nailed" checked>
-                            <label for="glued-nailed-i">Collé et cloué</label>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    <label>Type de portée</label>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item">
-                            <input type="radio" id="simple-span-i" name="span-type-i" value="simple" checked>
-                            <label for="simple-span-i">Portée simple</label>
+                    <div class="result-box">
+                        <div class="result-label">Hauteur (po)</div>
+                        <div class="result-value" id="height-result-i">-</div>
+                    </div>
+
+                    <div class="results-grid">
+                        <div class="result-box">
+                            <div class="result-label">Espacement recommandé</div>
+                            <div class="result-value" id="spacing-result-i">-</div>
                         </div>
-                        <div class="checkbox-item">
-                            <input type="radio" id="multiple-span-i" name="span-type-i" value="multiple">
-                            <label for="multiple-span-i">Portée multiple</label>
+                        <div class="result-box">
+                            <div class="result-label">Portée maximale</div>
+                            <div class="result-value" id="max-span-result-i">-</div>
                         </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label>Plafond gypse</label>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item">
-                            <input type="radio" id="no-gypsum-i" name="gypsum-i" value="no" checked>
-                            <label for="no-gypsum-i">Sans panneau de gypse</label>
+                    <div class="results-grid">
+                        <div class="result-box">
+                            <div class="result-label">Charge totale non pondérée (Wt)</div>
+                            <div class="result-value" id="total-load-result-i">-</div>
                         </div>
-                        <div class="checkbox-item">
-                            <input type="radio" id="gypsum-half-i" name="gypsum-i" value="half">
-                            <label for="gypsum-half-i">Avec panneau de gypse de ½"</label>
+                        <div class="result-box">
+                            <div class="result-label">Charge totale pondérée (Wf)</div>
+                            <div class="result-value" id="factored-load-result-i">-</div>
                         </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label>Contraintes dimensionnelles</label>
-                    <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-                        <div style="flex: 1;">
-                            <label style="font-size: 12px;">Largeur max (po)</label>
-                            <select id="max-width-i">
-                                <option value="">Aucune contrainte</option>
-                                <option value="12">12"</option>
-                                <option value="16">16"</option>
-                                <option value="19.2">19.2"</option>
-                                <option value="24">24"</option>
-                            </select>
-                        </div>
-                        <div style="flex: 1;">
-                            <label style="font-size: 12px;">Hauteur max (po)</label>
-                            <select id="max-height-i">
-                                <option value="">Aucune contrainte</option>
-                                <option value="9.5">9½"</option>
-                                <option value="11.875">11⅞"</option>
-                                <option value="14">14"</option>
-                                <option value="16">16"</option>
-                                <option value="18">18"</option>
-                                <option value="20">20"</option>
-                                <option value="22">22"</option>
-                                <option value="24">24"</option>
-                            </select>
-                        </div>
+                    <div class="info-text">
+                        Entrez les paramètres pour voir les options de poutrelles.
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Optimisation</label>
-                    <select id="optimization-i">
-                        <option value="fewer-plies">Favoriser moins de plis</option>
-                        <option value="minimum-depth">Hauteur minimale</option>
-                        <option value="standard">Standard</option>
-                    </select>
-                </div>
-
-                <button class="calculate-btn" onclick="calculateI()">Calculer</button>
-            </div>
-
-            <div class="results-panel">
-                <div class="section-title">Résultats de calcul</div>
-                
-                <div class="result-box">
-                    <div class="result-label">Série recommandée</div>
-                    <div class="result-value" id="series-result-i">-</div>
-                </div>
-
-                <div class="result-box">
-                    <div class="result-label">Hauteur (po)</div>
-                    <div class="result-value" id="height-result-i">-</div>
-                </div>
-
-                <div style="display: flex; gap: 15px;">
-                    <div class="result-box" style="flex: 1;">
-                        <div class="result-label">Espacement recommandé</div>
-                        <div class="result-value" id="spacing-result-i">-</div>
-                    </div>
-                    <div class="result-box" style="flex: 1;">
-                        <div class="result-label">Portée maximale</div>
-                        <div class="result-value" id="max-span-result-i">-</div>
-                    </div>
-                </div>
-
-                <div style="display: flex; gap: 15px;">
-                    <div class="result-box" style="flex: 1;">
-                        <div class="result-label">Charge totale non pondérée (Wt)</div>
-                        <div class="result-value" id="total-load-result-i">-</div>
-                    </div>
-                    <div class="result-box" style="flex: 1;">
-                        <div class="result-label">Charge totale pondérée (Wf)</div>
-                        <div class="result-value" id="factored-load-result-i">-</div>
-                    </div>
-                </div>
-
-                <div class="info-text">
-                    Entrez les paramètres pour voir les options de poutrelles.
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Onglet Poutrelles Ajourées -->
-    <div id="poutrelles-ajourees" class="tab-content">
-        <div class="calculator-container">
-            <div class="parameters-panel">
-                <div class="section-title">Paramètres de conception</div>
-                
-                <div class="form-group">
-                    <label>Portée libre</label>
-                    <div class="dimension-input">
-                        <input type="number" id="span-ft-a" placeholder="0" min="0">
-                        <span>pi</span>
-                        <input type="number" id="span-in-a" placeholder="0" min="0" max="11">
-                        <span>po</span>
+        <!-- Onglet Poutrelles Ajourées -->
+        <div id="poutrelles-ajourees" class="tab-content">
+            <div class="calculator-container">
+                <div class="parameters-panel">
+                    <div class="section-title">Paramètres de conception</div>
+                    
+                    <div class="form-group">
+                        <label>Portée libre</label>
+                        <div class="dimension-input">
+                            <input type="number" id="span-ft-a" placeholder="0" min="0">
+                            <span>pi</span>
+                            <input type="number" id="span-in-a" placeholder="0" min="0" max="11">
+                            <span>po</span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label>Charges (non pondérées)</label>
-                    <div style="margin-bottom: 10px;">
-                        <label style="font-size: 12px;">Charge vive (kPa)</label>
-                        <select id="live-load-kpa">
-                            <option value="1.9">1,9 kPa (40 lb/pi²)</option>
-                            <option value="4.8">4,8 kPa (100 lb/pi²)</option>
+                    <div class="form-group">
+                        <label>Charges (lb/pi.ca.)</label>
+                        <div class="load-group">
+                            <div>
+                                <label>Charge morte (CM)</label>
+                                <select id="dead-load-a">
+                                    <option value="">Valeur CM</option>
+                                    <option value="15">15 lb/pi.ca.</option>
+                                    <option value="30">30 lb/pi.ca.</option>
+                                    <option value="35">35 lb/pi.ca.</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Charge vive (CV)</label>
+                                <select id="live-load-a">
+                                    <option value="">Valeur CV</option>
+                                    <option value="40">40 lb/pi.ca.</option>
+                                    <option value="100">100 lb/pi.ca.</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Espacement (c/c)</label>
+                        <select id="spacing-a">
+                            <option value="12">12" (305 mm)</option>
+                            <option value="16">16" (406 mm)</option>
+                            <option value="19.2">19,2" (487 mm)</option>
+                            <option value="24">24" (610 mm)</option>
                         </select>
                     </div>
-                    <div>
-                        <label style="font-size: 12px;">Charge permanente (kPa)</label>
-                        <select id="dead-load-kpa">
-                            <option value="0.70">0,70 kPa (15 lb/pi²)</option>
-                            <option value="1.45">1,45 kPa (30 lb/pi²)</option>
-                            <option value="1.70">1,70 kPa (35 lb/pi²)</option>
+
+                    <div class="form-group">
+                        <label>Hauteur maximale (po)</label>
+                        <select id="max-height-a">
+                            <option value="">Aucune contrainte</option>
+                            <option value="11.875">11⅞"</option>
+                            <option value="12.5">12½"</option>
+                            <option value="14">14"</option>
+                            <option value="16">16"</option>
+                            <option value="18">18"</option>
+                            <option value="20">20"</option>
+                            <option value="22">22"</option>
+                            <option value="24">24"</option>
                         </select>
                     </div>
+
+                    <button class="calculate-btn" onclick="calculateAjourees()">Calculer</button>
                 </div>
 
-                <div class="form-group">
-                    <label>Espacement (c/c)</label>
-                    <select id="spacing-a">
-                        <option value="305">305 mm (12")</option>
-                        <option value="406">406 mm (16")</option>
-                        <option value="487">487 mm (19,2")</option>
-                        <option value="610">610 mm (24")</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Série souhaitée</label>
-                    <select id="series-a">
-                        <option value="">Toutes les séries</option>
-                        <option value="2x3-EPS">2x3 - EPS</option>
-                        <option value="2x3-1650">2x3 - 1650</option>
-                        <option value="2x3-2100">2x3 - 2100</option>
-                        <option value="2x4-2100">2x4 - 2100</option>
-                        <option value="2x4-2400">2x4 - 2400</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Hauteur minimale (mm)</label>
-                    <select id="min-height-a">
-                        <option value="">Aucune contrainte</option>
-                        <option value="302">302 mm (11⅞")</option>
-                        <option value="318">318 mm (12½")</option>
-                        <option value="356">356 mm (14")</option>
-                        <option value="406">406 mm (16")</option>
-                        <option value="457">457 mm (18")</option>
-                        <option value="508">508 mm (20")</option>
-                        <option value="559">559 mm (22")</option>
-                        <option value="610">610 mm (24")</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Hauteur maximale (mm)</label>
-                    <select id="max-height-a">
-                        <option value="">Aucune contrainte</option>
-                        <option value="302">302 mm (11⅞")</option>
-                        <option value="318">318 mm (12½")</option>
-                        <option value="356">356 mm (14")</option>
-                        <option value="406">406 mm (16")</option>
-                        <option value="457">457 mm (18")</option>
-                        <option value="508">508 mm (20")</option>
-                        <option value="559">559 mm (22")</option>
-                        <option value="610">610 mm (24")</option>
-                    </select>
-                </div>
-
-                <button class="calculate-btn" onclick="calculateAjourees()">Calculer</button>
-            </div>
-
-            <div class="results-panel">
-                <div class="section-title">Résultats de calcul</div>
-                
-                <div class="result-box">
-                    <div class="result-label">Série recommandée</div>
-                    <div class="result-value" id="series-result-a">-</div>
-                </div>
-
-                <div class="result-box">
-                    <div class="result-label">Hauteur recommandée</div>
-                    <div class="result-value" id="height-result-a">-</div>
-                </div>
-
-                <div style="display: flex; gap: 15px;">
-                    <div class="result-box" style="flex: 1;">
-                        <div class="result-label">Portée admissible</div>
-                        <div class="result-value" id="allowable-span-a">-</div>
+                <div class="results-panel">
+                    <div class="section-title">Résultats de calcul</div>
+                    
+                    <div class="result-box">
+                        <div class="result-label">Série recommandée</div>
+                        <div class="result-value" id="series-result-a">-</div>
                     </div>
-                    <div class="result-box" style="flex: 1;">
-                        <div class="result-label">Ratio portée/demande</div>
-                        <div class="result-value" id="span-ratio-a">-</div>
-                    </div>
-                </div>
 
-                <div style="display: flex; gap: 15px;">
-                    <div class="result-box" style="flex: 1;">
-                        <div class="result-label">Charges appliquées</div>
-                        <div class="result-value" id="applied-loads-a">-</div>
+                    <div class="result-box">
+                        <div class="result-label">Hauteur recommandée</div>
+                        <div class="result-value" id="height-result-a">-</div>
                     </div>
-                    <div class="result-box" style="flex: 1;">
-                        <div class="result-label">Statut</div>
-                        <div class="result-value" id="status-a">-</div>
-                    </div>
-                </div>
 
-                <div class="info-text">
-                    Entrez les paramètres pour voir les options de poutrelles ajourées.
+                    <div class="results-grid">
+                        <div class="result-box">
+                            <div class="result-label">Portée admissible</div>
+                            <div class="result-value" id="allowable-span-a">-</div>
+                        </div>
+                        <div class="result-box">
+                            <div class="result-label">Ratio portée/demande</div>
+                            <div class="result-value" id="span-ratio-a">-</div>
+                        </div>
+                    </div>
+
+                    <div class="results-grid">
+                        <div class="result-box">
+                            <div class="result-label">Charges appliquées</div>
+                            <div class="result-value" id="applied-loads-a">-</div>
+                        </div>
+                        <div class="result-box" id="status-box-a">
+                            <div class="result-label">Statut</div>
+                            <div class="result-value" id="status-a">-</div>
+                        </div>
+                    </div>
+
+                    <div class="info-text">
+                        Entrez les paramètres pour voir les options de poutrelles ajourées.
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Data tables for engineered joists (simplified from documents)
+        // Data tables for I-joists based on documents
         const iJoistData = {
-            "AJS140": {
+            "AJS® 140": {
                 heights: [9.5, 11.875],
                 spans: {
                     "5/8": {
@@ -581,6 +636,262 @@
                                     9.5: {12: "15-0", 16: "14-0", 19.2: "13-5", 24: "n/d"},
                                     11.875: {12: "16-11", 16: "15-9", 19.2: "15-2", 24: "n/d"}
                                 }
+                            },
+                            "multiple": {
+                                "no_gypsum": {
+                                    9.5: {12: "15-10", 16: "14-9", 19.2: "14-2", 24: "n/d"},
+                                    11.875: {12: "17-10", 16: "16-8", 19.2: "16-0", 24: "n/d"}
+                                },
+                                "half_gypsum": {
+                                    9.5: {12: "16-3", 16: "15-2", 19.2: "14-7", 24: "n/d"},
+                                    11.875: {12: "18-5", 16: "17-2", 19.2: "16-5", 24: "n/d"}
+                                }
+                            }
+                        },
+                        "glued-nailed": {
+                            "simple": {
+                                "no_gypsum": {
+                                    9.5: {12: "15-7", 16: "14-9", 19.2: "14-3", 24: "n/d"},
+                                    11.875: {12: "17-6", 16: "16-6", 19.2: "16-0", 24: "n/d"}
+                                },
+                                "half_gypsum": {
+                                    9.5: {12: "16-0", 16: "15-2", 19.2: "14-8", 24: "n/d"},
+                                    11.875: {12: "18-0", 16: "17-0", 19.2: "16-5", 24: "n/d"}
+                                }
+                            },
+                            "multiple": {
+                                "no_gypsum": {
+                                    9.5: {12: "16-10", 16: "15-11", 19.2: "15-5", 24: "n/d"},
+                                    11.875: {12: "19-2", 16: "17-10", 19.2: "17-3", 24: "n/d"}
+                                },
+                                "half_gypsum": {
+                                    9.5: {12: "17-4", 16: "16-5", 19.2: "15-11", 24: "n/d"},
+                                    11.875: {12: "19-11", 16: "18-6", 19.2: "17-10", 24: "n/d"}
+                                }
+                            }
+                        }
+                    },
+                    "3/4": {
+                        "nailed": {
+                            "simple": {
+                                "no_gypsum": {
+                                    9.5: {12: "15-3", 16: "14-3", 19.2: "13-7", 24: "12-11"},
+                                    11.875: {12: "17-2", 16: "16-0", 19.2: "15-4", 24: "14-7"}
+                                },
+                                "half_gypsum": {
+                                    9.5: {12: "15-7", 16: "14-7", 19.2: "13-11", 24: "13-3"},
+                                    11.875: {12: "17-7", 16: "16-5", 19.2: "15-9", 24: "15-0"}
+                                }
+                            },
+                            "multiple": {
+                                "no_gypsum": {
+                                    9.5: {12: "16-6", 16: "15-5", 19.2: "14-9", 24: "14-1"},
+                                    11.875: {12: "18-9", 16: "17-4", 19.2: "16-8", 24: "15-10"}
+                                },
+                                "half_gypsum": {
+                                    9.5: {12: "16-11", 16: "15-10", 19.2: "15-2", 24: "14-2"},
+                                    11.875: {12: "19-5", 16: "17-10", 19.2: "17-1", 24: "16-3"}
+                                }
+                            }
+                        },
+                        "glued-nailed": {
+                            "simple": {
+                                "no_gypsum": {
+                                    9.5: {12: "16-7", 16: "15-7", 19.2: "15-1", 24: "14-3"},
+                                    11.875: {12: "18-8", 16: "17-6", 19.2: "16-10", 24: "16-2"}
+                                },
+                                "half_gypsum": {
+                                    9.5: {12: "17-0", 16: "16-0", 19.2: "15-6", 24: "14-3"},
+                                    11.875: {12: "19-3", 16: "18-0", 19.2: "17-4", 24: "16-3"}
+                                }
+                            },
+                            "multiple": {
+                                "no_gypsum": {
+                                    9.5: {12: "17-11", 16: "16-11", 19.2: "15-10", 24: "14-2"},
+                                    11.875: {12: "20-7", 16: "19-2", 19.2: "18-3", 24: "16-2"}
+                                },
+                                "half_gypsum": {
+                                    9.5: {12: "18-6", 16: "17-5", 19.2: "15-10", 24: "14-2"},
+                                    11.875: {12: "21-4", 16: "19-11", 19.2: "18-1", 24: "16-2"}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "AJS® 20": {
+                heights: [9.5, 11.875, 14, 16],
+                spans: {
+                    "5/8": {
+                        "nailed": {
+                            "simple": {
+                                "no_gypsum": {
+                                    9.5: {12: "15-4", 16: "14-4", 19.2: "13-9", 24: "n/d"},
+                                    11.875: {12: "17-4", 16: "16-2", 19.2: "15-6", 24: "n/d"},
+                                    14: {12: "19-1", 16: "17-7", 19.2: "16-10", 24: "n/d"},
+                                    16: {12: "20-10", 16: "19-1", 19.2: "18-1", 24: "n/d"}
+                                },
+                                "half_gypsum": {
+                                    9.5: {12: "15-9", 16: "14-8", 19.2: "14-1", 24: "n/d"},
+                                    11.875: {12: "17-9", 16: "16-6", 19.2: "15-10", 24: "n/d"},
+                                    14: {12: "19-8", 16: "18-1", 19.2: "17-4", 24: "n/d"},
+                                    16: {12: "21-6", 16: "19-8", 19.2: "18-8", 24: "n/d"}
+                                }
+                            }
+                        },
+                        "glued-nailed": {
+                            "simple": {
+                                "no_gypsum": {
+                                    9.5: {12: "16-3", 16: "15-4", 19.2: "14-10", 24: "n/d"},
+                                    11.875: {12: "18-3", 16: "17-2", 19.2: "16-7", 24: "n/d"},
+                                    14: {12: "20-3", 16: "18-10", 19.2: "18-0", 24: "n/d"},
+                                    16: {12: "22-1", 16: "20-6", 19.2: "19-7", 24: "n/d"}
+                                },
+                                "half_gypsum": {
+                                    9.5: {12: "16-8", 16: "15-9", 19.2: "15-2", 24: "n/d"},
+                                    11.875: {12: "18-10", 16: "17-8", 19.2: "17-0", 24: "n/d"},
+                                    14: {12: "21-0", 16: "19-6", 19.2: "18-8", 24: "n/d"},
+                                    16: {12: "22-10", 16: "21-3", 19.2: "20-4", 24: "n/d"}
+                                }
+                            }
+                        }
+                    },
+                    "3/4": {
+                        "nailed": {
+                            "simple": {
+                                "no_gypsum": {
+                                    9.5: {12: "16-1", 16: "15-0", 19.2: "14-4", 24: "13-7"},
+                                    11.875: {12: "18-1", 16: "16-10", 19.2: "16-1", 24: "15-4"},
+                                    14: {12: "20-2", 16: "18-5", 19.2: "17-7", 24: "16-9"},
+                                    16: {12: "22-1", 16: "20-2", 19.2: "19-0", 24: "17-11"}
+                                },
+                                "half_gypsum": {
+                                    9.5: {12: "16-5", 16: "15-3", 19.2: "14-8", 24: "13-11"},
+                                    11.875: {12: "18-7", 16: "17-3", 19.2: "16-6", 24: "15-8"},
+                                    14: {12: "20-9", 16: "19-0", 19.2: "18-0", 24: "17-1"},
+                                    16: {12: "22-8", 16: "20-9", 19.2: "19-8", 24: "18-5"}
+                                }
+                            }
+                        },
+                        "glued-nailed": {
+                            "simple": {
+                                "no_gypsum": {
+                                    9.5: {12: "17-3", 16: "16-3", 19.2: "15-8", 24: "15-0"},
+                                    11.875: {12: "19-7", 16: "18-2", 19.2: "17-6", 24: "16-10"},
+                                    14: {12: "21-10", 16: "20-2", 19.2: "19-3", 24: "18-3"},
+                                    16: {12: "23-9", 16: "22-0", 19.2: "20-11", 24: "19-10"}
+                                },
+                                "half_gypsum": {
+                                    9.5: {12: "17-7", 16: "16-7", 19.2: "16-0", 24: "15-4"},
+                                    11.875: {12: "20-2", 16: "18-9", 19.2: "17-11", 24: "17-3"},
+                                    14: {12: "22-5", 16: "20-10", 19.2: "19-11", 24: "18-11"},
+                                    16: {12: "24-5", 16: "22-9", 19.2: "21-8", 24: "20-7"}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "AJS® 25": {
+                heights: [9.5, 11.875, 14, 16, 18, 20, 22, 24],
+                spans: {
+                    "5/8": {
+                        "nailed": {
+                            "simple": {
+                                "no_gypsum": {
+                                    9.5: {12: "16-5", 16: "15-4", 19.2: "14-9", 24: "n/d"},
+                                    11.875: {12: "18-8", 16: "17-3", 19.2: "16-7", 24: "n/d"},
+                                    14: {12: "20-9", 16: "19-0", 19.2: "18-0", 24: "n/d"},
+                                    16: {12: "22-8", 16: "20-8", 19.2: "19-8", 24: "n/d"},
+                                    18: {12: "24-9", 16: "22-7", 19.2: "21-5", 24: "n/d"},
+                                    20: {12: "26-6", 16: "24-2", 19.2: "22-11", 24: "n/d"},
+                                    22: {12: "28-2", 16: "25-9", 19.2: "24-5", 24: "n/d"},
+                                    24: {12: "29-9", 16: "27-2", 19.2: "25-10", 24: "n/d"}
+                                },
+                                "half_gypsum": {
+                                    9.5: {12: "16-10", 16: "15-8", 19.2: "15-0", 24: "n/d"},
+                                    11.875: {12: "19-2", 16: "17-8", 19.2: "16-11", 24: "n/d"},
+                                    14: {12: "21-4", 16: "19-6", 19.2: "18-6", 24: "n/d"},
+                                    16: {12: "23-4", 16: "21-4", 19.2: "20-3", 24: "n/d"},
+                                    18: {12: "25-5", 16: "23-3", 19.2: "22-1", 24: "n/d"},
+                                    20: {12: "27-2", 16: "24-11", 19.2: "23-8", 24: "n/d"},
+                                    22: {12: "28-11", 16: "26-6", 19.2: "25-2", 24: "n/d"},
+                                    24: {12: "30-7", 16: "28-1", 19.2: "26-8", 24: "n/d"}
+                                }
+                            }
+                        },
+                        "glued-nailed": {
+                            "simple": {
+                                "no_gypsum": {
+                                    9.5: {12: "17-3", 16: "16-2", 19.2: "15-8", 24: "n/d"},
+                                    11.875: {12: "19-8", 16: "18-2", 19.2: "17-6", 24: "n/d"},
+                                    14: {12: "21-10", 16: "20-2", 19.2: "19-3", 24: "n/d"},
+                                    16: {12: "23-9", 16: "21-11", 19.2: "21-0", 24: "n/d"},
+                                    18: {12: "25-10", 16: "23-10", 19.2: "22-9", 24: "n/d"},
+                                    20: {12: "27-7", 16: "25-6", 19.2: "24-4", 24: "n/d"},
+                                    22: {12: "29-4", 16: "27-1", 19.2: "25-10", 24: "n/d"},
+                                    24: {12: "31-0", 16: "28-7", 19.2: "27-4", 24: "n/d"}
+                                },
+                                "half_gypsum": {
+                                    9.5: {12: "17-7", 16: "16-7", 19.2: "16-0", 24: "n/d"},
+                                    11.875: {12: "20-2", 16: "18-8", 19.2: "17-11", 24: "n/d"},
+                                    14: {12: "22-6", 16: "20-10", 19.2: "19-10", 24: "n/d"},
+                                    16: {12: "24-6", 16: "22-8", 19.2: "21-8", 24: "n/d"},
+                                    18: {12: "26-7", 16: "24-7", 19.2: "23-6", 24: "n/d"},
+                                    20: {12: "28-5", 16: "26-4", 19.2: "25-2", 24: "n/d"},
+                                    22: {12: "30-2", 16: "27-11", 19.2: "26-8", 24: "n/d"},
+                                    24: {12: "31-11", 16: "29-7", 19.2: "28-3", 24: "n/d"}
+                                }
+                            }
+                        }
+                    },
+                    "3/4": {
+                        "nailed": {
+                            "simple": {
+                                "no_gypsum": {
+                                    9.5: {12: "17-2", 16: "16-0", 19.2: "15-4", 24: "14-7"},
+                                    11.875: {12: "19-9", 16: "18-0", 19.2: "17-3", 24: "16-5"},
+                                    14: {12: "22-0", 16: "20-1", 19.2: "19-0", 24: "17-10"},
+                                    16: {12: "24-0", 16: "21-11", 19.2: "20-8", 24: "19-5"},
+                                    18: {12: "26-2", 16: "23-11", 19.2: "22-7", 24: "21-2"},
+                                    20: {12: "28-0", 16: "25-7", 19.2: "24-2", 24: "22-8"},
+                                    22: {12: "29-9", 16: "27-2", 19.2: "25-8", 24: "24-1"},
+                                    24: {12: "31-6", 16: "28-9", 19.2: "27-2", 24: "25-6"}
+                                },
+                                "half_gypsum": {
+                                    9.5: {12: "17-6", 16: "16-4", 19.2: "15-7", 24: "14-10"},
+                                    11.875: {12: "20-2", 16: "18-5", 19.2: "17-7", 24: "16-9"},
+                                    14: {12: "22-6", 16: "20-7", 19.2: "19-6", 24: "18-3"},
+                                    16: {12: "24-7", 16: "22-6", 19.2: "21-3", 24: "19-11"},
+                                    18: {12: "26-9", 16: "24-6", 19.2: "23-2", 24: "21-9"},
+                                    20: {12: "28-7", 16: "26-3", 19.2: "24-10", 24: "23-4"},
+                                    22: {12: "30-5", 16: "27-11", 19.2: "26-5", 24: "24-10"},
+                                    24: {12: "32-2", 16: "29-7", 19.2: "28-0", 24: "26-3"}
+                                }
+                            }
+                        },
+                        "glued-nailed": {
+                            "simple": {
+                                "no_gypsum": {
+                                    9.5: {12: "18-3", 16: "17-2", 19.2: "16-6", 24: "15-10"},
+                                    11.875: {12: "21-1", 16: "19-6", 19.2: "18-7", 24: "17-8"},
+                                    14: {12: "23-5", 16: "21-8", 19.2: "20-7", 24: "19-6"},
+                                    16: {12: "25-6", 16: "23-6", 19.2: "22-5", 24: "21-2"},
+                                    18: {12: "27-7", 16: "25-6", 19.2: "24-4", 24: "23-0"},
+                                    20: {12: "29-6", 16: "27-3", 19.2: "26-0", 24: "24-7"},
+                                    22: {12: "31-4", 16: "29-0", 19.2: "27-7", 24: "26-1"},
+                                    24: {12: "33-4", 16: "30-7", 19.2: "29-1", 24: "27-6"}
+                                },
+                                "half_gypsum": {
+                                    9.5: {12: "18-8", 16: "17-6", 19.2: "16-10", 24: "16-2"},
+                                    11.875: {12: "21-7", 16: "20-0", 19.2: "19-1", 24: "18-1"},
+                                    14: {12: "24-0", 16: "22-3", 19.2: "21-2", 24: "20-1"},
+                                    16: {12: "26-1", 16: "24-2", 19.2: "23-1", 24: "21-10"},
+                                    18: {12: "28-4", 16: "26-3", 19.2: "25-0", 24: "23-8"},
+                                    20: {12: "30-3", 16: "28-1", 19.2: "26-9", 24: "25-4"},
+                                    22: {12: "32-2", 16: "29-10", 19.2: "28-5", 24: "26-11"},
+                                    24: {12: "34-5", 16: "31-6", 19.2: "30-0", 24: "28-5"}
+                                }
                             }
                         }
                     }
@@ -588,21 +899,111 @@
             }
         };
 
-        // Data tables for open web joists (from documents)
+        // Data tables for open web joists
         const openWebJoistData = {
-            "1.9_0.70": {
-                "2x3-EPS": {302: {305: 5.90, 406: 5.08, 487: 4.60, 610: 4.05}},
-                "2x3-1650": {302: {305: 6.58, 406: 6.00, 487: 5.45, 610: 4.80}},
-                "2x3-2100": {302: {305: 6.83, 406: 6.38, 487: 6.05, 610: 5.60}},
-                "2x4-2100": {302: {305: 7.35, 406: 6.85, 487: 6.53, 610: 6.15}},
-                "2x4-2400": {302: {305: 7.53, 406: 7.03, 487: 6.70, 610: 6.30}}
+            "40_15": { // 40 lb/pi² live + 15 lb/pi² dead
+                "2x3 - EPS": {
+                    11.875: {12: 19.33, 16: 16.58, 19.2: 15.08, 24: 13.25},
+                    12.5: {12: 19.92, 16: 17.08, 19.2: 15.5, 24: 13.67},
+                    14: {12: 21.17, 16: 18.25, 19.2: 16.5, 24: 14.58},
+                    16: {12: 22.83, 16: 19.58, 19.2: 17.75, 24: 15.58},
+                    18: {12: 0, 16: 0, 19.2: 0, 24: 0},
+                    20: {12: 0, 16: 0, 19.2: 0, 24: 0},
+                    22: {12: 0, 16: 0, 19.2: 0, 24: 0},
+                    24: {12: 0, 16: 0, 19.2: 0, 24: 0}
+                },
+                "2x3 - 1650": {
+                    11.875: {12: 21.5, 16: 19.67, 19.2: 17.83, 24: 15.67},
+                    12.5: {12: 22.17, 16: 20.25, 19.2: 18.33, 24: 16.17},
+                    14: {12: 23.83, 16: 21.5, 19.2: 19.58, 24: 17.25},
+                    16: {12: 25.83, 16: 23.17, 19.2: 21.0, 24: 18.58},
+                    18: {12: 0, 16: 0, 19.2: 0, 24: 0},
+                    20: {12: 0, 16: 0, 19.2: 0, 24: 0},
+                    22: {12: 0, 16: 0, 19.2: 0, 24: 0},
+                    24: {12: 0, 16: 0, 19.2: 0, 24: 0}
+                },
+                "2x3 - 2100": {
+                    11.875: {12: 22.33, 16: 20.83, 19.2: 19.83, 24: 18.33},
+                    12.5: {12: 23.08, 16: 21.5, 19.2: 20.58, 24: 19.08},
+                    14: {12: 24.75, 16: 23.17, 19.2: 22.08, 24: 20.83},
+                    16: {12: 26.83, 16: 25.17, 19.2: 24.0, 24: 22.58},
+                    18: {12: 0, 16: 0, 19.2: 0, 24: 0},
+                    20: {12: 0, 16: 0, 19.2: 0, 24: 0},
+                    22: {12: 0, 16: 0, 19.2: 0, 24: 0},
+                    24: {12: 0, 16: 0, 19.2: 0, 24: 0}
+                },
+                "2x4 - 2100": {
+                    11.875: {12: 24.08, 16: 22.42, 19.2: 21.33, 24: 20.17},
+                    12.5: {12: 24.83, 16: 23.17, 19.2: 22.08, 24: 20.83},
+                    14: {12: 26.58, 16: 24.92, 19.2: 23.75, 24: 22.33},
+                    16: {12: 28.83, 16: 26.92, 19.2: 25.75, 24: 24.25},
+                    18: {12: 31.0, 16: 29.0, 19.2: 27.67, 24: 26.0},
+                    20: {12: 32.5, 16: 30.5, 19.2: 29.08, 24: 27.42},
+                    22: {12: 35.08, 16: 32.25, 19.2: 30.92, 24: 29.08},
+                    24: {12: 37.5, 16: 34.5, 19.2: 32.5, 24: 30.75}
+                },
+                "2x4 - 2400": {
+                    11.875: {12: 24.67, 16: 23.0, 19.2: 21.92, 24: 20.67},
+                    12.5: {12: 25.5, 16: 23.75, 19.2: 22.67, 24: 21.25},
+                    14: {12: 27.25, 16: 25.5, 19.2: 24.33, 24: 22.83},
+                    16: {12: 29.5, 16: 27.58, 19.2: 26.33, 24: 24.83},
+                    18: {12: 31.67, 16: 29.67, 19.2: 28.33, 24: 26.67},
+                    20: {12: 34.08, 16: 31.58, 19.2: 30.25, 24: 28.5},
+                    22: {12: 36.58, 16: 33.67, 19.2: 31.92, 24: 30.17},
+                    24: {12: 39.17, 16: 36.08, 19.2: 34.0, 24: 31.75}
+                }
             },
-            "4.8_0.70": {
-                "2x3-EPS": {302: {305: 4.02, 406: 3.22, 487: 2.73, 610: 2.08}},
-                "2x3-1650": {302: {305: 4.75, 406: 4.07, 487: 3.62, 610: 2.92}},
-                "2x3-2100": {302: {305: 5.13, 406: 4.63, 487: 4.12, 610: 3.45}},
-                "2x4-2100": {302: {305: 5.70, 406: 5.08, 487: 4.40, 610: 3.62}},
-                "2x4-2400": {302: {305: 5.90, 406: 5.30, 487: 4.73, 610: 3.95}}
+            "100_15": { // 100 lb/pi² live + 15 lb/pi² dead
+                "2x3 - EPS": {
+                    11.875: {12: 13.17, 16: 10.5, 19.2: 8.92, 24: 6.75},
+                    12.5: {12: 13.58, 16: 10.75, 19.2: 9.17, 24: 7.0},
+                    14: {12: 14.42, 16: 11.5, 19.2: 9.75, 24: 7.42},
+                    16: {12: 15.58, 16: 12.42, 19.2: 10.42, 24: 8.0},
+                    18: {12: 0, 16: 0, 19.2: 0, 24: 0},
+                    20: {12: 0, 16: 0, 19.2: 0, 24: 0},
+                    22: {12: 0, 16: 0, 19.2: 0, 24: 0},
+                    24: {12: 0, 16: 0, 19.2: 0, 24: 0}
+                },
+                "2x3 - 1650": {
+                    11.875: {12: 15.58, 16: 13.33, 19.2: 11.83, 24: 9.58},
+                    12.5: {12: 15.92, 16: 13.75, 19.2: 12.17, 24: 9.83},
+                    14: {12: 17.0, 16: 14.67, 19.2: 13.0, 24: 10.42},
+                    16: {12: 18.33, 16: 15.75, 19.2: 14.0, 24: 11.25},
+                    18: {12: 0, 16: 0, 19.2: 0, 24: 0},
+                    20: {12: 0, 16: 0, 19.2: 0, 24: 0},
+                    22: {12: 0, 16: 0, 19.2: 0, 24: 0},
+                    24: {12: 0, 16: 0, 19.2: 0, 24: 0}
+                },
+                "2x3 - 2100": {
+                    11.875: {12: 16.75, 16: 15.17, 19.2: 13.5, 24: 11.25},
+                    12.5: {12: 17.42, 16: 15.75, 19.2: 13.92, 24: 11.58},
+                    14: {12: 19.17, 16: 16.83, 19.2: 14.83, 24: 12.33},
+                    16: {12: 21.17, 16: 18.17, 19.2: 15.83, 24: 13.25},
+                    18: {12: 0, 16: 0, 19.2: 0, 24: 0},
+                    20: {12: 0, 16: 0, 19.2: 0, 24: 0},
+                    22: {12: 0, 16: 0, 19.2: 0, 24: 0},
+                    24: {12: 0, 16: 0, 19.2: 0, 24: 0}
+                },
+                "2x4 - 2100": {
+                    11.875: {12: 18.67, 16: 16.58, 19.2: 14.42, 24: 11.83},
+                    12.5: {12: 19.42, 16: 17.08, 19.2: 14.92, 24: 12.17},
+                    14: {12: 21.25, 16: 18.17, 19.2: 15.83, 24: 13.0},
+                    16: {12: 23.58, 16: 19.58, 19.2: 17.0, 24: 14.0},
+                    18: {12: 25.5, 16: 20.83, 19.2: 18.17, 24: 15.0},
+                    20: {12: 26.92, 16: 22.08, 19.2: 19.25, 24: 15.75},
+                    22: {12: 28.33, 16: 23.25, 19.2: 20.33, 24: 16.67},
+                    24: {12: 29.75, 16: 24.42, 19.2: 21.17, 24: 17.42}
+                },
+                "2x4 - 2400": {
+                    11.875: {12: 19.33, 16: 17.33, 19.2: 15.5, 24: 12.92},
+                    12.5: {12: 20.17, 16: 18.08, 19.2: 16.17, 24: 13.33},
+                    14: {12: 22.0, 16: 19.42, 19.2: 17.0, 24: 14.25},
+                    16: {12: 24.42, 16: 20.83, 19.2: 18.33, 24: 15.33},
+                    18: {12: 26.67, 16: 22.25, 19.2: 19.5, 24: 16.25},
+                    20: {12: 28.42, 16: 23.58, 19.2: 20.75, 24: 17.25},
+                    22: {12: 30.0, 16: 24.83, 19.2: 21.75, 24: 18.17},
+                    24: {12: 31.33, 16: 26.0, 19.2: 22.83, 24: 19.08}
+                }
             }
         };
 
@@ -622,31 +1023,102 @@
             event.target.classList.add('active');
         }
 
-        function updateTributaryWidths() {
-            const floors = parseInt(document.getElementById('floors-i').value);
-            const container = document.getElementById('tributary-widths-i');
-            
-            let html = '';
-            for (let i = 1; i <= floors; i++) {
-                html += `
-                    <div class="stage-group">
-                        <div class="stage-title">L.T. Étage ${i}</div>
-                        <div class="dimension-input">
-                            <input type="number" id="trib-${i}-ft-i" placeholder="0" min="0">
-                            <span>pi</span>
-                            <input type="number" id="trib-${i}-in-i" placeholder="0" min="0" max="11">
-                            <span>po</span>
-                        </div>
-                    </div>
-                `;
-            }
-            container.innerHTML = html;
+        function parseSpan(spanStr) {
+            if (!spanStr || spanStr === "n/d") return 0;
+            const parts = spanStr.split('-');
+            const feet = parseInt(parts[0]);
+            const inches = parseInt(parts[1]);
+            return feet + inches/12;
+        }
+
+        function formatSpan(totalFeet) {
+            const feet = Math.floor(totalFeet);
+            const inches = Math.round((totalFeet - feet) * 12);
+            return `${feet}'-${inches}"`;
         }
 
         function calculateI() {
-            // Get span
+            // Get inputs
             const spanFt = parseFloat(document.getElementById('span-ft-i').value) || 0;
             const spanIn = parseFloat(document.getElementById('span-in-i').value) || 0;
+            const totalSpanFt = spanFt + spanIn/12;
+            
+            const tribFt = parseFloat(document.getElementById('trib-ft-i').value) || 0;
+            const tribIn = parseFloat(document.getElementById('trib-in-i').value) || 0;
+            const tributaryWidth = tribFt + tribIn/12;
+            
+            if (totalSpanFt === 0 || tributaryWidth === 0) {
+                alert('Veuillez entrer une portée et une largeur tributaire valides.');
+                return;
+            }
+            
+            const deadLoad = parseFloat(document.getElementById('dead-load-i').value) || 15;
+            const liveLoad = parseFloat(document.getElementById('live-load-i').value) || 40;
+            const snowLoad = parseFloat(document.getElementById('snow-load-i').value) || 0;
+            const subfloorThickness = document.getElementById('subfloor-thickness-i').value;
+            const attachment = document.querySelector('input[name="subfloor-attachment-i"]:checked').value;
+            const spanType = document.querySelector('input[name="span-type-i"]:checked').value;
+            const gypsum = document.querySelector('input[name="gypsum-i"]:checked').value;
+            const maxHeight = parseFloat(document.getElementById('max-height-i').value) || 999;
+            
+            // Calculate loads
+            const totalUnfactoredLoad = deadLoad + Math.max(liveLoad, snowLoad);
+            const factoredLoad = 1.25 * deadLoad + 1.5 * Math.max(liveLoad, snowLoad);
+            
+            let bestSolution = null;
+            let bestSpacing = 0;
+            
+            // Check all series
+            for (const [seriesName, seriesData] of Object.entries(iJoistData)) {
+                if (seriesData.spans[subfloorThickness] && seriesData.spans[subfloorThickness][attachment]) {
+                    const spanTypeData = seriesData.spans[subfloorThickness][attachment][spanType];
+                    const gypsumData = spanTypeData[gypsum === "no" ? "no_gypsum" : "half_gypsum"];
+                    
+                    for (const height of seriesData.heights) {
+                        if (height > maxHeight) continue;
+                        
+                        const heightData = gypsumData[height];
+                        if (!heightData) continue;
+                        
+                        for (const [spacing, spanStr] of Object.entries(heightData)) {
+                            const spacingNum = parseFloat(spacing);
+                            const allowableSpan = parseSpan(spanStr);
+                            
+                            if (allowableSpan >= totalSpanFt && spacingNum > bestSpacing) {
+                                bestSolution = {
+                                    series: seriesName,
+                                    height: height,
+                                    spacing: spacingNum,
+                                    maxSpan: spanStr
+                                };
+                                bestSpacing = spacingNum;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            if (bestSolution) {
+                document.getElementById('series-result-i').textContent = bestSolution.series;
+                document.getElementById('height-result-i').textContent = `${bestSolution.height}"`;
+                document.getElementById('spacing-result-i').textContent = `${bestSolution.spacing}"`;
+                document.getElementById('max-span-result-i').textContent = bestSolution.maxSpan;
+                document.getElementById('total-load-result-i').textContent = `${totalUnfactoredLoad.toFixed(0)} lb/pi.ca.`;
+                document.getElementById('factored-load-result-i').textContent = `${factoredLoad.toFixed(0)} lb/pi.ca.`;
+            } else {
+                document.getElementById('series-result-i').textContent = 'Aucune solution trouvée';
+                document.getElementById('height-result-i').textContent = '-';
+                document.getElementById('spacing-result-i').textContent = '-';
+                document.getElementById('max-span-result-i').textContent = '-';
+                document.getElementById('total-load-result-i').textContent = `${totalUnfactoredLoad.toFixed(0)} lb/pi.ca.`;
+                document.getElementById('factored-load-result-i').textContent = `${factoredLoad.toFixed(0)} lb/pi.ca.`;
+            }
+        }
+
+        function calculateAjourees() {
+            // Get inputs
+            const spanFt = parseFloat(document.getElementById('span-ft-a').value) || 0;
+            const spanIn = parseFloat(document.getElementById('span-in-a').value) || 0;
             const totalSpanFt = spanFt + spanIn/12;
             
             if (totalSpanFt === 0) {
@@ -654,75 +1126,114 @@
                 return;
             }
             
-            // Simple calculation example
-            document.getElementById('series-result-i').textContent = 'AJS® 25';
-            document.getElementById('height-result-i').textContent = '11⅞"';
-            document.getElementById('spacing-result-i').textContent = '16"';
-            document.getElementById('max-span-result-i').textContent = '18\'-6"';
-            document.getElementById('total-load-result-i').textContent = '55 lb/pi.ca.';
-            document.getElementById('factored-load-result-i').textContent = '77 lb/pi.ca.';
-        }
-
-        function calculateAjourees() {
-            // Get input values
-            const spanFt = parseFloat(document.getElementById('span-ft-a').value) || 0;
-            const spanIn = parseFloat(document.getElementById('span-in-a').value) || 0;
-            const totalSpanM = (spanFt + spanIn/12) * 0.3048; // Convert to meters
+            const deadLoad = parseFloat(document.getElementById('dead-load-a').value);
+            const liveLoad = parseFloat(document.getElementById('live-load-a').value);
+            const spacing = parseFloat(document.getElementById('spacing-a').value);
+            const maxHeight = parseFloat(document.getElementById('max-height-a').value) || 999;
             
-            if (totalSpanM === 0) {
-                alert('Veuillez entrer une portée valide.');
+            if (!deadLoad || !liveLoad) {
+                alert('Veuillez sélectionner les charges.');
                 return;
             }
             
-            const liveLoad = document.getElementById('live-load-kpa').value;
-            const deadLoad = document.getElementById('dead-load-kpa').value;
-            const spacing = document.getElementById('spacing-a').value;
-            
-            // Use data from tables to find suitable joists
+            // Determine load case
             const loadCase = `${liveLoad}_${deadLoad}`;
             const data = openWebJoistData[loadCase];
             
             if (!data) {
-                alert('Combinaison de charges non trouvée dans les tables.');
+                alert('Combinaison de charges non supportée.');
                 return;
             }
             
-            let bestSeries = null;
-            let bestHeight = null;
-            let allowableSpan = 0;
+            let bestSolution = null;
+            let bestRatio = 0;
             
-            // Find best match
-            for (const [series, heights] of Object.entries(data)) {
-                for (const [height, spacings] of Object.entries(heights)) {
-                    const maxSpan = spacings[spacing];
-                    if (maxSpan && maxSpan >= totalSpanM && maxSpan > allowableSpan) {
-                        bestSeries = series;
-                        bestHeight = height;
-                        allowableSpan = maxSpan;
+            // Check all series and heights
+            for (const [series, heightData] of Object.entries(data)) {
+                for (const [heightStr, spacingData] of Object.entries(heightData)) {
+                    const height = parseFloat(heightStr);
+                    if (height > maxHeight) continue;
+                    
+                    const allowableSpan = spacingData[spacing];
+                    if (allowableSpan && allowableSpan > 0) {
+                        const ratio = allowableSpan / totalSpanFt;
+                        if (ratio > bestRatio) {
+                            bestSolution = {
+                                series: series,
+                                height: height,
+                                allowableSpan: allowableSpan,
+                                ratio: ratio
+                            };
+                            bestRatio = ratio;
+                        }
                     }
                 }
             }
             
-            if (bestSeries) {
-                document.getElementById('series-result-a').textContent = bestSeries;
-                document.getElementById('height-result-a').textContent = `${bestHeight} mm`;
-                document.getElementById('allowable-span-a').textContent = `${allowableSpan.toFixed(2)} m`;
-                document.getElementById('span-ratio-a').textContent = (allowableSpan / totalSpanM).toFixed(2);
-                document.getElementById('applied-loads-a').textContent = `${liveLoad} + ${deadLoad} kPa`;
-                document.getElementById('status-a').textContent = allowableSpan >= totalSpanM ? 'CONFORME' : 'NON CONFORME';
+            if (bestSolution) {
+                document.getElementById('series-result-a').textContent = bestSolution.series;
+                document.getElementById('height-result-a').textContent = `${bestSolution.height}"`;
+                document.getElementById('allowable-span-a').textContent = formatSpan(bestSolution.allowableSpan);
+                document.getElementById('span-ratio-a').textContent = bestSolution.ratio.toFixed(2);
+                document.getElementById('applied-loads-a').textContent = `${deadLoad} + ${liveLoad} lb/pi.ca.`;
+                
+                const statusBox = document.getElementById('status-box-a');
+                const statusElement = document.getElementById('status-a');
+                
+                if (bestSolution.ratio >= 1.0) {
+                    statusElement.textContent = 'CONFORME';
+                    statusBox.className = 'result-box status-success';
+                } else {
+                    statusElement.textContent = 'NON CONFORME';
+                    statusBox.className = 'result-box status-error';
+                }
             } else {
                 document.getElementById('series-result-a').textContent = 'Aucune solution';
                 document.getElementById('height-result-a').textContent = '-';
                 document.getElementById('allowable-span-a').textContent = '-';
                 document.getElementById('span-ratio-a').textContent = '-';
-                document.getElementById('applied-loads-a').textContent = '-';
-                document.getElementById('status-a').textContent = 'NON CONFORME';
+                document.getElementById('applied-loads-a').textContent = `${deadLoad} + ${liveLoad} lb/pi.ca.`;
+                
+                const statusBox = document.getElementById('status-box-a');
+                const statusElement = document.getElementById('status-a');
+                statusElement.textContent = 'NON CONFORME';
+                statusBox.className = 'result-box status-error';
             }
         }
 
-        // Initialize tributary widths
-        document.getElementById('floors-i').addEventListener('change', updateTributaryWidths);
-        updateTributaryWidths();
+        // Add event listeners for real-time calculation
+        document.addEventListener('DOMContentLoaded', function() {
+            // I-joist inputs
+            const iInputs = ['span-ft-i', 'span-in-i', 'trib-ft-i', 'trib-in-i', 'dead-load-i', 'live-load-i', 'snow-load-i', 'subfloor-thickness-i', 'max-height-i'];
+            iInputs.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('change', calculateI);
+                    element.addEventListener('input', calculateI);
+                }
+            });
+            
+            // Radio buttons for I-joists
+            document.querySelectorAll('input[name="subfloor-attachment-i"]').forEach(input => {
+                input.addEventListener('change', calculateI);
+            });
+            document.querySelectorAll('input[name="span-type-i"]').forEach(input => {
+                input.addEventListener('change', calculateI);
+            });
+            document.querySelectorAll('input[name="gypsum-i"]').forEach(input => {
+                input.addEventListener('change', calculateI);
+            });
+            
+            // Open web joist inputs
+            const aInputs = ['span-ft-a', 'span-in-a', 'dead-load-a', 'live-load-a', 'spacing-a', 'max-height-a'];
+            aInputs.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('change', calculateAjourees);
+                    element.addEventListener('input', calculateAjourees);
+                }
+            });
+        });
     </script>
 </body>
 </html>
