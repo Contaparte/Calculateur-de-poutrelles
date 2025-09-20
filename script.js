@@ -135,15 +135,55 @@ function calculateJoist() {
             return;
         }
 
-        // Calculs principaux
+        // Analyser toutes les options disponibles
+        const recommendations = analyzeAllOptions(span, spacing, deadLoad, liveLoad, snowLoad);
+        
+        // Calculer pour la configuration sélectionnée
         const results = performCalculations(span, spacing, height, series, spanType, deadLoad, liveLoad, snowLoad);
         
-        // Affichage des résultats
-        displayResults(results);
+        // Afficher les résultats avec recommandations
+        displayResults(results, recommendations);
 
     } catch (error) {
         showError("Erreur lors du calcul: " + error.message);
     }
+}
+
+function analyzeAllOptions(span, spacing, deadLoad, liveLoad, snowLoad) {
+    const totalLiveLoad = Math.max(liveLoad, snowLoad);
+    const totalLoad = deadLoad + totalLiveLoad;
+    const standardTotal = 55; // 40 + 15 lb/pi²
+    const adjustmentFactor = Math.sqrt(standardTotal / totalLoad);
+    
+    const recommendations = [];
+
+    for (const [heightStr, heightData] of Object.entries(ALLOWABLE_SPANS)) {
+        const height = parseFloat(heightStr);
+        for (const [series, spacingData] of Object.entries(heightData)) {
+            if (spacingData[spacing]) {
+                const baseAllowableSpan = spacingData[spacing];
+                const adjustedSpan = baseAllowableSpan * adjustmentFactor;
+                
+                if (adjustedSpan >= span) {
+                    const properties = JOIST_PROPERTIES[height][series];
+                    recommendations.push({
+                        height: height,
+                        series: series,
+                        allowableSpan: adjustedSpan,
+                        baseSpan: baseAllowableSpan,
+                        margin: adjustedSpan - span,
+                        EI: properties.EI,
+                        adequate: true
+                    });
+                }
+            }
+        }
+    }
+
+    // Trier par marge croissante (plus optimal = marge plus petite)
+    recommendations.sort((a, b) => a.margin - b.margin);
+    
+    return recommendations;
 }
 
 function performCalculations(span, spacing, height, series, spanType, deadLoad, liveLoad, snowLoad) {
@@ -183,9 +223,6 @@ function performCalculations(span, spacing, height, series, spanType, deadLoad, 
     // Ouvertures maximales
     const openings = getMaxOpenings(height, series);
 
-    // Facteurs d'amélioration
-    const improvements = calculateImprovements(span, spacing, height, series);
-
     return {
         span: span,
         spacing: spacing,
@@ -203,7 +240,6 @@ function performCalculations(span, spacing, height, series, spanType, deadLoad, 
         shearCheck: VMax <= VR,
         shearUtilization: (VMax / VR * 100),
         openings: openings,
-        improvements: improvements,
         EI: EI / 1000000,
         K: K / 1000000,
         moment: MTotal,
@@ -276,54 +312,7 @@ function getMaxOpenings(height, series) {
     return MAX_OPENINGS[height][chordSize];
 }
 
-function calculateImprovements(span, spacing, height, series) {
-    const improvements = [];
-    
-    // Suggestions pour réduire l'espacement
-    if (spacing > 16) {
-        improvements.push({
-            type: "Réduire l'espacement",
-            description: `Passer de ${spacing}" à 16" améliorerait la performance`,
-            impact: "Réduction de la flèche d'environ 20-30%"
-        });
-    }
-    
-    // Suggestions pour augmenter la hauteur
-    const nextHeight = getNextHeight(height);
-    if (nextHeight) {
-        improvements.push({
-            type: "Augmenter la hauteur",
-            description: `Passer de ${height}" à ${nextHeight}" améliorerait la rigidité`,
-            impact: "Réduction significative de la flèche"
-        });
-    }
-    
-    // Suggestions pour améliorer la série
-    const betterSeries = getBetterSeries(series);
-    if (betterSeries) {
-        improvements.push({
-            type: "Améliorer la série",
-            description: `Passer de ${series} à ${betterSeries}`,
-            impact: "Augmentation de la résistance et rigidité"
-        });
-    }
-
-    return improvements;
-}
-
-function getNextHeight(currentHeight) {
-    const heights = [11.875, 12.5, 14, 16, 18, 20, 22, 24];
-    const index = heights.indexOf(currentHeight);
-    return index < heights.length - 1 ? heights[index + 1] : null;
-}
-
-function getBetterSeries(currentSeries) {
-    const seriesOrder = ["2x3-EPS", "2x3-1650", "2x3-2100", "2x4-2100", "2x4-2400"];
-    const index = seriesOrder.indexOf(currentSeries);
-    return index < seriesOrder.length - 1 ? seriesOrder[index + 1] : null;
-}
-
-function displayResults(results) {
+function displayResults(results, recommendations) {
     const container = document.getElementById('results-container');
     
     // Détermination du statut global
@@ -335,18 +324,41 @@ function displayResults(results) {
     
     const overallStatus = deflectionOK && spanOK && vibrationOK && shearOK;
     
-    container.innerHTML = `
-        <div class="summary-box" style="background: ${overallStatus ? 'linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)' : 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)'}">
-            <div class="summary-value">${overallStatus ? '✓ CONFORME' : '✗ NON CONFORME'}</div>
-            <div class="summary-label">Vérification globale selon CECOBOIS</div>
+    let statusClass = 'summary-box';
+    let statusText = '✓ CONFORME';
+    let statusDescription = 'Configuration sélectionnée valide';
+
+    if (!overallStatus) {
+        statusClass = 'summary-box error';
+        statusText = '✗ NON CONFORME';
+        statusDescription = 'Configuration sélectionnée inadéquate';
+    } else if (recommendations.length > 3) {
+        statusClass = 'summary-box success';
+        statusText = '✓ OPTIMAL';
+        statusDescription = 'Plusieurs options disponibles';
+    } else if (recommendations.length <= 2) {
+        statusClass = 'summary-box warning';
+        statusText = '⚠ LIMITÉ';
+        statusDescription = 'Peu d\'options disponibles';
+    }
+
+    let html = `
+        <div class="${statusClass}">
+            <div class="summary-value">${statusText}</div>
+            <div class="summary-label">${statusDescription}</div>
         </div>
 
         <div class="results">
-            <h3>Résultats de calcul</h3>
+            <h3>Configuration sélectionnée</h3>
             
             <div class="result-item">
-                <span class="result-label">Configuration sélectionnée</span>
-                <span class="result-value">${results.height}" ${results.series} @ ${results.spacing}"</span>
+                <span class="result-label">Poutrelle</span>
+                <span class="result-value">${results.height}" ${results.series}</span>
+            </div>
+            
+            <div class="result-item">
+                <span class="result-label">Espacement</span>
+                <span class="result-value">${results.spacing}" c/c</span>
             </div>
             
             <div class="result-item">
@@ -355,18 +367,8 @@ function displayResults(results) {
             </div>
             
             <div class="result-item">
-                <span class="result-label">Charges appliquées</span>
+                <span class="result-label">Charges</span>
                 <span class="result-value">CM: ${results.deadLoad} psf, CV: ${results.liveLoad} psf</span>
-            </div>
-            
-            <div class="result-item">
-                <span class="result-label">Rigidité EI</span>
-                <span class="result-value">${results.EI.toFixed(0)} × 10⁶ lb·in²</span>
-            </div>
-            
-            <div class="result-item">
-                <span class="result-label">Coefficient cisaillement K</span>
-                <span class="result-value">${results.K.toFixed(2)} × 10⁶ lb</span>
             </div>
         </div>
 
@@ -424,42 +426,77 @@ function displayResults(results) {
                 </div>
             </div>
         </div>
+    `;
 
-        ${results.openings ? `
-        <div class="verification-section">
-            <h3>Ouvertures maximales permises</h3>
-            <div class="verification-item">
-                <span>Zone A (extrémités)</span>
-                <span class="result-value">${results.openings.A}"</span>
-            </div>
-            <div class="verification-item">
-                <span>Zone B (quart de portée)</span>
-                <span class="result-value">${results.openings.B}"</span>
-            </div>
-            <div class="verification-item">
-                <span>Zone C (centre)</span>
-                <span class="result-value">${results.openings.C}"</span>
-            </div>
-            <div class="verification-item">
-                <span>Diamètre max (zones D et E)</span>
-                <span class="result-value">D: ${results.openings.D}", E: ${results.openings.E}"</span>
-            </div>
-        </div>
-        ` : ''}
+    // Afficher les recommandations alternatives
+    if (recommendations.length > 0) {
+        html += `
+            <div class="recommendations">
+                <h3 style="color: #27ae60; margin-bottom: 15px;">Solutions recommandées</h3>
+        `;
 
-        ${results.improvements.length > 0 ? `
-        <div class="verification-section">
-            <h3>Suggestions d'amélioration</h3>
-            ${results.improvements.map(imp => `
-                <div class="verification-item" style="flex-direction: column; align-items: flex-start;">
-                    <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">${imp.type}</div>
-                    <div style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 3px;">${imp.description}</div>
-                    <div style="font-size: 0.8rem; color: #27ae60;">${imp.impact}</div>
+        recommendations.slice(0, 5).forEach((rec, index) => {
+            const isSelected = rec.height === results.height && rec.series === results.series;
+            const cardClass = isSelected ? 'optimal' : (index === 0 ? 'optimal' : '');
+            const heightLabel = rec.height === 11.875 ? '11⅞"' : rec.height === 12.5 ? '12½"' : `${rec.height}"`;
+            
+            html += `
+                <div class="recommendation-card ${cardClass}">
+                    <h4>${rec.series} - Hauteur ${heightLabel}${isSelected ? ' (SÉLECTIONNÉ)' : (index === 0 && !isSelected ? ' (OPTIMAL)' : '')}</h4>
+                    <div class="recommendation-specs">
+                        <div class="spec-item">
+                            <span class="spec-label">Portée admissible:</span>
+                            <span class="spec-value">${rec.allowableSpan.toFixed(1)}'</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Marge de sécurité:</span>
+                            <span class="spec-value">${rec.margin.toFixed(1)}'</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Rigidité EI:</span>
+                            <span class="spec-value">${rec.EI} × 10⁶</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Portée base:</span>
+                            <span class="spec-value">${rec.baseSpan.toFixed(1)}'</span>
+                        </div>
+                    </div>
+                    <div class="portee-result">
+                        ✓ Convient pour ${results.span}' @ ${results.spacing}" c/c
+                    </div>
                 </div>
-            `).join('')}
-        </div>
-        ` : ''}
+            `;
+        });
 
+        html += `</div>`;
+    }
+
+    // Ouvertures maximales
+    if (results.openings) {
+        html += `
+            <div class="verification-section">
+                <h3>Ouvertures maximales permises</h3>
+                <div class="verification-item">
+                    <span>Zone A (extrémités)</span>
+                    <span class="result-value">${results.openings.A}"</span>
+                </div>
+                <div class="verification-item">
+                    <span>Zone B (quart de portée)</span>
+                    <span class="result-value">${results.openings.B}"</span>
+                </div>
+                <div class="verification-item">
+                    <span>Zone C (centre)</span>
+                    <span class="result-value">${results.openings.C}"</span>
+                </div>
+                <div class="verification-item">
+                    <span>Diamètre max (zones D et E)</span>
+                    <span class="result-value">D: ${results.openings.D}", E: ${results.openings.E}"</span>
+                </div>
+            </div>
+        `;
+    }
+
+    html += `
         <div class="info-box">
             <h4>Notes importantes</h4>
             <ul style="margin-left: 20px; margin-top: 10px;">
@@ -471,6 +508,8 @@ function displayResults(results) {
             </ul>
         </div>
     `;
+
+    container.innerHTML = html;
 }
 
 function showError(message) {
