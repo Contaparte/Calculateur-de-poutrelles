@@ -121,23 +121,6 @@
             box-shadow: 0 0 0 3px rgba(50, 205, 50, 0.1);
         }
 
-        .checkbox-group {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .checkbox-item input[type="checkbox"] {
-            width: auto;
-            margin: 0;
-        }
-
         .results-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -218,34 +201,6 @@
             font-weight: 600;
         }
 
-        .charge-preset {
-            background: #e8f5e8;
-            border-radius: 4px;
-            padding: 15px;
-            margin-bottom: 15px;
-        }
-
-        .preset-buttons {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .preset-btn {
-            background: #32CD32;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.9em;
-            transition: all 0.3s ease;
-        }
-
-        .preset-btn:hover {
-            background: #228B22;
-        }
-
         @media (max-width: 768px) {
             .main-content {
                 grid-template-columns: 1fr;
@@ -268,11 +223,6 @@
             .poutrelle-specs {
                 grid-template-columns: 1fr;
             }
-
-            .checkbox-group {
-                flex-direction: column;
-                gap: 10px;
-            }
         }
     </style>
 </head>
@@ -292,20 +242,18 @@
                         <div class="input-field">
                             <label for="portee">Portée libre</label>
                             <div class="dimension-input">
-                                <input type="number" id="porteePieds" step="1" min="10" max="40" placeholder="Pieds">
-                                <span>pi</span>
-                                <input type="number" id="porteePouces" step="0.5" min="0" max="11.5" placeholder="Pouces">
-                                <span>po</span>
+                                <input type="number" id="porteeMetres" step="0.1" min="3" max="12" placeholder="Mètres">
+                                <span>m</span>
                             </div>
                         </div>
                         <div class="input-field">
                             <label for="espacement">Espacement</label>
                             <select id="espacement">
                                 <option value="">Sélectionner</option>
-                                <option value="305">12" (305 mm)</option>
-                                <option value="406">16" (406 mm)</option>
-                                <option value="488">19.2" (488 mm)</option>
-                                <option value="610">24" (610 mm)</option>
+                                <option value="305">305 mm (12")</option>
+                                <option value="406">406 mm (16")</option>
+                                <option value="488">488 mm (19.2")</option>
+                                <option value="610">610 mm (24")</option>
                             </select>
                         </div>
                     </div>
@@ -313,14 +261,6 @@
 
                 <div class="input-group">
                     <div class="input-row">
-                        <div class="input-field">
-                            <label for="typePlancher">Type de plancher</label>
-                            <select id="typePlancher">
-                                <option value="">Sélectionner</option>
-                                <option value="etage">Plancher d'étage</option>
-                                <option value="rdc">Plancher du rez-de-chaussée</option>
-                            </select>
-                        </div>
                         <div class="input-field">
                             <label for="typePortee">Type de portée</label>
                             <select id="typePortee">
@@ -354,30 +294,26 @@
                     </div>
                     <div class="input-row">
                         <div class="input-field">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="plafondGypse">
-                                <label for="plafondGypse">Plafond gypse 1/2"</label>
-                            </div>
+                            <label for="plafondGypse">Plafond gypse</label>
+                            <select id="plafondGypse">
+                                <option value="">Aucun</option>
+                                <option value="12">1/2" (12 mm)</option>
+                                <option value="16">5/8" (16 mm)</option>
+                            </select>
                         </div>
                     </div>
                 </div>
 
                 <div class="input-group">
-                    <label>Charges (lb/pi²)</label>
-                    <div class="charge-preset">
-                        <div class="preset-buttons">
-                            <button class="preset-btn" onclick="appliquerPreset('residentiel')">Résidentiel</button>
-                        </div>
-                        <small>Résidentiel: 40 lb/pi² (charge vive) + 15 lb/pi² (charge morte)</small>
-                    </div>
+                    <label>Charges (kPa)</label>
                     <div class="input-row">
                         <div class="input-field">
-                            <label for="chargeVive">Charge vive (surcharge)</label>
-                            <input type="number" id="chargeVive" step="1" min="0" placeholder="lb/pi²">
+                            <label for="chargeMorte">Charge morte (CM)</label>
+                            <input type="number" id="chargeMorte" step="0.1" min="0" placeholder="Valeur CM">
                         </div>
                         <div class="input-field">
-                            <label for="chargeMorte">Charge morte (permanente)</label>
-                            <input type="number" id="chargeMorte" step="1" min="0" placeholder="lb/pi²">
+                            <label for="chargeVive">Charge vive (CV)</label>
+                            <input type="number" id="chargeVive" step="0.1" min="0" placeholder="Valeur CV">
                         </div>
                     </div>
                 </div>
@@ -386,11 +322,11 @@
                     <label>Contraintes dimensionnelles</label>
                     <div class="input-row">
                         <div class="input-field">
-                            <label for="hauteurMax">Hauteur max (pouces)</label>
-                            <input type="number" id="hauteurMax" step="0.25" min="0" placeholder="Aucune contrainte">
+                            <label for="hauteurMax">Hauteur max (mm)</label>
+                            <input type="number" id="hauteurMax" step="10" min="250" placeholder="Aucune contrainte">
                         </div>
                         <div class="input-field">
-                            <label for="optimisation">Critère d'optimisation</label>
+                            <label for="optimisation">Optimisation</label>
                             <select id="optimisation">
                                 <option value="">Sélectionner</option>
                                 <option value="hauteur">Hauteur minimale</option>
@@ -419,8 +355,8 @@
                         <div class="result-value" id="resultConfig">-</div>
                     </div>
                     <div class="result-card">
-                        <div class="result-label">Espacement</div>
-                        <div class="result-value" id="resultEspacement">-</div>
+                        <div class="result-label">Tableau utilisé</div>
+                        <div class="result-value" id="resultTableau">-</div>
                     </div>
                 </div>
 
@@ -435,4 +371,4 @@
 
     <script src="poutrelles-script.js"></script>
 </body>
-</html> 
+</html>
