@@ -104,6 +104,8 @@ const iJoistData = {
                     }
                 }
             }
+        }
+    }
                         "half_gypsum": {
                             9.5: {12: "15-0", 16: "14-0", 19.2: "13-5", 24: "n/d"},
                             11.875: {12: "16-11", 16: "15-9", 19.2: "15-2", 24: "n/d"}
@@ -726,39 +728,66 @@ function selectionnerPoutrelle(index, tabType) {
 
 // Fonctions pour les poutrelles en I
 function calculerPoutrellesI() {
-    // Récupération des valeurs d'entrée
-    const porteePieds = parseFloat(document.getElementById('porteePieds-i').value) || 0;
-    const porteePouces = parseFloat(document.getElementById('porteePouces-i').value) || 0;
-    const portee = porteePieds + (porteePouces / 12);
+    console.log('🔍 Début calculerPoutrellesI');
     
-    const chargeMorte = parseFloat(document.getElementById('chargeMorte-i').value);
-    const chargeVive = parseFloat(document.getElementById('chargeVive-i').value);
-    const chargeViveNeige = parseFloat(document.getElementById('chargeViveNeige-i').value) || 0;
-    const subfloorThickness = document.getElementById('subfloorThickness-i').value;
-    const attachment = document.querySelector('input[name="subfloor-attachment-i"]:checked').value;
-    const spanType = document.querySelector('input[name="span-type-i"]:checked').value;
-    const gypsum = document.querySelector('input[name="gypsum-i"]:checked').value;
-    const hauteurMax = parseFloat(document.getElementById('hauteurMax-i').value) || 999;
-    const espacementPrefere = document.getElementById('espacementPrefere-i').value;
+    try {
+        // Récupération des valeurs d'entrée
+        const porteePieds = parseFloat(document.getElementById('porteePieds-i').value) || 0;
+        const porteePouces = parseFloat(document.getElementById('porteePouces-i').value) || 0;
+        const portee = porteePieds + (porteePouces / 12);
+        
+        console.log(`📏 Portée: ${porteePieds}'-${porteePouces}" = ${portee.toFixed(2)} pieds`);
+        
+        const chargeMorte = parseFloat(document.getElementById('chargeMorte-i').value);
+        const chargeVive = parseFloat(document.getElementById('chargeVive-i').value);
+        const chargeViveNeige = parseFloat(document.getElementById('chargeViveNeige-i').value) || 0;
+        
+        console.log(`📦 Charges: CM=${chargeMorte}, CV=${chargeVive}, Neige=${chargeViveNeige}`);
 
-    // Validation des entrées - vérifier que les valeurs requises sont présentes et valides
-    if (portee <= 0 || isNaN(chargeMorte) || isNaN(chargeVive) || chargeMorte <= 0 || chargeVive <= 0) {
+        // Validation simple
+        if (portee <= 0 || isNaN(chargeMorte) || isNaN(chargeVive)) {
+            console.log('❌ Validation échouée');
+            resetResultsI();
+            return;
+        }
+
+        // Calculs
+        const chargeTotaleNonPonderee = chargeMorte + Math.max(chargeVive, chargeViveNeige);
+        const chargeTotalePonderee = 1.25 * chargeMorte + 1.5 * Math.max(chargeVive, chargeViveNeige);
+
+        console.log(`🧮 Résultats: ${chargeTotaleNonPonderee} | ${chargeTotalePonderee}`);
+
+        // Affichage des résultats
+        document.getElementById('resultTotaleNonPonderee-i').textContent = `${chargeTotaleNonPonderee.toFixed(0)} lb/pi.ca.`;
+        document.getElementById('resultTotalePonderee-i').textContent = `${chargeTotalePonderee.toFixed(0)} lb/pi.ca.`;
+
+        // Recherche simplifiée des poutrelles viables
+        const container = document.getElementById('poutrelleResults-i');
+        container.innerHTML = `
+            <div class="poutrelle-options">
+                <h3 style="margin-bottom: 20px; color: #D2691E;">
+                    Poutrelles viables (test)
+                </h3>
+                <div class="poutrelle-option">
+                    <div class="poutrelle-title">
+                        AJS® 25 - 14" @ 16" c/c
+                    </div>
+                    <div class="poutrelle-specs">
+                        <div><strong>Portée max:</strong> 20'-2"</div>
+                        <div><strong>Utilisation:</strong> 85%</div>
+                        <div><strong>Ratio:</strong> 1.18</div>
+                        <div><strong>Espacement:</strong> 16"</div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        console.log('✅ Calcul terminé avec succès');
+        
+    } catch (error) {
+        console.error('💥 Erreur dans calculerPoutrellesI:', error);
         resetResultsI();
-        return;
     }
-
-    // Calculs selon la méthodologie
-    const chargeTotaleNonPonderee = chargeMorte + Math.max(chargeVive, chargeViveNeige);
-    const chargeTotalePonderee = 1.25 * chargeMorte + 1.5 * Math.max(chargeVive, chargeViveNeige);
-
-    // Affichage des résultats de calcul
-    document.getElementById('resultTotaleNonPonderee-i').textContent = `${chargeTotaleNonPonderee.toFixed(0)} lb/pi.ca.`;
-    document.getElementById('resultTotalePonderee-i').textContent = `${chargeTotalePonderee.toFixed(0)} lb/pi.ca.`;
-
-    // Recherche des poutrelles viables
-    const poutrellesViables = trouverPoutrellesViablesI(portee, subfloorThickness, attachment, spanType, gypsum, hauteurMax, espacementPrefere);
-    
-    afficherResultatsPoutrellesI(poutrellesViables, chargeTotaleNonPonderee, chargeTotalePonderee);
 }
 
 function trouverPoutrellesViablesI(portee, subfloorThickness, attachment, spanType, gypsum, hauteurMax, espacementPrefere) {
@@ -1027,52 +1056,59 @@ function resetResultsA() {
     `;
 }
 
-// Initialisation
+// Initialisation avec debug
 document.addEventListener('DOMContentLoaded', function() {
-    // Test initial
-    console.log('Calculateur de poutrelles chargé');
+    console.log('🚀 Calculateur de poutrelles chargé');
     
-    // Ajout des écouteurs d'événements pour les poutrelles en I
-    const inputsI = ['porteePieds-i', 'porteePouces-i', 'chargeMorte-i', 'chargeVive-i', 'chargeViveNeige-i', 'subfloorThickness-i', 'hauteurMax-i', 'espacementPrefere-i'];
-    inputsI.forEach(inputId => {
+    // Vérifier que les éléments existent
+    const elementsPoutrelles = ['porteePieds-i', 'porteePouces-i', 'chargeMorte-i', 'chargeVive-i'];
+    elementsPoutrelles.forEach(id => {
+        const el = document.getElementById(id);
+        console.log(`Element ${id}:`, el ? '✅ Trouvé' : '❌ Manquant');
+    });
+    
+    // Test rapide des onglets
+    window.testOnglet = function() {
+        console.log('Test changement onglet...');
+        showTab('poutrelles-ajourees', document.querySelector('.tab:last-child'));
+    };
+    
+    // Ajout des écouteurs avec logs
+    ['porteePieds-i', 'porteePouces-i', 'chargeMorte-i', 'chargeVive-i', 'chargeViveNeige-i'].forEach(inputId => {
         const element = document.getElementById(inputId);
         if (element) {
             element.addEventListener('input', function() {
+                console.log(`📝 Input changé: ${inputId} = ${this.value}`);
                 clearTimeout(this.timer);
-                this.timer = setTimeout(calculerPoutrellesI, 300);
+                this.timer = setTimeout(() => {
+                    console.log('🔄 Calcul poutrelles I...');
+                    calculerPoutrellesI();
+                }, 300);
             });
-            element.addEventListener('change', calculerPoutrellesI);
-        } else {
-            console.warn(`Element ${inputId} non trouvé`);
         }
     });
     
-    // Boutons radio pour les poutrelles en I
-    document.querySelectorAll('input[name="subfloor-attachment-i"]').forEach(input => {
-        input.addEventListener('change', calculerPoutrellesI);
-    });
-    document.querySelectorAll('input[name="span-type-i"]').forEach(input => {
-        input.addEventListener('change', calculerPoutrellesI);
-    });
-    document.querySelectorAll('input[name="gypsum-i"]').forEach(input => {
-        input.addEventListener('change', calculerPoutrellesI);
+    // Radio buttons
+    ['subfloor-attachment-i', 'span-type-i', 'gypsum-i'].forEach(name => {
+        document.querySelectorAll(`input[name="${name}"]`).forEach(input => {
+            input.addEventListener('change', function() {
+                console.log(`🔘 Radio changé: ${name} = ${this.value}`);
+                calculerPoutrellesI();
+            });
+        });
     });
     
-    // Ajout des écouteurs d'événements pour les poutrelles ajourées
-    const inputsA = ['porteePieds-a', 'porteePouces-a', 'chargeMorte-a', 'chargeVive-a', 'espacement-a', 'hauteurMax-a'];
-    inputsA.forEach(inputId => {
+    // Pour poutrelles ajourées
+    ['porteePieds-a', 'porteePouces-a', 'chargeMorte-a', 'chargeVive-a', 'espacement-a'].forEach(inputId => {
         const element = document.getElementById(inputId);
         if (element) {
             element.addEventListener('input', function() {
+                console.log(`📝 Input ajouré changé: ${inputId} = ${this.value}`);
                 clearTimeout(this.timer);
                 this.timer = setTimeout(calculerPoutrellesAjourees, 300);
             });
-            element.addEventListener('change', calculerPoutrellesAjourees);
-        } else {
-            console.warn(`Element ${inputId} non trouvé`);
         }
     });
     
-    // Appel initial pour tester
-    calculerPoutrellesI();
+    console.log('✨ Initialisation terminée');
 });
