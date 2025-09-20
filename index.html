@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculateur de Poutrelles Ajourées</title>
+    <title>Calculateur de Poutrelles Ajourées CECOBOIS</title>
     <style>
         * {
             margin: 0;
@@ -159,16 +159,36 @@
             color: #2c3e50;
         }
 
-        .status-ok {
-            color: #27ae60;
+        .summary-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
         }
 
-        .status-warning {
-            color: #f39c12;
+        .summary-box.success {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
         }
 
-        .status-error {
-            color: #e74c3c;
+        .summary-box.warning {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        }
+
+        .summary-box.error {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+
+        .summary-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .summary-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
         }
 
         .verification-section {
@@ -177,6 +197,11 @@
             background: white;
             border-radius: 10px;
             border: 1px solid #e9ecef;
+        }
+
+        .verification-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
         }
 
         .verification-item {
@@ -214,33 +239,58 @@
             color: #721c24;
         }
 
-        .summary-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            text-align: center;
+        .recommendations {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
         }
 
-        .summary-value {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .summary-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        .error-message {
-            background: #f8d7da;
-            color: #721c24;
-            padding: 15px;
+        .recommendation-card {
+            background: white;
+            border: 1px solid #e9ecef;
             border-radius: 8px;
-            margin-top: 15px;
-            border: 1px solid #f5c6cb;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .recommendation-card.optimal {
+            border-color: #27ae60;
+            background: #f8fff9;
+        }
+
+        .recommendation-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .recommendation-specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+
+        .spec-label {
+            color: #7f8c8d;
+        }
+
+        .spec-value {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .portee-result {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #27ae60;
+            margin-top: 10px;
         }
 
         .info-box {
@@ -250,6 +300,15 @@
             border-radius: 8px;
             margin-top: 15px;
             color: #004085;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 1px solid #f5c6cb;
         }
 
         @media (max-width: 768px) {
@@ -359,82 +418,6 @@
                             <option value="30">30 lb/pi²</option>
                             <option value="40">40 lb/pi²</option>
                             <option value="50">50 lb/pi²</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="section">
-                    <h3>Contraintes dimensionnelles</h3>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="maxWidth">Largeur max (po)</label>
-                            <select id="maxWidth">
-                                <option value="" selected>Aucune contrainte</option>
-                                <option value="12">12"</option>
-                                <option value="14">14"</option>
-                                <option value="16">16"</option>
-                                <option value="18">18"</option>
-                                <option value="20">20"</option>
-                                <option value="22">22"</option>
-                                <option value="24">24"</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="maxHeight">Hauteur max (po)</label>
-                            <select id="maxHeight">
-                                <option value="" selected>Aucune contrainte</option>
-                                <option value="12">12"</option>
-                                <option value="14">14"</option>
-                                <option value="16">16"</option>
-                                <option value="18">18"</option>
-                                <option value="20">20"</option>
-                                <option value="22">22"</option>
-                                <option value="24">24"</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="section">
-                    <h3>Configuration du plancher</h3>
-                    
-                    <div class="form-group">
-                        <label for="subfloor">Épaisseur sous-plancher</label>
-                        <select id="subfloor">
-                            <option value="0.625">5/8"</option>
-                            <option value="0.75" selected>3/4"</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="attachment">Fixation</label>
-                        <select id="attachment">
-                            <option value="nailed">Cloué seulement</option>
-                            <option value="glued" selected>Cloué et collé</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="ceiling">Plafond gypse</label>
-                        <select id="ceiling">
-                            <option value="none">Aucun</option>
-                            <option value="0.5">1/2"</option>
-                            <option value="0.625" selected>5/8"</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="section">
-                    <h3>Optimisation</h3>
-                    
-                    <div class="form-group">
-                        <label for="optimization">Critère d'optimisation</label>
-                        <select id="optimization">
-                            <option value="minimize_depth" selected>Favoriser moins de plis</option>
-                            <option value="minimize_cost">Minimiser les coûts</option>
-                            <option value="maximize_openings">Maximiser les ouvertures</option>
                         </select>
                     </div>
                 </div>
