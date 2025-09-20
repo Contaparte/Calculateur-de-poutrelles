@@ -504,7 +504,7 @@ function formatSpan(totalFeet) {
     return `${feet}'-${inches}"`;
 }
 
-function showTab(tabName) {
+function showTab(tabName, clickedTab) {
     // Masquer tous les contenus d'onglets
     const contents = document.querySelectorAll('.tab-content');
     contents.forEach(content => content.classList.remove('active'));
@@ -517,7 +517,7 @@ function showTab(tabName) {
     document.getElementById(tabName).classList.add('active');
     
     // Ajouter la classe active à l'onglet cliqué
-    event.target.classList.add('active');
+    clickedTab.classList.add('active');
 }
 
 function selectionnerPoutrelle(index, tabType) {
@@ -537,8 +537,8 @@ function calculerPoutrellesI() {
     const porteePouces = parseFloat(document.getElementById('porteePouces-i').value) || 0;
     const portee = porteePieds + (porteePouces / 12);
     
-    const chargeMorte = parseFloat(document.getElementById('chargeMorte-i').value) || 0;
-    const chargeVive = parseFloat(document.getElementById('chargeVive-i').value) || 0;
+    const chargeMorte = parseFloat(document.getElementById('chargeMorte-i').value);
+    const chargeVive = parseFloat(document.getElementById('chargeVive-i').value);
     const chargeViveNeige = parseFloat(document.getElementById('chargeViveNeige-i').value) || 0;
     const subfloorThickness = document.getElementById('subfloorThickness-i').value;
     const attachment = document.querySelector('input[name="subfloor-attachment-i"]:checked').value;
@@ -547,8 +547,8 @@ function calculerPoutrellesI() {
     const hauteurMax = parseFloat(document.getElementById('hauteurMax-i').value) || 999;
     const espacementPrefere = document.getElementById('espacementPrefere-i').value;
 
-    // Validation des entrées
-    if (!portee || !chargeMorte || !chargeVive) {
+    // Validation des entrées - vérifier que les valeurs requises sont présentes et valides
+    if (portee <= 0 || isNaN(chargeMorte) || isNaN(chargeVive) || chargeMorte <= 0 || chargeVive <= 0) {
         resetResultsI();
         return;
     }
@@ -697,8 +697,8 @@ function calculerPoutrellesAjourees() {
     const espacement = parseFloat(document.getElementById('espacement-a').value);
     const hauteurMax = parseFloat(document.getElementById('hauteurMax-a').value) || 999;
 
-    // Validation des entrées
-    if (!portee || !chargeMorte || !chargeVive || !espacement) {
+    // Validation des entrées - vérifier que les valeurs requises sont présentes et valides
+    if (portee <= 0 || isNaN(chargeMorte) || isNaN(chargeVive) || isNaN(espacement) || chargeMorte <= 0 || chargeVive <= 0 || espacement <= 0) {
         resetResultsA();
         return;
     }
@@ -835,6 +835,9 @@ function resetResultsA() {
 
 // Initialisation
 document.addEventListener('DOMContentLoaded', function() {
+    // Test initial
+    console.log('Calculateur de poutrelles chargé');
+    
     // Ajout des écouteurs d'événements pour les poutrelles en I
     const inputsI = ['porteePieds-i', 'porteePouces-i', 'chargeMorte-i', 'chargeVive-i', 'chargeViveNeige-i', 'subfloorThickness-i', 'hauteurMax-i', 'espacementPrefere-i'];
     inputsI.forEach(inputId => {
@@ -842,9 +845,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (element) {
             element.addEventListener('input', function() {
                 clearTimeout(this.timer);
-                this.timer = setTimeout(calculerPoutrellesI, 500);
+                this.timer = setTimeout(calculerPoutrellesI, 300);
             });
             element.addEventListener('change', calculerPoutrellesI);
+        } else {
+            console.warn(`Element ${inputId} non trouvé`);
         }
     });
     
@@ -866,9 +871,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if (element) {
             element.addEventListener('input', function() {
                 clearTimeout(this.timer);
-                this.timer = setTimeout(calculerPoutrellesAjourees, 500);
+                this.timer = setTimeout(calculerPoutrellesAjourees, 300);
             });
             element.addEventListener('change', calculerPoutrellesAjourees);
+        } else {
+            console.warn(`Element ${inputId} non trouvé`);
         }
     });
+    
+    // Appel initial pour tester
+    calculerPoutrellesI();
 });
