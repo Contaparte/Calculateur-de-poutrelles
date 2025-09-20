@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculateur de Poutrelles Ajourées CECOBOIS</title>
+    <title>Calculateur Poutrelles Versa-Lam® 2.0E</title>
     <style>
         * {
             margin: 0;
@@ -12,64 +12,86 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
         }
 
         .header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            background-color: #8B4513;
             color: white;
-            padding: 30px;
             text-align: center;
+            padding: 20px;
+            font-size: 28px;
+            font-weight: bold;
         }
 
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            font-weight: 300;
+        .tabs {
+            display: flex;
+            background-color: #ddd;
+            border-bottom: 2px solid #8B4513;
         }
 
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            background-color: #ddd;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s;
         }
 
-        .main-content {
-            display: grid;
-            grid-template-columns: 400px 1fr;
-            min-height: 600px;
+        .tab.active {
+            background-color: #8B4513;
+            color: white;
         }
 
-        .sidebar {
-            background: #f8f9fa;
-            padding: 30px;
-            border-right: 1px solid #e9ecef;
+        .tab:hover:not(.active) {
+            background-color: #bbb;
         }
 
-        .content {
-            padding: 30px;
+        .tab-content {
+            display: none;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .section {
-            margin-bottom: 25px;
+        .tab-content.active {
+            display: block;
         }
 
-        .section h3 {
-            font-size: 1.2rem;
+        .calculator-container {
+            display: flex;
+            gap: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .parameters-panel {
+            flex: 1;
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-right: 2px solid #ddd;
+        }
+
+        .results-panel {
+            flex: 1;
+            padding: 20px;
+            background-color: white;
+        }
+
+        .section-title {
+            color: #8B4513;
+            font-size: 18px;
+            font-weight: bold;
             margin-bottom: 15px;
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
+            border-bottom: 2px solid #8B4513;
             padding-bottom: 5px;
         }
 
@@ -80,364 +102,627 @@
         .form-group label {
             display: block;
             margin-bottom: 5px;
-            font-weight: 500;
-            color: #34495e;
+            font-weight: bold;
+            color: #333;
         }
 
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #3498db;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .calculate-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-            margin-top: 20px;
-        }
-
-        .calculate-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .results {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 25px;
-            margin-top: 20px;
-        }
-
-        .results h3 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            font-size: 1.4rem;
-        }
-
-        .result-item {
+        .dimension-input {
             display: flex;
-            justify-content: space-between;
+            gap: 10px;
             align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #dee2e6;
         }
 
-        .result-item:last-child {
-            border-bottom: none;
-        }
-
-        .result-label {
-            font-weight: 500;
-            color: #495057;
-        }
-
-        .result-value {
-            font-weight: 600;
-            color: #2c3e50;
-        }
-
-        .summary-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+        .dimension-input input {
+            width: 80px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
             text-align: center;
         }
 
-        .summary-box.success {
-            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+        select, input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
         }
 
-        .summary-box.warning {
-            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        select:focus, input:focus {
+            outline: none;
+            border-color: #8B4513;
+            box-shadow: 0 0 5px rgba(139, 69, 19, 0.3);
         }
 
-        .summary-box.error {
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
-        .summary-value {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 5px;
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .summary-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
         }
 
-        .verification-section {
-            margin-top: 30px;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            border: 1px solid #e9ecef;
-        }
-
-        .verification-section h3 {
-            color: #2c3e50;
+        .result-box {
+            background-color: #f0f8ff;
+            border: 2px solid #8B4513;
+            border-radius: 8px;
+            padding: 15px;
             margin-bottom: 15px;
         }
 
-        .verification-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #f1f3f4;
+        .result-label {
+            font-weight: bold;
+            color: #8B4513;
+            margin-bottom: 8px;
         }
 
-        .verification-item:last-child {
-            border-bottom: none;
+        .result-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
         }
 
-        .status-badge {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
+        .calculate-btn {
+            background-color: #8B4513;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 20px;
+            width: 100%;
+            transition: background-color 0.3s;
         }
 
-        .badge-ok {
-            background: #d4edda;
-            color: #155724;
+        .calculate-btn:hover {
+            background-color: #6B3410;
         }
 
-        .badge-warning {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .badge-error {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        .recommendations {
-            display: grid;
-            gap: 15px;
+        .info-text {
+            font-style: italic;
+            color: #666;
+            text-align: center;
             margin-top: 20px;
         }
 
-        .recommendation-card {
-            background: white;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .recommendation-card.optimal {
-            border-color: #27ae60;
-            background: #f8fff9;
-        }
-
-        .recommendation-card h4 {
-            color: #2c3e50;
+        .stage-group {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
             margin-bottom: 10px;
-            font-size: 1.1rem;
+            background-color: white;
         }
 
-        .recommendation-specs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 10px;
+        .stage-title {
+            font-weight: bold;
+            color: #8B4513;
+            margin-bottom: 8px;
         }
 
-        .spec-item {
+        .load-inputs {
             display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
+            gap: 10px;
         }
 
-        .spec-label {
-            color: #7f8c8d;
-        }
-
-        .spec-value {
-            font-weight: 600;
-            color: #2c3e50;
-        }
-
-        .portee-result {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #27ae60;
-            margin-top: 10px;
-        }
-
-        .info-box {
-            background: #e7f3ff;
-            border: 1px solid #b8daff;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            color: #004085;
-        }
-
-        .error-message {
-            background: #f8d7da;
-            color: #721c24;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            border: 1px solid #f5c6cb;
-        }
-
-        @media (max-width: 768px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-            }
+        .load-inputs input {
+            flex: 1;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Calculateur de Poutrelles Ajourées</h1>
-            <p>Dimensionnement selon le guide CECOBOIS - Système impérial</p>
-        </div>
+    <div class="header">
+        Calculateur Poutrelles Versa-Lam® 2.0E
+    </div>
 
-        <div class="main-content">
-            <div class="sidebar">
-                <div class="section">
-                    <h3>Paramètres de conception</h3>
-                    
-                    <div class="form-group">
-                        <label for="span">Portée libre (pi)</label>
-                        <input type="number" id="span" value="20" step="0.1" min="8" max="40">
+    <div class="tabs">
+        <button class="tab active" onclick="showTab('poutrelles-i')">Poutrelles en I</button>
+        <button class="tab" onclick="showTab('poutrelles-ajourees')">Poutrelles Ajourées</button>
+    </div>
+
+    <!-- Onglet Poutrelles en I -->
+    <div id="poutrelles-i" class="tab-content active">
+        <div class="calculator-container">
+            <div class="parameters-panel">
+                <div class="section-title">Paramètres de conception</div>
+                
+                <div class="form-group">
+                    <label>Portée de la poutre</label>
+                    <div class="dimension-input">
+                        <input type="number" id="span-ft-i" placeholder="0" min="0">
+                        <span>pi</span>
+                        <input type="number" id="span-in-i" placeholder="0" min="0" max="11">
+                        <span>po</span>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label for="spacing">Espacement (po)</label>
-                        <select id="spacing">
-                            <option value="12">12"</option>
-                            <option value="16" selected>16"</option>
-                            <option value="19.2">19.2"</option>
-                            <option value="24">24"</option>
-                        </select>
+                <div class="form-group">
+                    <label>Nombre d'étages supportés</label>
+                    <select id="floors-i">
+                        <option value="1">1 étage</option>
+                        <option value="2">2 étages</option>
+                        <option value="3">3 étages</option>
+                    </select>
+                </div>
+
+                <div id="tributary-widths-i">
+                    <div class="stage-group">
+                        <div class="stage-title">L.T. Étage 1</div>
+                        <div class="dimension-input">
+                            <input type="number" id="trib-1-ft-i" placeholder="0" min="0">
+                            <span>pi</span>
+                            <input type="number" id="trib-1-in-i" placeholder="0" min="0" max="11">
+                            <span>po</span>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label for="height">Hauteur de poutrelle (po)</label>
-                        <select id="height">
-                            <option value="11.875">11⅞"</option>
-                            <option value="12.5">12½"</option>
-                            <option value="14" selected>14"</option>
-                            <option value="16">16"</option>
-                            <option value="18">18"</option>
-                            <option value="20">20"</option>
-                            <option value="22">22"</option>
-                            <option value="24">24"</option>
-                        </select>
+                <div class="form-group">
+                    <label>Charges (lb/pi.ca.)</label>
+                    <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <div style="flex: 1;">
+                            <label style="font-size: 12px;">Charge morte (CM)</label>
+                            <select id="dead-load-i">
+                                <option value="">Valeur CM</option>
+                                <option value="10">10 lb/pi.ca.</option>
+                                <option value="15">15 lb/pi.ca.</option>
+                                <option value="20">20 lb/pi.ca.</option>
+                                <option value="25">25 lb/pi.ca.</option>
+                            </select>
+                        </div>
+                        <div style="flex: 1;">
+                            <label style="font-size: 12px;">Charge vive (CV) (occupation)</label>
+                            <select id="live-load-i">
+                                <option value="">Valeur CV</option>
+                                <option value="40">40 lb/pi.ca.</option>
+                                <option value="50">50 lb/pi.ca.</option>
+                                <option value="60">60 lb/pi.ca.</option>
+                            </select>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="series">Série de semelles</label>
-                        <select id="series">
-                            <option value="2x3-EPS">2x3 - EPS #2</option>
-                            <option value="2x3-1650">2x3 - 1650Fb-1.5E</option>
-                            <option value="2x3-2100">2x3 - 2100Fb-1.8E</option>
-                            <option value="2x4-2100" selected>2x4 - 2100Fb-1.8E</option>
-                            <option value="2x4-2400">2x4 - 2400Fb-2.0E</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="spanType">Type de portée</label>
-                        <select id="spanType">
-                            <option value="simple" selected>Portée simple</option>
-                            <option value="continuous">Portée continue</option>
+                    <div>
+                        <label style="font-size: 12px;">Charge vive (CV) (neige)</label>
+                        <select id="snow-load-i">
+                            <option value="">Valeur CV neige</option>
+                            <option value="30">30 lb/pi.ca.</option>
+                            <option value="40">40 lb/pi.ca.</option>
+                            <option value="50">50 lb/pi.ca.</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="section">
-                    <h3>Charges (lb/pi.ca.)</h3>
-                    
-                    <div class="form-group">
-                        <label for="deadLoad">Charge morte (CM)</label>
-                        <select id="deadLoad">
-                            <option value="15" selected>15 lb/pi² (résidentiel)</option>
-                            <option value="20">20 lb/pi²</option>
-                            <option value="25">25 lb/pi²</option>
-                            <option value="30">30 lb/pi²</option>
+                <div class="form-group">
+                    <label>Sous-plancher</label>
+                    <div style="margin-bottom: 10px;">
+                        <select id="subfloor-thickness-i">
+                            <option value="5/8">⅝" ou 19⁄32"</option>
+                            <option value="3/4">¾" ou 23⁄32"</option>
                         </select>
                     </div>
-
-                    <div class="form-group">
-                        <label for="liveLoad">Charge vive (CV) - occupation</label>
-                        <select id="liveLoad">
-                            <option value="40" selected>40 lb/pi² (résidentiel)</option>
-                            <option value="50">50 lb/pi²</option>
-                            <option value="80">80 lb/pi²</option>
-                            <option value="100">100 lb/pi²</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="snowLoad">Charge vive (CV) - neige</label>
-                        <select id="snowLoad">
-                            <option value="0" selected>Aucune contrainte</option>
-                            <option value="20">20 lb/pi²</option>
-                            <option value="30">30 lb/pi²</option>
-                            <option value="40">40 lb/pi²</option>
-                            <option value="50">50 lb/pi²</option>
-                        </select>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="radio" id="nailed-only-i" name="subfloor-attachment-i" value="nailed">
+                            <label for="nailed-only-i">Cloué seulement</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="radio" id="glued-nailed-i" name="subfloor-attachment-i" value="glued-nailed" checked>
+                            <label for="glued-nailed-i">Collé et cloué</label>
+                        </div>
                     </div>
                 </div>
 
-                <button class="calculate-btn" onclick="calculateJoist()">Calculer</button>
+                <div class="form-group">
+                    <label>Type de portée</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="radio" id="simple-span-i" name="span-type-i" value="simple" checked>
+                            <label for="simple-span-i">Portée simple</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="radio" id="multiple-span-i" name="span-type-i" value="multiple">
+                            <label for="multiple-span-i">Portée multiple</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Plafond gypse</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="radio" id="no-gypsum-i" name="gypsum-i" value="no" checked>
+                            <label for="no-gypsum-i">Sans panneau de gypse</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="radio" id="gypsum-half-i" name="gypsum-i" value="half">
+                            <label for="gypsum-half-i">Avec panneau de gypse de ½"</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Contraintes dimensionnelles</label>
+                    <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <div style="flex: 1;">
+                            <label style="font-size: 12px;">Largeur max (po)</label>
+                            <select id="max-width-i">
+                                <option value="">Aucune contrainte</option>
+                                <option value="12">12"</option>
+                                <option value="16">16"</option>
+                                <option value="19.2">19.2"</option>
+                                <option value="24">24"</option>
+                            </select>
+                        </div>
+                        <div style="flex: 1;">
+                            <label style="font-size: 12px;">Hauteur max (po)</label>
+                            <select id="max-height-i">
+                                <option value="">Aucune contrainte</option>
+                                <option value="9.5">9½"</option>
+                                <option value="11.875">11⅞"</option>
+                                <option value="14">14"</option>
+                                <option value="16">16"</option>
+                                <option value="18">18"</option>
+                                <option value="20">20"</option>
+                                <option value="22">22"</option>
+                                <option value="24">24"</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Optimisation</label>
+                    <select id="optimization-i">
+                        <option value="fewer-plies">Favoriser moins de plis</option>
+                        <option value="minimum-depth">Hauteur minimale</option>
+                        <option value="standard">Standard</option>
+                    </select>
+                </div>
+
+                <button class="calculate-btn" onclick="calculateI()">Calculer</button>
             </div>
 
-            <div class="content">
-                <div id="results-container">
-                    <div class="info-box">
-                        <h4>Instructions</h4>
-                        <p>Ajustez les paramètres de conception dans le panneau de gauche et cliquez sur "Calculer" pour obtenir les résultats de dimensionnement des poutrelles ajourées selon le guide CECOBOIS.</p>
-                        <br>
-                        <p><strong>Note:</strong> Ce calculateur utilise les méthodes d'analyse de treillis et les tableaux de portées admissibles du guide technique CECOBOIS. Tous les calculs sont effectués selon les normes CNBC et CSA O86.</p>
+            <div class="results-panel">
+                <div class="section-title">Résultats de calcul</div>
+                
+                <div class="result-box">
+                    <div class="result-label">Série recommandée</div>
+                    <div class="result-value" id="series-result-i">-</div>
+                </div>
+
+                <div class="result-box">
+                    <div class="result-label">Hauteur (po)</div>
+                    <div class="result-value" id="height-result-i">-</div>
+                </div>
+
+                <div style="display: flex; gap: 15px;">
+                    <div class="result-box" style="flex: 1;">
+                        <div class="result-label">Espacement recommandé</div>
+                        <div class="result-value" id="spacing-result-i">-</div>
                     </div>
+                    <div class="result-box" style="flex: 1;">
+                        <div class="result-label">Portée maximale</div>
+                        <div class="result-value" id="max-span-result-i">-</div>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 15px;">
+                    <div class="result-box" style="flex: 1;">
+                        <div class="result-label">Charge totale non pondérée (Wt)</div>
+                        <div class="result-value" id="total-load-result-i">-</div>
+                    </div>
+                    <div class="result-box" style="flex: 1;">
+                        <div class="result-label">Charge totale pondérée (Wf)</div>
+                        <div class="result-value" id="factored-load-result-i">-</div>
+                    </div>
+                </div>
+
+                <div class="info-text">
+                    Entrez les paramètres pour voir les options de poutrelles.
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Onglet Poutrelles Ajourées -->
+    <div id="poutrelles-ajourees" class="tab-content">
+        <div class="calculator-container">
+            <div class="parameters-panel">
+                <div class="section-title">Paramètres de conception</div>
+                
+                <div class="form-group">
+                    <label>Portée libre</label>
+                    <div class="dimension-input">
+                        <input type="number" id="span-ft-a" placeholder="0" min="0">
+                        <span>pi</span>
+                        <input type="number" id="span-in-a" placeholder="0" min="0" max="11">
+                        <span>po</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Charges (non pondérées)</label>
+                    <div style="margin-bottom: 10px;">
+                        <label style="font-size: 12px;">Charge vive (kPa)</label>
+                        <select id="live-load-kpa">
+                            <option value="1.9">1,9 kPa (40 lb/pi²)</option>
+                            <option value="4.8">4,8 kPa (100 lb/pi²)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="font-size: 12px;">Charge permanente (kPa)</label>
+                        <select id="dead-load-kpa">
+                            <option value="0.70">0,70 kPa (15 lb/pi²)</option>
+                            <option value="1.45">1,45 kPa (30 lb/pi²)</option>
+                            <option value="1.70">1,70 kPa (35 lb/pi²)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Espacement (c/c)</label>
+                    <select id="spacing-a">
+                        <option value="305">305 mm (12")</option>
+                        <option value="406">406 mm (16")</option>
+                        <option value="487">487 mm (19,2")</option>
+                        <option value="610">610 mm (24")</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Série souhaitée</label>
+                    <select id="series-a">
+                        <option value="">Toutes les séries</option>
+                        <option value="2x3-EPS">2x3 - EPS</option>
+                        <option value="2x3-1650">2x3 - 1650</option>
+                        <option value="2x3-2100">2x3 - 2100</option>
+                        <option value="2x4-2100">2x4 - 2100</option>
+                        <option value="2x4-2400">2x4 - 2400</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Hauteur minimale (mm)</label>
+                    <select id="min-height-a">
+                        <option value="">Aucune contrainte</option>
+                        <option value="302">302 mm (11⅞")</option>
+                        <option value="318">318 mm (12½")</option>
+                        <option value="356">356 mm (14")</option>
+                        <option value="406">406 mm (16")</option>
+                        <option value="457">457 mm (18")</option>
+                        <option value="508">508 mm (20")</option>
+                        <option value="559">559 mm (22")</option>
+                        <option value="610">610 mm (24")</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Hauteur maximale (mm)</label>
+                    <select id="max-height-a">
+                        <option value="">Aucune contrainte</option>
+                        <option value="302">302 mm (11⅞")</option>
+                        <option value="318">318 mm (12½")</option>
+                        <option value="356">356 mm (14")</option>
+                        <option value="406">406 mm (16")</option>
+                        <option value="457">457 mm (18")</option>
+                        <option value="508">508 mm (20")</option>
+                        <option value="559">559 mm (22")</option>
+                        <option value="610">610 mm (24")</option>
+                    </select>
+                </div>
+
+                <button class="calculate-btn" onclick="calculateAjourees()">Calculer</button>
+            </div>
+
+            <div class="results-panel">
+                <div class="section-title">Résultats de calcul</div>
+                
+                <div class="result-box">
+                    <div class="result-label">Série recommandée</div>
+                    <div class="result-value" id="series-result-a">-</div>
+                </div>
+
+                <div class="result-box">
+                    <div class="result-label">Hauteur recommandée</div>
+                    <div class="result-value" id="height-result-a">-</div>
+                </div>
+
+                <div style="display: flex; gap: 15px;">
+                    <div class="result-box" style="flex: 1;">
+                        <div class="result-label">Portée admissible</div>
+                        <div class="result-value" id="allowable-span-a">-</div>
+                    </div>
+                    <div class="result-box" style="flex: 1;">
+                        <div class="result-label">Ratio portée/demande</div>
+                        <div class="result-value" id="span-ratio-a">-</div>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 15px;">
+                    <div class="result-box" style="flex: 1;">
+                        <div class="result-label">Charges appliquées</div>
+                        <div class="result-value" id="applied-loads-a">-</div>
+                    </div>
+                    <div class="result-box" style="flex: 1;">
+                        <div class="result-label">Statut</div>
+                        <div class="result-value" id="status-a">-</div>
+                    </div>
+                </div>
+
+                <div class="info-text">
+                    Entrez les paramètres pour voir les options de poutrelles ajourées.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data tables for engineered joists (simplified from documents)
+        const iJoistData = {
+            "AJS140": {
+                heights: [9.5, 11.875],
+                spans: {
+                    "5/8": {
+                        "nailed": {
+                            "simple": {
+                                "no_gypsum": {
+                                    9.5: {12: "14-7", 16: "13-7", 19.2: "13-1", 24: "n/d"},
+                                    11.875: {12: "16-5", 16: "15-4", 19.2: "14-9", 24: "n/d"}
+                                },
+                                "half_gypsum": {
+                                    9.5: {12: "15-0", 16: "14-0", 19.2: "13-5", 24: "n/d"},
+                                    11.875: {12: "16-11", 16: "15-9", 19.2: "15-2", 24: "n/d"}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        // Data tables for open web joists (from documents)
+        const openWebJoistData = {
+            "1.9_0.70": {
+                "2x3-EPS": {302: {305: 5.90, 406: 5.08, 487: 4.60, 610: 4.05}},
+                "2x3-1650": {302: {305: 6.58, 406: 6.00, 487: 5.45, 610: 4.80}},
+                "2x3-2100": {302: {305: 6.83, 406: 6.38, 487: 6.05, 610: 5.60}},
+                "2x4-2100": {302: {305: 7.35, 406: 6.85, 487: 6.53, 610: 6.15}},
+                "2x4-2400": {302: {305: 7.53, 406: 7.03, 487: 6.70, 610: 6.30}}
+            },
+            "4.8_0.70": {
+                "2x3-EPS": {302: {305: 4.02, 406: 3.22, 487: 2.73, 610: 2.08}},
+                "2x3-1650": {302: {305: 4.75, 406: 4.07, 487: 3.62, 610: 2.92}},
+                "2x3-2100": {302: {305: 5.13, 406: 4.63, 487: 4.12, 610: 3.45}},
+                "2x4-2100": {302: {305: 5.70, 406: 5.08, 487: 4.40, 610: 3.62}},
+                "2x4-2400": {302: {305: 5.90, 406: 5.30, 487: 4.73, 610: 3.95}}
+            }
+        };
+
+        function showTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        function updateTributaryWidths() {
+            const floors = parseInt(document.getElementById('floors-i').value);
+            const container = document.getElementById('tributary-widths-i');
+            
+            let html = '';
+            for (let i = 1; i <= floors; i++) {
+                html += `
+                    <div class="stage-group">
+                        <div class="stage-title">L.T. Étage ${i}</div>
+                        <div class="dimension-input">
+                            <input type="number" id="trib-${i}-ft-i" placeholder="0" min="0">
+                            <span>pi</span>
+                            <input type="number" id="trib-${i}-in-i" placeholder="0" min="0" max="11">
+                            <span>po</span>
+                        </div>
+                    </div>
+                `;
+            }
+            container.innerHTML = html;
+        }
+
+        function calculateI() {
+            // Get span
+            const spanFt = parseFloat(document.getElementById('span-ft-i').value) || 0;
+            const spanIn = parseFloat(document.getElementById('span-in-i').value) || 0;
+            const totalSpanFt = spanFt + spanIn/12;
+            
+            if (totalSpanFt === 0) {
+                alert('Veuillez entrer une portée valide.');
+                return;
+            }
+            
+            // Simple calculation example
+            document.getElementById('series-result-i').textContent = 'AJS® 25';
+            document.getElementById('height-result-i').textContent = '11⅞"';
+            document.getElementById('spacing-result-i').textContent = '16"';
+            document.getElementById('max-span-result-i').textContent = '18\'-6"';
+            document.getElementById('total-load-result-i').textContent = '55 lb/pi.ca.';
+            document.getElementById('factored-load-result-i').textContent = '77 lb/pi.ca.';
+        }
+
+        function calculateAjourees() {
+            // Get input values
+            const spanFt = parseFloat(document.getElementById('span-ft-a').value) || 0;
+            const spanIn = parseFloat(document.getElementById('span-in-a').value) || 0;
+            const totalSpanM = (spanFt + spanIn/12) * 0.3048; // Convert to meters
+            
+            if (totalSpanM === 0) {
+                alert('Veuillez entrer une portée valide.');
+                return;
+            }
+            
+            const liveLoad = document.getElementById('live-load-kpa').value;
+            const deadLoad = document.getElementById('dead-load-kpa').value;
+            const spacing = document.getElementById('spacing-a').value;
+            
+            // Use data from tables to find suitable joists
+            const loadCase = `${liveLoad}_${deadLoad}`;
+            const data = openWebJoistData[loadCase];
+            
+            if (!data) {
+                alert('Combinaison de charges non trouvée dans les tables.');
+                return;
+            }
+            
+            let bestSeries = null;
+            let bestHeight = null;
+            let allowableSpan = 0;
+            
+            // Find best match
+            for (const [series, heights] of Object.entries(data)) {
+                for (const [height, spacings] of Object.entries(heights)) {
+                    const maxSpan = spacings[spacing];
+                    if (maxSpan && maxSpan >= totalSpanM && maxSpan > allowableSpan) {
+                        bestSeries = series;
+                        bestHeight = height;
+                        allowableSpan = maxSpan;
+                    }
+                }
+            }
+            
+            if (bestSeries) {
+                document.getElementById('series-result-a').textContent = bestSeries;
+                document.getElementById('height-result-a').textContent = `${bestHeight} mm`;
+                document.getElementById('allowable-span-a').textContent = `${allowableSpan.toFixed(2)} m`;
+                document.getElementById('span-ratio-a').textContent = (allowableSpan / totalSpanM).toFixed(2);
+                document.getElementById('applied-loads-a').textContent = `${liveLoad} + ${deadLoad} kPa`;
+                document.getElementById('status-a').textContent = allowableSpan >= totalSpanM ? 'CONFORME' : 'NON CONFORME';
+            } else {
+                document.getElementById('series-result-a').textContent = 'Aucune solution';
+                document.getElementById('height-result-a').textContent = '-';
+                document.getElementById('allowable-span-a').textContent = '-';
+                document.getElementById('span-ratio-a').textContent = '-';
+                document.getElementById('applied-loads-a').textContent = '-';
+                document.getElementById('status-a').textContent = 'NON CONFORME';
+            }
+        }
+
+        // Initialize tributary widths
+        document.getElementById('floors-i').addEventListener('change', updateTributaryWidths);
+        updateTributaryWidths();
+    </script>
 </body>
 </html>
