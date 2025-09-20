@@ -13,24 +13,25 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #fef7f2 0%, #764ba2 100%);
+            background: #fef7f2;
             min-height: 100vh;
-            color: #333;
+            padding: 20px;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
 
         .header {
-            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            background: #8B4513;
             color: white;
             text-align: center;
             padding: 30px;
-            border-radius: 15px 15px 0 0;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
             font-size: 32px;
             font-weight: 700;
             letter-spacing: 1px;
@@ -58,7 +59,7 @@
         }
 
         .tab.active {
-            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            background: #8B4513;
             color: white;
             transform: translateY(-2px);
         }
@@ -70,107 +71,91 @@
 
         .tab-content {
             display: none;
-            background: white;
-            border-radius: 0 0 15px 15px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            overflow: hidden;
         }
 
         .tab-content.active {
             display: block;
         }
 
-        .calculator-container {
-            display: flex;
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
             min-height: 600px;
         }
 
-        .parameters-panel {
-            flex: 1;
-            background: linear-gradient(145deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 30px;
-            border-right: 3px solid #dee2e6;
+        .input-section {
+            padding: 40px;
+            background: #f5f5f0;
+            border-right: 1px solid #e9ecef;
         }
 
-        .results-panel {
-            flex: 1;
-            padding: 30px;
+        .results-section {
+            padding: 40px;
             background: white;
         }
 
         .section-title {
+            font-size: 1.5em;
             color: #8B4513;
-            font-size: 22px;
-            font-weight: 700;
             margin-bottom: 25px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #8B4513;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(90deg, #8B4513, #A0522D);
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            border-left: 4px solid #8B4513;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 10px;
             font-weight: 600;
-            color: #495057;
-            font-size: 14px;
+            border-bottom: 3px solid #D2691E;
+            padding-bottom: 10px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .input-field {
+            flex: 1;
         }
 
         .dimension-input {
             display: flex;
-            gap: 12px;
+            gap: 8px;
             align-items: center;
         }
 
         .dimension-input input {
-            width: 80px;
-            padding: 12px;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            flex: 1;
         }
 
         .dimension-input span {
+            font-size: 0.9em;
+            color: #666;
+            min-width: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
             font-weight: 600;
-            color: #6c757d;
+            color: #8B4513;
+            font-size: 0.95em;
         }
 
-        select, input[type="text"], input[type="number"] {
+        input, select {
             width: 100%;
-            padding: 12px 16px;
+            padding: 12px 15px;
             border: 2px solid #e9ecef;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
+            border-radius: 6px;
+            font-size: 1em;
             transition: all 0.3s ease;
+            background: white;
         }
 
-        select:focus, input:focus {
+        input:focus, select:focus {
             outline: none;
-            border-color: #8B4513;
-            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
-            transform: translateY(-1px);
+            border-color: #D2691E;
+            box-shadow: 0 0 0 3px rgba(210, 105, 30, 0.1);
         }
 
         .checkbox-group {
@@ -198,54 +183,81 @@
             accent-color: #8B4513;
         }
 
-        .result-box {
-            background: linear-gradient(145deg, #f8f9ff 0%, #e6f3ff 100%);
-            border: 2px solid #8B4513;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            position: relative;
-            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.1);
-        }
-
-        .result-label {
-            font-weight: 600;
-            color: #8B4513;
-            margin-bottom: 8px;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .result-value {
-            font-size: 20px;
-            font-weight: 700;
-            color: #2c3e50;
-        }
-
-        .load-group {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .load-group > div {
-            flex: 1;
-        }
-
-        .load-group label {
-            font-size: 12px;
-            color: #6c757d;
-        }
-
         .results-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            gap: 20px;
+            margin-bottom: 30px;
         }
 
-        .results-grid .result-box {
-            margin-bottom: 0;
+        .result-card {
+            background: #f5f5f0;
+            border-radius: 4px;
+            padding: 20px;
+            border-left: 4px solid #D2691E;
+        }
+
+        .result-label {
+            font-size: 0.9em;
+            color: #8B4513;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .result-value {
+            font-size: 1.3em;
+            color: #8B4513;
+            font-weight: 700;
+        }
+
+        .poutrelle-options {
+            background: #f9f6f3;
+            border-radius: 4px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .poutrelle-option {
+            background: #fef7f2;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .poutrelle-option:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .poutrelle-option.selected {
+            border-left: 4px solid #D2691E;
+        }
+
+        .poutrelle-title {
+            font-weight: 700;
+            color: #8B4513;
+            margin-bottom: 8px;
+        }
+
+        .poutrelle-specs {
+            font-size: 0.9em;
+            color: #A0522D;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .no-solution {
+            background: #fdf2f2;
+            border: 2px solid #e74c3c;
+            border-radius: 4px;
+            padding: 20px;
+            text-align: center;
+            color: #c0392b;
+            font-weight: 600;
         }
 
         .status-success {
@@ -275,84 +287,21 @@
             color: #dc3545;
         }
 
-        .poutrelle-options {
-            background: #f9f6f3;
-            border-radius: 12px;
-            padding: 25px;
-            margin-top: 20px;
-        }
-
-        .poutrelle-option {
-            background: #fef7f2;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border-left: 4px solid #8B4513;
-            position: relative;
-        }
-
-        .poutrelle-option:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .poutrelle-option.selected {
-            border-left: 4px solid #D2691E;
-            background: #fff3cd;
-        }
-
-        .poutrelle-title {
-            font-weight: 700;
-            color: #8B4513;
-            margin-bottom: 8px;
-            font-size: 16px;
-        }
-
-        .poutrelle-specs {
-            font-size: 0.9em;
-            color: #A0522D;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .no-solution {
-            background: #fdf2f2;
-            border: 2px solid #e74c3c;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            color: #c0392b;
-            font-weight: 600;
-            margin-top: 20px;
-        }
-
-        .info-text {
-            font-style: italic;
-            color: #6c757d;
-            text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            background: rgba(139, 69, 19, 0.05);
-            border-radius: 8px;
-        }
-
         @media (max-width: 768px) {
-            .calculator-container {
-                flex-direction: column;
+            .main-content {
+                grid-template-columns: 1fr;
             }
-            
-            .parameters-panel {
+
+            .input-section {
                 border-right: none;
-                border-bottom: 3px solid #dee2e6;
+                border-bottom: 1px solid #e9ecef;
             }
-            
-            .container {
-                padding: 10px;
+
+            .input-row {
+                flex-direction: column;
+                gap: 0;
             }
-            
+
             .results-grid {
                 grid-template-columns: 1fr;
             }
@@ -376,26 +325,30 @@
 
         <!-- Onglet Poutrelles en I -->
         <div id="poutrelles-i" class="tab-content active">
-            <div class="calculator-container">
-                <div class="parameters-panel">
-                    <div class="section-title">Paramètres de conception</div>
+            <div class="main-content">
+                <div class="input-section">
+                    <h2 class="section-title">Paramètres de conception</h2>
                     
-                    <div class="form-group">
-                        <label>Portée de la poutrelle</label>
-                        <div class="dimension-input">
-                            <input type="number" id="span-ft-i" placeholder="0" min="0">
-                            <span>pi</span>
-                            <input type="number" id="span-in-i" placeholder="0" min="0" max="11">
-                            <span>po</span>
+                    <div class="input-group">
+                        <div class="input-row">
+                            <div class="input-field">
+                                <label for="portee-i">Portée de la poutrelle</label>
+                                <div class="dimension-input">
+                                    <input type="number" id="porteePieds-i" min="0" placeholder="Pieds">
+                                    <span>pi</span>
+                                    <input type="number" id="porteePouces-i" min="0" max="11" step="0.5" placeholder="Pouces">
+                                    <span>po</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="input-group">
                         <label>Charges (lb/pi.ca.)</label>
-                        <div class="load-group">
-                            <div>
-                                <label>Charge morte (CM)</label>
-                                <select id="dead-load-i">
+                        <div class="input-row">
+                            <div class="input-field">
+                                <label for="chargeMorte-i">Charge morte (CM)</label>
+                                <select id="chargeMorte-i">
                                     <option value="">Valeur CM</option>
                                     <option value="10">10 lb/pi.ca.</option>
                                     <option value="15">15 lb/pi.ca.</option>
@@ -403,9 +356,9 @@
                                     <option value="25">25 lb/pi.ca.</option>
                                 </select>
                             </div>
-                            <div>
-                                <label>Charge vive (CV) occupation</label>
-                                <select id="live-load-i">
+                            <div class="input-field">
+                                <label for="chargeVive-i">Charge vive (CV) occupation</label>
+                                <select id="chargeVive-i">
                                     <option value="">Valeur CV</option>
                                     <option value="40">40 lb/pi.ca.</option>
                                     <option value="50">50 lb/pi.ca.</option>
@@ -413,21 +366,26 @@
                                 </select>
                             </div>
                         </div>
-                        <div>
-                            <label>Charge vive (CV) neige</label>
-                            <select id="snow-load-i">
-                                <option value="">Valeur CV neige</option>
-                                <option value="30">30 lb/pi.ca.</option>
-                                <option value="40">40 lb/pi.ca.</option>
-                                <option value="50">50 lb/pi.ca.</option>
-                            </select>
+                        <div class="input-row">
+                            <div class="input-field">
+                                <label for="chargeViveNeige-i">Charge vive (CV) neige</label>
+                                <select id="chargeViveNeige-i">
+                                    <option value="">Valeur CV neige</option>
+                                    <option value="30">30 lb/pi.ca.</option>
+                                    <option value="40">40 lb/pi.ca.</option>
+                                    <option value="50">50 lb/pi.ca.</option>
+                                </select>
+                            </div>
+                            <div class="input-field">
+                                <!-- Vide pour alignement -->
+                            </div>
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="input-group">
                         <label>Sous-plancher</label>
                         <div style="margin-bottom: 15px;">
-                            <select id="subfloor-thickness-i">
+                            <select id="subfloorThickness-i">
                                 <option value="5/8">⅝" ou 19/32"</option>
                                 <option value="3/4">¾" ou 23/32"</option>
                             </select>
@@ -444,7 +402,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="input-group">
                         <label>Type de portée</label>
                         <div class="checkbox-group">
                             <div class="checkbox-item">
@@ -458,7 +416,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="input-group">
                         <label>Plafond gypse</label>
                         <div class="checkbox-group">
                             <div class="checkbox-item">
@@ -472,51 +430,54 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Hauteur maximale (po)</label>
-                        <select id="max-height-i">
-                            <option value="">Aucune contrainte</option>
-                            <option value="9.5">9½"</option>
-                            <option value="11.875">11⅞"</option>
-                            <option value="14">14"</option>
-                            <option value="16">16"</option>
-                            <option value="18">18"</option>
-                            <option value="20">20"</option>
-                            <option value="22">22"</option>
-                            <option value="24">24"</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Espacement souhaité (po)</label>
-                        <select id="spacing-preference-i">
-                            <option value="">Optimal</option>
-                            <option value="12">12"</option>
-                            <option value="16">16"</option>
-                            <option value="19.2">19.2"</option>
-                            <option value="24">24"</option>
-                        </select>
+                    <div class="input-group">
+                        <div class="input-row">
+                            <div class="input-field">
+                                <label for="hauteurMax-i">Hauteur maximale (po)</label>
+                                <select id="hauteurMax-i">
+                                    <option value="">Aucune contrainte</option>
+                                    <option value="9.5">9½"</option>
+                                    <option value="11.875">11⅞"</option>
+                                    <option value="14">14"</option>
+                                    <option value="16">16"</option>
+                                    <option value="18">18"</option>
+                                    <option value="20">20"</option>
+                                    <option value="22">22"</option>
+                                    <option value="24">24"</option>
+                                </select>
+                            </div>
+                            <div class="input-field">
+                                <label for="espacementPrefere-i">Espacement souhaité (po)</label>
+                                <select id="espacementPrefere-i">
+                                    <option value="">Optimal</option>
+                                    <option value="12">12"</option>
+                                    <option value="16">16"</option>
+                                    <option value="19.2">19.2"</option>
+                                    <option value="24">24"</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="results-panel">
-                    <div class="section-title">Résultats de calcul</div>
+                <div class="results-section">
+                    <h2 class="section-title">Résultats de calcul</h2>
                     
                     <div class="results-grid">
-                        <div class="result-box">
+                        <div class="result-card">
                             <div class="result-label">Charge totale non pondérée</div>
-                            <div class="result-value" id="total-load-result-i">-</div>
+                            <div class="result-value" id="resultTotaleNonPonderee-i">-</div>
                         </div>
-                        <div class="result-box">
+                        <div class="result-card">
                             <div class="result-label">Charge totale pondérée</div>
-                            <div class="result-value" id="factored-load-result-i">-</div>
+                            <div class="result-value" id="resultTotalePonderee-i">-</div>
                         </div>
                     </div>
 
-                    <div id="poutrelle-results-i">
-                        <div class="info-text">
+                    <div id="poutrelleResults-i">
+                        <p style="text-align: center; color: #A0522D; margin-top: 50px;">
                             Entrez les paramètres pour voir les options de poutrelles.
-                        </div>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -524,35 +485,39 @@
 
         <!-- Onglet Poutrelles Ajourées -->
         <div id="poutrelles-ajourees" class="tab-content">
-            <div class="calculator-container">
-                <div class="parameters-panel">
-                    <div class="section-title">Paramètres de conception</div>
+            <div class="main-content">
+                <div class="input-section">
+                    <h2 class="section-title">Paramètres de conception</h2>
                     
-                    <div class="form-group">
-                        <label>Portée libre</label>
-                        <div class="dimension-input">
-                            <input type="number" id="span-ft-a" placeholder="0" min="0">
-                            <span>pi</span>
-                            <input type="number" id="span-in-a" placeholder="0" min="0" max="11">
-                            <span>po</span>
+                    <div class="input-group">
+                        <div class="input-row">
+                            <div class="input-field">
+                                <label for="portee-a">Portée libre</label>
+                                <div class="dimension-input">
+                                    <input type="number" id="porteePieds-a" min="0" placeholder="Pieds">
+                                    <span>pi</span>
+                                    <input type="number" id="porteePouces-a" min="0" max="11" step="0.5" placeholder="Pouces">
+                                    <span>po</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="input-group">
                         <label>Charges (lb/pi.ca.)</label>
-                        <div class="load-group">
-                            <div>
-                                <label>Charge morte (CM)</label>
-                                <select id="dead-load-a">
+                        <div class="input-row">
+                            <div class="input-field">
+                                <label for="chargeMorte-a">Charge morte (CM)</label>
+                                <select id="chargeMorte-a">
                                     <option value="">Valeur CM</option>
                                     <option value="15">15 lb/pi.ca.</option>
                                     <option value="30">30 lb/pi.ca.</option>
                                     <option value="35">35 lb/pi.ca.</option>
                                 </select>
                             </div>
-                            <div>
-                                <label>Charge vive (CV)</label>
-                                <select id="live-load-a">
+                            <div class="input-field">
+                                <label for="chargeVive-a">Charge vive (CV)</label>
+                                <select id="chargeVive-a">
                                     <option value="">Valeur CV</option>
                                     <option value="40">40 lb/pi.ca.</option>
                                     <option value="100">100 lb/pi.ca.</option>
@@ -561,817 +526,60 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Espacement (c/c)</label>
-                        <select id="spacing-a">
-                            <option value="">Sélectionner</option>
-                            <option value="12">12" (305 mm)</option>
-                            <option value="16">16" (406 mm)</option>
-                            <option value="19.2">19,2" (487 mm)</option>
-                            <option value="24">24" (610 mm)</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Hauteur maximale (po)</label>
-                        <select id="max-height-a">
-                            <option value="">Aucune contrainte</option>
-                            <option value="11.875">11⅞"</option>
-                            <option value="12.5">12½"</option>
-                            <option value="14">14"</option>
-                            <option value="16">16"</option>
-                            <option value="18">18"</option>
-                            <option value="20">20"</option>
-                            <option value="22">22"</option>
-                            <option value="24">24"</option>
-                        </select>
+                    <div class="input-group">
+                        <div class="input-row">
+                            <div class="input-field">
+                                <label for="espacement-a">Espacement (c/c)</label>
+                                <select id="espacement-a">
+                                    <option value="">Sélectionner</option>
+                                    <option value="12">12" (305 mm)</option>
+                                    <option value="16">16" (406 mm)</option>
+                                    <option value="19.2">19,2" (487 mm)</option>
+                                    <option value="24">24" (610 mm)</option>
+                                </select>
+                            </div>
+                            <div class="input-field">
+                                <label for="hauteurMax-a">Hauteur maximale (po)</label>
+                                <select id="hauteurMax-a">
+                                    <option value="">Aucune contrainte</option>
+                                    <option value="11.875">11⅞"</option>
+                                    <option value="12.5">12½"</option>
+                                    <option value="14">14"</option>
+                                    <option value="16">16"</option>
+                                    <option value="18">18"</option>
+                                    <option value="20">20"</option>
+                                    <option value="22">22"</option>
+                                    <option value="24">24"</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="results-panel">
-                    <div class="section-title">Résultats de calcul</div>
+                <div class="results-section">
+                    <h2 class="section-title">Résultats de calcul</h2>
                     
                     <div class="results-grid">
-                        <div class="result-box">
+                        <div class="result-card">
                             <div class="result-label">Charges appliquées</div>
-                            <div class="result-value" id="applied-loads-a">-</div>
+                            <div class="result-value" id="resultChargesAppliquees-a">-</div>
                         </div>
-                        <div class="result-box" id="status-box-a">
+                        <div class="result-card" id="status-box-a">
                             <div class="result-label">Statut</div>
-                            <div class="result-value" id="status-a">-</div>
+                            <div class="result-value" id="resultStatut-a">-</div>
                         </div>
                     </div>
 
-                    <div id="poutrelle-results-a">
-                        <div class="info-text">
+                    <div id="poutrelleResults-a">
+                        <p style="text-align: center; color: #A0522D; margin-top: 50px;">
                             Entrez les paramètres pour voir les options de poutrelles ajourées.
-                        </div>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-        // Data tables for I-joists based on documents
-        const iJoistData = {
-            "AJS® 140": {
-                heights: [9.5, 11.875],
-                spans: {
-                    "5/8": {
-                        "nailed": {
-                            "simple": {
-                                "no_gypsum": {
-                                    9.5: {12: "14-7", 16: "13-7", 19.2: "13-1", 24: "n/d"},
-                                    11.875: {12: "16-5", 16: "15-4", 19.2: "14-9", 24: "n/d"}
-                                },
-                                "half_gypsum": {
-                                    9.5: {12: "15-0", 16: "14-0", 19.2: "13-5", 24: "n/d"},
-                                    11.875: {12: "16-11", 16: "15-9", 19.2: "15-2", 24: "n/d"}
-                                }
-                            },
-                            "multiple": {
-                                "no_gypsum": {
-                                    9.5: {12: "15-10", 16: "14-9", 19.2: "14-2", 24: "n/d"},
-                                    11.875: {12: "17-10", 16: "16-8", 19.2: "16-0", 24: "n/d"}
-                                },
-                                "half_gypsum": {
-                                    9.5: {12: "16-3", 16: "15-2", 19.2: "14-7", 24: "n/d"},
-                                    11.875: {12: "18-5", 16: "17-2", 19.2: "16-5", 24: "n/d"}
-                                }
-                            }
-                        },
-                        "glued-nailed": {
-                            "simple": {
-                                "no_gypsum": {
-                                    9.5: {12: "15-7", 16: "14-9", 19.2: "14-3", 24: "n/d"},
-                                    11.875: {12: "17-6", 16: "16-6", 19.2: "16-0", 24: "n/d"}
-                                },
-                                "half_gypsum": {
-                                    9.5: {12: "16-0", 16: "15-2", 19.2: "14-8", 24: "n/d"},
-                                    11.875: {12: "18-0", 16: "17-0", 19.2: "16-5", 24: "n/d"}
-                                }
-                            },
-                            "multiple": {
-                                "no_gypsum": {
-                                    9.5: {12: "16-10", 16: "15-11", 19.2: "15-5", 24: "n/d"},
-                                    11.875: {12: "19-2", 16: "17-10", 19.2: "17-3", 24: "n/d"}
-                                },
-                                "half_gypsum": {
-                                    9.5: {12: "17-4", 16: "16-5", 19.2: "15-11", 24: "n/d"},
-                                    11.875: {12: "19-11", 16: "18-6", 19.2: "17-10", 24: "n/d"}
-                                }
-                            }
-                        }
-                    },
-                    "3/4": {
-                        "nailed": {
-                            "simple": {
-                                "no_gypsum": {
-                                    9.5: {12: "15-3", 16: "14-3", 19.2: "13-7", 24: "12-11"},
-                                    11.875: {12: "17-2", 16: "16-0", 19.2: "15-4", 24: "14-7"}
-                                },
-                                "half_gypsum": {
-                                    9.5: {12: "15-7", 16: "14-7", 19.2: "13-11", 24: "13-3"},
-                                    11.875: {12: "17-7", 16: "16-5", 19.2: "15-9", 24: "15-0"}
-                                }
-                            },
-                            "multiple": {
-                                "no_gypsum": {
-                                    9.5: {12: "16-6", 16: "15-5", 19.2: "14-9", 24: "14-1"},
-                                    11.875: {12: "18-9", 16: "17-4", 19.2: "16-8", 24: "15-10"}
-                                },
-                                "half_gypsum": {
-                                    9.5: {12: "16-11", 16: "15-10", 19.2: "15-2", 24: "14-2"},
-                                    11.875: {12: "19-5", 16: "17-10", 19.2: "17-1", 24: "16-3"}
-                                }
-                            }
-                        },
-                        "glued-nailed": {
-                            "simple": {
-                                "no_gypsum": {
-                                    9.5: {12: "16-7", 16: "15-7", 19.2: "15-1", 24: "14-3"},
-                                    11.875: {12: "18-8", 16: "17-6", 19.2: "16-10", 24: "16-2"}
-                                },
-                                "half_gypsum": {
-                                    9.5: {12: "17-0", 16: "16-0", 19.2: "15-6", 24: "14-3"},
-                                    11.875: {12: "19-3", 16: "18-0", 19.2: "17-4", 24: "16-3"}
-                                }
-                            },
-                            "multiple": {
-                                "no_gypsum": {
-                                    9.5: {12: "17-11", 16: "16-11", 19.2: "15-10", 24: "14-2"},
-                                    11.875: {12: "20-7", 16: "19-2", 19.2: "18-3", 24: "16-2"}
-                                },
-                                "half_gypsum": {
-                                    9.5: {12: "18-6", 16: "17-5", 19.2: "15-10", 24: "14-2"},
-                                    11.875: {12: "21-4", 16: "19-11", 19.2: "18-1", 24: "16-2"}
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "AJS® 20": {
-                heights: [9.5, 11.875, 14, 16],
-                spans: {
-                    "5/8": {
-                        "nailed": {
-                            "simple": {
-                                "no_gypsum": {
-                                    9.5: {12: "15-4", 16: "14-4", 19.2: "13-9", 24: "n/d"},
-                                    11.875: {12: "17-4", 16: "16-2", 19.2: "15-6", 24: "n/d"},
-                                    14: {12: "19-1", 16: "17-7", 19.2: "16-10", 24: "n/d"},
-                                    16: {12: "20-10", 16: "19-1", 19.2: "18-1", 24: "n/d"}
-                                },
-                                "half_gypsum": {
-                                    9.5: {12: "15-9", 16: "14-8", 19.2: "14-1", 24: "n/d"},
-                                    11.875: {12: "17-9", 16: "16-6", 19.2: "15-10", 24: "n/d"},
-                                    14: {12: "19-8", 16: "18-1", 19.2: "17-4", 24: "n/d"},
-                                    16: {12: "21-6", 16: "19-8", 19.2: "18-8", 24: "n/d"}
-                                }
-                            }
-                        },
-                        "glued-nailed": {
-                            "simple": {
-                                "no_gypsum": {
-                                    9.5: {12: "16-3", 16: "15-4", 19.2: "14-10", 24: "n/d"},
-                                    11.875: {12: "18-3", 16: "17-2", 19.2: "16-7", 24: "n/d"},
-                                    14: {12: "20-3", 16: "18-10", 19.2: "18-0", 24: "n/d"},
-                                    16: {12: "22-1", 16: "20-6", 19.2: "19-7", 24: "n/d"}
-                                },
-                                "half_gypsum": {
-                                    9.5: {12: "16-8", 16: "15-9", 19.2: "15-2", 24: "n/d"},
-                                    11.875: {12: "18-10", 16: "17-8", 19.2: "17-0", 24: "n/d"},
-                                    14: {12: "21-0", 16: "19-6", 19.2: "18-8", 24: "n/d"},
-                                    16: {12: "22-10", 16: "21-3", 19.2: "20-4", 24: "n/d"}
-                                }
-                            }
-                        }
-                    },
-                    "3/4": {
-                        "nailed": {
-                            "simple": {
-                                "no_gypsum": {
-                                    9.5: {12: "16-1", 16: "15-0", 19.2: "14-4", 24: "13-7"},
-                                    11.875: {12: "18-1", 16: "16-10", 19.2: "16-1", 24: "15-4"},
-                                    14: {12: "20-2", 16: "18-5", 19.2: "17-7", 24: "16-9"},
-                                    16: {12: "22-1", 16: "20-2", 19.2: "19-0", 24: "17-11"}
-                                },
-                                "half_gypsum": {
-                                    9.5: {12: "16-5", 16: "15-3", 19.2: "14-8", 24: "13-11"},
-                                    11.875: {12: "18-7", 16: "17-3", 19.2: "16-6", 24: "15-8"},
-                                    14: {12: "20-9", 16: "19-0", 19.2: "18-0", 24: "17-1"},
-                                    16: {12: "22-8", 16: "20-9", 19.2: "19-8", 24: "18-5"}
-                                }
-                            }
-                        },
-                        "glued-nailed": {
-                            "simple": {
-                                "no_gypsum": {
-                                    9.5: {12: "17-3", 16: "16-3", 19.2: "15-8", 24: "15-0"},
-                                    11.875: {12: "19-7", 16: "18-2", 19.2: "17-6", 24: "16-10"},
-                                    14: {12: "21-10", 16: "20-2", 19.2: "19-3", 24: "18-3"},
-                                    16: {12: "23-9", 16: "22-0", 19.2: "20-11", 24: "19-10"}
-                                },
-                                "half_gypsum": {
-                                    9.5: {12: "17-7", 16: "16-7", 19.2: "16-0", 24: "15-4"},
-                                    11.875: {12: "20-2", 16: "18-9", 19.2: "17-11", 24: "17-3"},
-                                    14: {12: "22-5", 16: "20-10", 19.2: "19-11", 24: "18-11"},
-                                    16: {12: "24-5", 16: "22-9", 19.2: "21-8", 24: "20-7"}
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "AJS® 25": {
-                heights: [9.5, 11.875, 14, 16, 18, 20, 22, 24],
-                spans: {
-                    "5/8": {
-                        "nailed": {
-                            "simple": {
-                                "no_gypsum": {
-                                    9.5: {12: "16-5", 16: "15-4", 19.2: "14-9", 24: "n/d"},
-                                    11.875: {12: "18-8", 16: "17-3", 19.2: "16-7", 24: "n/d"},
-                                    14: {12: "20-9", 16: "19-0", 19.2: "18-0", 24: "n/d"},
-                                    16: {12: "22-8", 16: "20-8", 19.2: "19-8", 24: "n/d"},
-                                    18: {12: "24-9", 16: "22-7", 19.2: "21-5", 24: "n/d"},
-                                    20: {12: "26-6", 16: "24-2", 19.2: "22-11", 24: "n/d"},
-                                    22: {12: "28-2", 16: "25-9", 19.2: "24-5", 24: "n/d"},
-                                    24: {12: "29-9", 16: "27-2", 19.2: "25-10", 24: "n/d"}
-                                },
-                                "half_gypsum": {
-                                    9.5: {12: "16-10", 16: "15-8", 19.2: "15-0", 24: "n/d"},
-                                    11.875: {12: "19-2", 16: "17-8", 19.2: "16-11", 24: "n/d"},
-                                    14: {12: "21-4", 16: "19-6", 19.2: "18-6", 24: "n/d"},
-                                    16: {12: "23-4", 16: "21-4", 19.2: "20-3", 24: "n/d"},
-                                    18: {12: "25-5", 16: "23-3", 19.2: "22-1", 24: "n/d"},
-                                    20: {12: "27-2", 16: "24-11", 19.2: "23-8", 24: "n/d"},
-                                    22: {12: "28-11", 16: "26-6", 19.2: "25-2", 24: "n/d"},
-                                    24: {12: "30-7", 16: "28-1", 19.2: "26-8", 24: "n/d"}
-                                }
-                            }
-                        },
-                        "glued-nailed": {
-                            "simple": {
-                                "no_gypsum": {
-                                    9.5: {12: "17-3", 16: "16-2", 19.2: "15-8", 24: "n/d"},
-                                    11.875: {12: "19-8", 16: "18-2", 19.2: "17-6", 24: "n/d"},
-                                    14: {12: "21-10", 16: "20-2", 19.2: "19-3", 24: "n/d"},
-                                    16: {12: "23-9", 16: "21-11", 19.2: "21-0", 24: "n/d"},
-                                    18: {12: "25-10", 16: "23-10", 19.2: "22-9", 24: "n/d"},
-                                    20: {12: "27-7", 16: "25-6", 19.2: "24-4", 24: "n/d"},
-                                    22: {12: "29-4", 16: "27-1", 19.2: "25-10", 24: "n/d"},
-                                    24: {12: "31-0", 16: "28-7", 19.2: "27-4", 24: "n/d"}
-                                },
-                                "half_gypsum": {
-                                    9.5: {12: "17-7", 16: "16-7", 19.2: "16-0", 24: "n/d"},
-                                    11.875: {12: "20-2", 16: "18-8", 19.2: "17-11", 24: "n/d"},
-                                    14: {12: "22-6", 16: "20-10", 19.2: "19-10", 24: "n/d"},
-                                    16: {12: "24-6", 16: "22-8", 19.2: "21-8", 24: "n/d"},
-                                    18: {12: "26-7", 16: "24-7", 19.2: "23-6", 24: "n/d"},
-                                    20: {12: "28-5", 16: "26-4", 19.2: "25-2", 24: "n/d"},
-                                    22: {12: "30-2", 16: "27-11", 19.2: "26-8", 24: "n/d"},
-                                    24: {12: "31-11", 16: "29-7", 19.2: "28-3", 24: "n/d"}
-                                }
-                            }
-                        }
-                    },
-                    "3/4": {
-                        "nailed": {
-                            "simple": {
-                                "no_gypsum": {
-                                    9.5: {12: "17-2", 16: "16-0", 19.2: "15-4", 24: "14-7"},
-                                    11.875: {12: "19-9", 16: "18-0", 19.2: "17-3", 24: "16-5"},
-                                    14: {12: "22-0", 16: "20-1", 19.2: "19-0", 24: "17-10"},
-                                    16: {12: "24-0", 16: "21-11", 19.2: "20-8", 24: "19-5"},
-                                    18: {12: "26-2", 16: "23-11", 19.2: "22-7", 24: "21-2"},
-                                    20: {12: "28-0", 16: "25-7", 19.2: "24-2", 24: "22-8"},
-                                    22: {12: "29-9", 16: "27-2", 19.2: "25-8", 24: "24-1"},
-                                    24: {12: "31-6", 16: "28-9", 19.2: "27-2", 24: "25-6"}
-                                },
-                                "half_gypsum": {
-                                    9.5: {12: "17-6", 16: "16-4", 19.2: "15-7", 24: "14-10"},
-                                    11.875: {12: "20-2", 16: "18-5", 19.2: "17-7", 24: "16-9"},
-                                    14: {12: "22-6", 16: "20-7", 19.2: "19-6", 24: "18-3"},
-                                    16: {12: "24-7", 16: "22-6", 19.2: "21-3", 24: "19-11"},
-                                    18: {12: "26-9", 16: "24-6", 19.2: "23-2", 24: "21-9"},
-                                    20: {12: "28-7", 16: "26-3", 19.2: "24-10", 24: "23-4"},
-                                    22: {12: "30-5", 16: "27-11", 19.2: "26-5", 24: "24-10"},
-                                    24: {12: "32-2", 16: "29-7", 19.2: "28-0", 24: "26-3"}
-                                }
-                            }
-                        },
-                        "glued-nailed": {
-                            "simple": {
-                                "no_gypsum": {
-                                    9.5: {12: "18-3", 16: "17-2", 19.2: "16-6", 24: "15-10"},
-                                    11.875: {12: "21-1", 16: "19-6", 19.2: "18-7", 24: "17-8"},
-                                    14: {12: "23-5", 16: "21-8", 19.2: "20-7", 24: "19-6"},
-                                    16: {12: "25-6", 16: "23-6", 19.2: "22-5", 24: "21-2"},
-                                    18: {12: "27-7", 16: "25-6", 19.2: "24-4", 24: "23-0"},
-                                    20: {12: "29-6", 16: "27-3", 19.2: "26-0", 24: "24-7"},
-                                    22: {12: "31-4", 16: "29-0", 19.2: "27-7", 24: "26-1"},
-                                    24: {12: "33-4", 16: "30-7", 19.2: "29-1", 24: "27-6"}
-                                },
-                                "half_gypsum": {
-                                    9.5: {12: "18-8", 16: "17-6", 19.2: "16-10", 24: "16-2"},
-                                    11.875: {12: "21-7", 16: "20-0", 19.2: "19-1", 24: "18-1"},
-                                    14: {12: "24-0", 16: "22-3", 19.2: "21-2", 24: "20-1"},
-                                    16: {12: "26-1", 16: "24-2", 19.2: "23-1", 24: "21-10"},
-                                    18: {12: "28-4", 16: "26-3", 19.2: "25-0", 24: "23-8"},
-                                    20: {12: "30-3", 16: "28-1", 19.2: "26-9", 24: "25-4"},
-                                    22: {12: "32-2", 16: "29-10", 19.2: "28-5", 24: "26-11"},
-                                    24: {12: "34-5", 16: "31-6", 19.2: "30-0", 24: "28-5"}
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        };
-
-        // Data tables for open web joists
-        const openWebJoistData = {
-            "40_15": { // 40 lb/pi² live + 15 lb/pi² dead
-                "2x3 - EPS": {
-                    11.875: {12: 19.33, 16: 16.58, 19.2: 15.08, 24: 13.25},
-                    12.5: {12: 19.92, 16: 17.08, 19.2: 15.5, 24: 13.67},
-                    14: {12: 21.17, 16: 18.25, 19.2: 16.5, 24: 14.58},
-                    16: {12: 22.83, 16: 19.58, 19.2: 17.75, 24: 15.58},
-                    18: {12: 0, 16: 0, 19.2: 0, 24: 0},
-                    20: {12: 0, 16: 0, 19.2: 0, 24: 0},
-                    22: {12: 0, 16: 0, 19.2: 0, 24: 0},
-                    24: {12: 0, 16: 0, 19.2: 0, 24: 0}
-                },
-                "2x3 - 1650": {
-                    11.875: {12: 21.5, 16: 19.67, 19.2: 17.83, 24: 15.67},
-                    12.5: {12: 22.17, 16: 20.25, 19.2: 18.33, 24: 16.17},
-                    14: {12: 23.83, 16: 21.5, 19.2: 19.58, 24: 17.25},
-                    16: {12: 25.83, 16: 23.17, 19.2: 21.0, 24: 18.58},
-                    18: {12: 0, 16: 0, 19.2: 0, 24: 0},
-                    20: {12: 0, 16: 0, 19.2: 0, 24: 0},
-                    22: {12: 0, 16: 0, 19.2: 0, 24: 0},
-                    24: {12: 0, 16: 0, 19.2: 0, 24: 0}
-                },
-                "2x3 - 2100": {
-                    11.875: {12: 22.33, 16: 20.83, 19.2: 19.83, 24: 18.33},
-                    12.5: {12: 23.08, 16: 21.5, 19.2: 20.58, 24: 19.08},
-                    14: {12: 24.75, 16: 23.17, 19.2: 22.08, 24: 20.83},
-                    16: {12: 26.83, 16: 25.17, 19.2: 24.0, 24: 22.58},
-                    18: {12: 0, 16: 0, 19.2: 0, 24: 0},
-                    20: {12: 0, 16: 0, 19.2: 0, 24: 0},
-                    22: {12: 0, 16: 0, 19.2: 0, 24: 0},
-                    24: {12: 0, 16: 0, 19.2: 0, 24: 0}
-                },
-                "2x4 - 2100": {
-                    11.875: {12: 24.08, 16: 22.42, 19.2: 21.33, 24: 20.17},
-                    12.5: {12: 24.83, 16: 23.17, 19.2: 22.08, 24: 20.83},
-                    14: {12: 26.58, 16: 24.92, 19.2: 23.75, 24: 22.33},
-                    16: {12: 28.83, 16: 26.92, 19.2: 25.75, 24: 24.25},
-                    18: {12: 31.0, 16: 29.0, 19.2: 27.67, 24: 26.0},
-                    20: {12: 32.5, 16: 30.5, 19.2: 29.08, 24: 27.42},
-                    22: {12: 35.08, 16: 32.25, 19.2: 30.92, 24: 29.08},
-                    24: {12: 37.5, 16: 34.5, 19.2: 32.5, 24: 30.75}
-                },
-                "2x4 - 2400": {
-                    11.875: {12: 24.67, 16: 23.0, 19.2: 21.92, 24: 20.67},
-                    12.5: {12: 25.5, 16: 23.75, 19.2: 22.67, 24: 21.25},
-                    14: {12: 27.25, 16: 25.5, 19.2: 24.33, 24: 22.83},
-                    16: {12: 29.5, 16: 27.58, 19.2: 26.33, 24: 24.83},
-                    18: {12: 31.67, 16: 29.67, 19.2: 28.33, 24: 26.67},
-                    20: {12: 34.08, 16: 31.58, 19.2: 30.25, 24: 28.5},
-                    22: {12: 36.58, 16: 33.67, 19.2: 31.92, 24: 30.17},
-                    24: {12: 39.17, 16: 36.08, 19.2: 34.0, 24: 31.75}
-                }
-            },
-            "100_15": { // 100 lb/pi² live + 15 lb/pi² dead
-                "2x3 - EPS": {
-                    11.875: {12: 13.17, 16: 10.5, 19.2: 8.92, 24: 6.75},
-                    12.5: {12: 13.58, 16: 10.75, 19.2: 9.17, 24: 7.0},
-                    14: {12: 14.42, 16: 11.5, 19.2: 9.75, 24: 7.42},
-                    16: {12: 15.58, 16: 12.42, 19.2: 10.42, 24: 8.0},
-                    18: {12: 0, 16: 0, 19.2: 0, 24: 0},
-                    20: {12: 0, 16: 0, 19.2: 0, 24: 0},
-                    22: {12: 0, 16: 0, 19.2: 0, 24: 0},
-                    24: {12: 0, 16: 0, 19.2: 0, 24: 0}
-                },
-                "2x3 - 1650": {
-                    11.875: {12: 15.58, 16: 13.33, 19.2: 11.83, 24: 9.58},
-                    12.5: {12: 15.92, 16: 13.75, 19.2: 12.17, 24: 9.83},
-                    14: {12: 17.0, 16: 14.67, 19.2: 13.0, 24: 10.42},
-                    16: {12: 18.33, 16: 15.75, 19.2: 14.0, 24: 11.25},
-                    18: {12: 0, 16: 0, 19.2: 0, 24: 0},
-                    20: {12: 0, 16: 0, 19.2: 0, 24: 0},
-                    22: {12: 0, 16: 0, 19.2: 0, 24: 0},
-                    24: {12: 0, 16: 0, 19.2: 0, 24: 0}
-                },
-                "2x3 - 2100": {
-                    11.875: {12: 16.75, 16: 15.17, 19.2: 13.5, 24: 11.25},
-                    12.5: {12: 17.42, 16: 15.75, 19.2: 13.92, 24: 11.58},
-                    14: {12: 19.17, 16: 16.83, 19.2: 14.83, 24: 12.33},
-                    16: {12: 21.17, 16: 18.17, 19.2: 15.83, 24: 13.25},
-                    18: {12: 0, 16: 0, 19.2: 0, 24: 0},
-                    20: {12: 0, 16: 0, 19.2: 0, 24: 0},
-                    22: {12: 0, 16: 0, 19.2: 0, 24: 0},
-                    24: {12: 0, 16: 0, 19.2: 0, 24: 0}
-                },
-                "2x4 - 2100": {
-                    11.875: {12: 18.67, 16: 16.58, 19.2: 14.42, 24: 11.83},
-                    12.5: {12: 19.42, 16: 17.08, 19.2: 14.92, 24: 12.17},
-                    14: {12: 21.25, 16: 18.17, 19.2: 15.83, 24: 13.0},
-                    16: {12: 23.58, 16: 19.58, 19.2: 17.0, 24: 14.0},
-                    18: {12: 25.5, 16: 20.83, 19.2: 18.17, 24: 15.0},
-                    20: {12: 26.92, 16: 22.08, 19.2: 19.25, 24: 15.75},
-                    22: {12: 28.33, 16: 23.25, 19.2: 20.33, 24: 16.67},
-                    24: {12: 29.75, 16: 24.42, 19.2: 21.17, 24: 17.42}
-                },
-                "2x4 - 2400": {
-                    11.875: {12: 19.33, 16: 17.33, 19.2: 15.5, 24: 12.92},
-                    12.5: {12: 20.17, 16: 18.08, 19.2: 16.17, 24: 13.33},
-                    14: {12: 22.0, 16: 19.42, 19.2: 17.0, 24: 14.25},
-                    16: {12: 24.42, 16: 20.83, 19.2: 18.33, 24: 15.33},
-                    18: {12: 26.67, 16: 22.25, 19.2: 19.5, 24: 16.25},
-                    20: {12: 28.42, 16: 23.58, 19.2: 20.75, 24: 17.25},
-                    22: {12: 30.0, 16: 24.83, 19.2: 21.75, 24: 18.17},
-                    24: {12: 31.33, 16: 26.0, 19.2: 22.83, 24: 19.08}
-                }
-            }
-        };
-
-        function showTab(tabName) {
-            // Hide all tab contents
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => content.classList.remove('active'));
-            
-            // Remove active class from all tabs
-            const tabs = document.querySelectorAll('.tab');
-            tabs.forEach(tab => tab.classList.remove('active'));
-            
-            // Show selected tab content
-            document.getElementById(tabName).classList.add('active');
-            
-            // Add active class to clicked tab
-            event.target.classList.add('active');
-        }
-
-        function parseSpan(spanStr) {
-            if (!spanStr || spanStr === "n/d") return 0;
-            const parts = spanStr.split('-');
-            const feet = parseInt(parts[0]);
-            const inches = parseInt(parts[1]);
-            return feet + inches/12;
-        }
-
-        function formatSpan(totalFeet) {
-            const feet = Math.floor(totalFeet);
-            const inches = Math.round((totalFeet - feet) * 12);
-            return `${feet}'-${inches}"`;
-        }
-
-        function selectPoutrelle(index, tabType) {
-            // Remove previous selection
-            document.querySelectorAll('.poutrelle-option').forEach(option => {
-                option.classList.remove('selected');
-            });
-            
-            // Add selection to clicked option
-            document.querySelectorAll('.poutrelle-option')[index].classList.add('selected');
-        }
-
-        function calculateI() {
-            // Get inputs
-            const spanFt = parseFloat(document.getElementById('span-ft-i').value) || 0;
-            const spanIn = parseFloat(document.getElementById('span-in-i').value) || 0;
-            const totalSpanFt = spanFt + spanIn/12;
-            
-            if (totalSpanFt === 0) {
-                resetResultsI();
-                return;
-            }
-            
-            const deadLoad = parseFloat(document.getElementById('dead-load-i').value) || 0;
-            const liveLoad = parseFloat(document.getElementById('live-load-i').value) || 0;
-            const snowLoad = parseFloat(document.getElementById('snow-load-i').value) || 0;
-            const subfloorThickness = document.getElementById('subfloor-thickness-i').value;
-            const attachment = document.querySelector('input[name="subfloor-attachment-i"]:checked').value;
-            const spanType = document.querySelector('input[name="span-type-i"]:checked').value;
-            const gypsum = document.querySelector('input[name="gypsum-i"]:checked').value;
-            const maxHeight = parseFloat(document.getElementById('max-height-i').value) || 999;
-            const spacingPreference = document.getElementById('spacing-preference-i').value;
-            
-            if (!deadLoad || !liveLoad) {
-                resetResultsI();
-                return;
-            }
-            
-            // Calculate loads
-            const totalUnfactoredLoad = deadLoad + Math.max(liveLoad, snowLoad);
-            const factoredLoad = 1.25 * deadLoad + 1.5 * Math.max(liveLoad, snowLoad);
-            
-            // Update load results
-            document.getElementById('total-load-result-i').textContent = `${totalUnfactoredLoad.toFixed(0)} lb/pi.ca.`;
-            document.getElementById('factored-load-result-i').textContent = `${factoredLoad.toFixed(0)} lb/pi.ca.`;
-            
-            // Find viable options
-            const viableOptions = findViableOptionsI(totalSpanFt, subfloorThickness, attachment, spanType, gypsum, maxHeight, spacingPreference);
-            displayResultsI(viableOptions, totalUnfactoredLoad, factoredLoad);
-        }
-
-        function findViableOptionsI(totalSpanFt, subfloorThickness, attachment, spanType, gypsum, maxHeight, spacingPreference) {
-            const viableOptions = [];
-            
-            // Check all series
-            for (const [seriesName, seriesData] of Object.entries(iJoistData)) {
-                if (seriesData.spans[subfloorThickness] && seriesData.spans[subfloorThickness][attachment]) {
-                    const spanTypeData = seriesData.spans[subfloorThickness][attachment][spanType];
-                    const gypsumData = spanTypeData[gypsum === "no" ? "no_gypsum" : "half_gypsum"];
-                    
-                    for (const height of seriesData.heights) {
-                        if (height > maxHeight) continue;
-                        
-                        const heightData = gypsumData[height];
-                        if (!heightData) continue;
-                        
-                        const spacings = spacingPreference ? [parseFloat(spacingPreference)] : [12, 16, 19.2, 24];
-                        
-                        for (const spacing of spacings) {
-                            const spanStr = heightData[spacing];
-                            if (!spanStr || spanStr === "n/d") continue;
-                            
-                            const allowableSpan = parseSpan(spanStr);
-                            
-                            if (allowableSpan >= totalSpanFt) {
-                                viableOptions.push({
-                                    series: seriesName,
-                                    height: height,
-                                    spacing: spacing,
-                                    maxSpan: spanStr,
-                                    allowableSpanFt: allowableSpan,
-                                    ratio: allowableSpan / totalSpanFt
-                                });
-                            }
-                        }
-                    }
-                }
-            }
-            
-            // Sort by ratio (highest first), then by spacing (largest first)
-            viableOptions.sort((a, b) => {
-                if (Math.abs(a.ratio - b.ratio) < 0.01) {
-                    return b.spacing - a.spacing;
-                }
-                return b.ratio - a.ratio;
-            });
-            
-            return viableOptions;
-        }
-
-        function displayResultsI(viableOptions, totalLoad, factoredLoad) {
-            const container = document.getElementById('poutrelle-results-i');
-            
-            if (viableOptions.length === 0) {
-                container.innerHTML = `
-                    <div class="no-solution">
-                        <h3>Aucune poutrelle viable trouvée</h3>
-                        <p>Les paramètres entrés ne permettent pas de trouver une solution viable.</p>
-                        <p>Suggestions : Augmenter la hauteur maximale ou réduire la portée.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            let html = `
-                <div class="poutrelle-options">
-                    <h3 style="margin-bottom: 20px; color: #8B4513;">
-                        Poutrelles viables (${viableOptions.length} option${viableOptions.length > 1 ? 's' : ''})
-                    </h3>
-            `;
-
-            viableOptions.forEach((option, index) => {
-                const utilizationPercent = ((1 / option.ratio) * 100).toFixed(0);
-                
-                html += `
-                    <div class="poutrelle-option" onclick="selectPoutrelle(${index}, 'i')">
-                        <div class="poutrelle-title">
-                            ${option.series} - ${option.height}" @ ${option.spacing}" c/c
-                        </div>
-                        <div class="poutrelle-specs">
-                            <div><strong>Portée max:</strong> ${option.maxSpan}</div>
-                            <div><strong>Utilisation:</strong> ${utilizationPercent}%</div>
-                            <div><strong>Ratio:</strong> ${option.ratio.toFixed(2)}</div>
-                            <div><strong>Espacement:</strong> ${option.spacing}"</div>
-                        </div>
-                    </div>
-                `;
-            });
-
-            html += `
-                <div style="margin-top: 20px; padding: 15px; background: #fff3cd; border-radius: 8px; font-size: 0.9em;">
-                    <strong>Charges de conception:</strong><br>
-                    Charge totale non pondérée: ${totalLoad.toFixed(0)} lb/pi.ca. | 
-                    Charge totale pondérée: ${factoredLoad.toFixed(0)} lb/pi.ca.
-                </div>
-            `;
-
-            html += '</div>';
-            container.innerHTML = html;
-        }
-
-        function resetResultsI() {
-            document.getElementById('total-load-result-i').textContent = '-';
-            document.getElementById('factored-load-result-i').textContent = '-';
-            document.getElementById('poutrelle-results-i').innerHTML = `
-                <div class="info-text">
-                    Entrez les paramètres pour voir les options de poutrelles.
-                </div>
-            `;
-        }
-
-        function calculateAjourees() {
-            // Get inputs
-            const spanFt = parseFloat(document.getElementById('span-ft-a').value) || 0;
-            const spanIn = parseFloat(document.getElementById('span-in-a').value) || 0;
-            const totalSpanFt = spanFt + spanIn/12;
-            
-            if (totalSpanFt === 0) {
-                resetResultsA();
-                return;
-            }
-            
-            const deadLoad = parseFloat(document.getElementById('dead-load-a').value);
-            const liveLoad = parseFloat(document.getElementById('live-load-a').value);
-            const spacing = parseFloat(document.getElementById('spacing-a').value);
-            const maxHeight = parseFloat(document.getElementById('max-height-a').value) || 999;
-            
-            if (!deadLoad || !liveLoad || !spacing) {
-                resetResultsA();
-                return;
-            }
-            
-            // Update applied loads
-            document.getElementById('applied-loads-a').textContent = `${deadLoad} + ${liveLoad} lb/pi.ca.`;
-            
-            // Determine load case
-            const loadCase = `${liveLoad}_${deadLoad}`;
-            const data = openWebJoistData[loadCase];
-            
-            if (!data) {
-                document.getElementById('poutrelle-results-a').innerHTML = `
-                    <div class="no-solution">
-                        <h3>Combinaison de charges non supportée</h3>
-                    </div>
-                `;
-                return;
-            }
-            
-            // Find viable options
-            const viableOptions = findViableOptionsA(data, totalSpanFt, spacing, maxHeight);
-            displayResultsA(viableOptions, deadLoad, liveLoad, totalSpanFt, spacing);
-        }
-
-        function findViableOptionsA(data, totalSpanFt, spacing, maxHeight) {
-            const viableOptions = [];
-            
-            // Check all series and heights
-            for (const [series, heightData] of Object.entries(data)) {
-                for (const [heightStr, spacingData] of Object.entries(heightData)) {
-                    const height = parseFloat(heightStr);
-                    if (height > maxHeight) continue;
-                    
-                    const allowableSpan = spacingData[spacing];
-                    if (allowableSpan && allowableSpan > 0) {
-                        const ratio = allowableSpan / totalSpanFt;
-                        viableOptions.push({
-                            series: series,
-                            height: height,
-                            allowableSpan: allowableSpan,
-                            ratio: ratio
-                        });
-                    }
-                }
-            }
-            
-            // Sort by ratio (highest first)
-            viableOptions.sort((a, b) => b.ratio - a.ratio);
-            
-            return viableOptions;
-        }
-
-        function displayResultsA(viableOptions, deadLoad, liveLoad, totalSpanFt, spacing) {
-            const container = document.getElementById('poutrelle-results-a');
-            const statusBox = document.getElementById('status-box-a');
-            const statusElement = document.getElementById('status-a');
-            
-            if (viableOptions.length === 0) {
-                statusElement.textContent = 'NON CONFORME';
-                statusBox.className = 'result-box status-error';
-                container.innerHTML = `
-                    <div class="no-solution">
-                        <h3>Aucune solution trouvée</h3>
-                        <p>Aucune poutrelle ajourée ne peut supporter cette portée avec ces charges.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            const bestOption = viableOptions[0];
-            
-            if (bestOption.ratio >= 1.0) {
-                statusElement.textContent = 'CONFORME';
-                statusBox.className = 'result-box status-success';
-            } else {
-                statusElement.textContent = 'NON CONFORME';
-                statusBox.className = 'result-box status-error';
-            }
-
-            let html = `
-                <div class="poutrelle-options">
-                    <h3 style="margin-bottom: 20px; color: #8B4513;">
-                        Poutrelles ajourées viables (${viableOptions.length} option${viableOptions.length > 1 ? 's' : ''})
-                    </h3>
-            `;
-
-            viableOptions.forEach((option, index) => {
-                const utilizationPercent = ((1 / option.ratio) * 100).toFixed(0);
-                const statusClass = option.ratio >= 1.0 ? 'status-success' : 'status-error';
-                
-                html += `
-                    <div class="poutrelle-option ${statusClass}" onclick="selectPoutrelle(${index}, 'a')">
-                        <div class="poutrelle-title">
-                            ${option.series} - ${option.height}" @ ${spacing}" c/c
-                        </div>
-                        <div class="poutrelle-specs">
-                            <div><strong>Portée admissible:</strong> ${formatSpan(option.allowableSpan)}</div>
-                            <div><strong>Ratio:</strong> ${option.ratio.toFixed(2)}</div>
-                            <div><strong>Utilisation:</strong> ${utilizationPercent}%</div>
-                            <div><strong>Statut:</strong> ${option.ratio >= 1.0 ? 'Conforme' : 'Non conforme'}</div>
-                        </div>
-                    </div>
-                `;
-            });
-
-            html += `
-                <div style="margin-top: 20px; padding: 15px; background: #fff3cd; border-radius: 8px; font-size: 0.9em;">
-                    <strong>Paramètres de conception:</strong><br>
-                    Portée demandée: ${formatSpan(totalSpanFt)} | 
-                    Charges: ${deadLoad} + ${liveLoad} lb/pi.ca. | 
-                    Espacement: ${spacing}"
-                </div>
-            `;
-
-            html += '</div>';
-            container.innerHTML = html;
-        }
-
-        function resetResultsA() {
-            document.getElementById('applied-loads-a').textContent = '-';
-            const statusBox = document.getElementById('status-box-a');
-            const statusElement = document.getElementById('status-a');
-            statusElement.textContent = '-';
-            statusBox.className = 'result-box';
-            
-            document.getElementById('poutrelle-results-a').innerHTML = `
-                <div class="info-text">
-                    Entrez les paramètres pour voir les options de poutrelles ajourées.
-                </div>
-            `;
-        }
-
-        // Add event listeners for real-time calculation
-        document.addEventListener('DOMContentLoaded', function() {
-            // I-joist inputs
-            const iInputs = ['span-ft-i', 'span-in-i', 'dead-load-i', 'live-load-i', 'snow-load-i', 'subfloor-thickness-i', 'max-height-i', 'spacing-preference-i'];
-            iInputs.forEach(id => {
-                const element = document.getElementById(id);
-                if (element) {
-                    element.addEventListener('change', calculateI);
-                    element.addEventListener('input', calculateI);
-                }
-            });
-            
-            // Radio buttons for I-joists
-            document.querySelectorAll('input[name="subfloor-attachment-i"]').forEach(input => {
-                input.addEventListener('change', calculateI);
-            });
-            document.querySelectorAll('input[name="span-type-i"]').forEach(input => {
-                input.addEventListener('change', calculateI);
-            });
-            document.querySelectorAll('input[name="gypsum-i"]').forEach(input => {
-                input.addEventListener('change', calculateI);
-            });
-            
-            // Open web joist inputs
-            const aInputs = ['span-ft-a', 'span-in-a', 'dead-load-a', 'live-load-a', 'spacing-a', 'max-height-a'];
-            aInputs.forEach(id => {
-                const element = document.getElementById(id);
-                if (element) {
-                    element.addEventListener('change', calculateAjourees);
-                    element.addEventListener('input', calculateAjourees);
-                }
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
