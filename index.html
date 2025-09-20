@@ -1,374 +1,380 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculateur de Poutrelles Ajourées</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+// Tables des portées admissibles des poutrelles ajourées (CECOBOIS)
+// Charge 1,9 kPa (surcharge) + 0,70 kPa (permanente)
+const POUTRELLES_1_9_KPA = {
+    302: { // hauteur 302mm (11⅞")
+        "2x3-EPS": { 305: 5.90, 406: 5.08, 487: 4.60, 610: 4.05 },
+        "2x3-1650": { 305: 6.58, 406: 6.00, 487: 5.45, 610: 4.80 },
+        "2x3-2100": { 305: 6.83, 406: 6.38, 487: 6.05, 610: 5.60 },
+        "2x4-2100": { 305: 7.35, 406: 6.85, 487: 6.53, 610: 6.15 },
+        "2x4-2400": { 305: 7.53, 406: 7.03, 487: 6.70, 610: 6.30 }
+    },
+    318: { // hauteur 318mm (12½")
+        "2x3-EPS": { 305: 6.08, 406: 5.23, 487: 4.73, 610: 4.17 },
+        "2x3-1650": { 305: 6.78, 406: 6.18, 487: 5.60, 610: 4.95 },
+        "2x3-2100": { 305: 7.05, 406: 6.58, 487: 6.28, 610: 5.83 },
+        "2x4-2100": { 305: 7.58, 406: 7.08, 487: 6.75, 610: 6.35 },
+        "2x4-2400": { 305: 7.78, 406: 7.25, 487: 6.93, 610: 6.50 }
+    },
+    356: { // hauteur 356mm (14")
+        "2x3-EPS": { 305: 6.48, 406: 5.58, 487: 5.05, 610: 4.45 },
+        "2x3-1650": { 305: 7.28, 406: 6.58, 487: 5.98, 610: 5.28 },
+        "2x3-2100": { 305: 7.55, 406: 7.08, 487: 6.75, 610: 6.35 },
+        "2x4-2100": { 305: 8.13, 406: 7.60, 487: 7.25, 610: 6.83 },
+        "2x4-2400": { 305: 8.33, 406: 7.78, 487: 7.43, 610: 6.98 }
+    },
+    406: { // hauteur 406mm (16")
+        "2x3-EPS": { 305: 6.98, 406: 5.98, 487: 5.43, 610: 4.78 },
+        "2x3-1650": { 305: 7.88, 406: 7.08, 487: 6.43, 610: 5.68 },
+        "2x3-2100": { 305: 8.20, 406: 7.68, 487: 7.33, 610: 6.90 },
+        "2x4-2100": { 305: 8.80, 406: 8.23, 487: 7.85, 610: 7.40 },
+        "2x4-2400": { 305: 9.00, 406: 8.43, 487: 8.05, 610: 7.58 }
+    },
+    457: { // hauteur 457mm (18")
+        "2x4-2100": { 305: 9.45, 406: 8.85, 487: 8.45, 610: 7.95 },
+        "2x4-2400": { 305: 9.68, 406: 9.05, 487: 8.65, 610: 8.15 }
+    },
+    508: { // hauteur 508mm (20")
+        "2x4-2100": { 305: 9.93, 406: 9.30, 487: 8.88, 610: 8.38 },
+        "2x4-2400": { 305: 10.40, 406: 9.65, 487: 9.23, 610: 8.70 }
+    },
+    559: { // hauteur 559mm (22")
+        "2x4-2100": { 305: 10.70, 406: 9.85, 487: 9.43, 610: 8.88 },
+        "2x4-2400": { 305: 11.18, 406: 10.28, 487: 9.75, 610: 9.20 }
+    },
+    610: { // hauteur 610mm (24")
+        "2x4-2100": { 305: 11.45, 406: 10.53, 487: 9.93, 610: 9.38 },
+        "2x4-2400": { 305: 11.95, 406: 11.00, 487: 10.38, 610: 9.70 }
+    }
+};
+
+// Charge 4,8 kPa (surcharge) + 0,70 kPa (permanente)
+const POUTRELLES_4_8_KPA = {
+    302: { // hauteur 302mm (11⅞")
+        "2x3-EPS": { 305: 4.02, 406: 3.22, 487: 2.73, 610: 2.08 },
+        "2x3-1650": { 305: 4.75, 406: 4.07, 487: 3.62, 610: 2.92 },
+        "2x3-2100": { 305: 5.13, 406: 4.63, 487: 4.12, 610: 3.45 },
+        "2x4-2100": { 305: 5.70, 406: 5.08, 487: 4.40, 610: 3.62 },
+        "2x4-2400": { 305: 5.90, 406: 5.30, 487: 4.73, 610: 3.95 }
+    },
+    318: { // hauteur 318mm (12½")
+        "2x3-EPS": { 305: 4.15, 406: 3.30, 487: 2.80, 610: 2.15 },
+        "2x3-1650": { 305: 4.88, 406: 4.20, 487: 3.72, 610: 3.00 },
+        "2x3-2100": { 305: 5.35, 406: 4.83, 487: 4.25, 610: 3.55 },
+        "2x4-2100": { 305: 5.93, 406: 5.23, 487: 4.55, 610: 3.72 },
+        "2x4-2400": { 305: 6.15, 406: 5.53, 487: 4.88, 610: 4.07 }
+    },
+    356: { // hauteur 356mm (14")
+        "2x3-EPS": { 305: 4.40, 406: 3.52, 487: 2.97, 610: 2.28 },
+        "2x3-1650": { 305: 5.20, 406: 4.48, 487: 3.97, 610: 3.20 },
+        "2x3-2100": { 305: 5.85, 406: 5.15, 487: 4.53, 610: 3.77 },
+        "2x4-2100": { 305: 6.50, 406: 5.95, 487: 4.85, 610: 3.97 },
+        "2x4-2400": { 305: 6.73, 406: 5.93, 487: 5.20, 610: 4.35 }
+    },
+    406: { // hauteur 406mm (16")
+        "2x3-EPS": { 305: 4.75, 406: 3.80, 487: 3.20, 610: 2.45 },
+        "2x3-1650": { 305: 5.60, 406: 4.83, 487: 4.28, 610: 3.45 },
+        "2x3-2100": { 305: 6.48, 406: 5.55, 487: 4.85, 610: 4.05 },
+        "2x4-2100": { 305: 7.20, 406: 5.98, 487: 5.20, 610: 4.28 },
+        "2x4-2400": { 305: 7.45, 406: 6.38, 487: 5.60, 610: 4.68 }
+    },
+    457: { // hauteur 457mm (18")
+        "2x4-2100": { 305: 7.78, 406: 6.38, 487: 5.55, 610: 4.58 },
+        "2x4-2400": { 305: 8.15, 406: 6.80, 487: 5.95, 610: 4.98 }
+    },
+    508: { // hauteur 508mm (20")
+        "2x4-2100": { 305: 8.23, 406: 6.75, 487: 5.88, 610: 4.83 },
+        "2x4-2400": { 305: 8.68, 406: 7.20, 487: 6.33, 610: 5.28 }
+    },
+    559: { // hauteur 559mm (22")
+        "2x4-2100": { 305: 8.65, 406: 7.10, 487: 6.20, 610: 5.10 },
+        "2x4-2400": { 305: 9.15, 406: 7.58, 487: 6.65, 610: 5.55 }
+    },
+    610: { // hauteur 610mm (24")
+        "2x4-2100": { 305: 9.08, 406: 7.45, 487: 6.48, 610: 5.33 },
+        "2x4-2400": { 305: 9.58, 406: 7.93, 487: 6.98, 610: 5.83 }
+    }
+};
+
+// Hauteurs disponibles et leurs équivalents en pouces
+const HAUTEURS_DISPONIBLES = [
+    { mm: 302, pouces: "11⅞\"", display: "302 mm (11⅞\")" },
+    { mm: 318, pouces: "12½\"", display: "318 mm (12½\")" },
+    { mm: 356, pouces: "14\"", display: "356 mm (14\")" },
+    { mm: 406, pouces: "16\"", display: "406 mm (16\")" },
+    { mm: 457, pouces: "18\"", display: "457 mm (18\")" },
+    { mm: 508, pouces: "20\"", display: "508 mm (20\")" },
+    { mm: 559, pouces: "22\"", display: "559 mm (22\")" },
+    { mm: 610, pouces: "24\"", display: "610 mm (24\")" }
+];
+
+// Espacements standards
+const ESPACEMENTS_STANDARDS = [305, 406, 488, 610];
+
+function calculerPoutrelles() {
+    // Récupération des valeurs d'entrée
+    const porteeMetres = parseFloat(document.getElementById('porteeMetres').value) || 0;
+    const espacementMm = parseInt(document.getElementById('espacement').value);
+    const chargeVive = parseFloat(document.getElementById('chargeVive').value) || 0;
+    const chargeMorte = parseFloat(document.getElementById('chargeMorte').value) || 0;
+    const hauteurMaxMm = parseFloat(document.getElementById('hauteurMax').value) || null;
+    const optimisation = document.getElementById('optimisation').value;
+    
+    const typePortee = document.getElementById('typePortee').value;
+    const epaisseurSousPlancher = document.getElementById('epaisseurSousPlancher').value;
+    const fixation = document.getElementById('fixation').value;
+    const plafondGypse = document.getElementById('plafondGypse').value;
+
+    // Validation des entrées essentielles
+    if (!porteeMetres || porteeMetres < 3 || porteeMetres > 12) {
+        afficherMessageErreur("La portée doit être entre 3 et 12 mètres");
+        return;
+    }
+
+    if (!espacementMm) {
+        afficherMessageErreur("Sélectionnez un espacement");
+        return;
+    }
+
+    if (!chargeVive || !chargeMorte) {
+        afficherMessageErreur("Entrez les charges vive et morte");
+        return;
+    }
+
+    // Affichage des résultats de calcul
+    const chargesTotales = chargeVive + chargeMorte;
+    document.getElementById('resultPortee').textContent = `${porteeMetres.toFixed(1)} m`;
+    document.getElementById('resultCharges').textContent = `${chargesTotales.toFixed(1)} kPa`;
+    
+    // Configuration
+    const configElements = [];
+    if (epaisseurSousPlancher) {
+        configElements.push(`${epaisseurSousPlancher === '16' ? '5/8"' : '3/4"'} sous-plancher`);
+    }
+    if (fixation) {
+        configElements.push(fixation === 'cloue_colle' ? 'cloué-collé' : 'cloué');
+    }
+    if (plafondGypse) {
+        const epaisseurGypse = plafondGypse === '12' ? '1/2"' : '5/8"';
+        configElements.push(`gypse ${epaisseurGypse}`);
+    }
+    
+    document.getElementById('resultConfig').textContent = configElements.length > 0 ? configElements.join(', ') : '-';
+
+    // Déterminer le tableau à utiliser selon les charges
+    let tableauUtilise;
+    let nomTableau;
+    
+    if (Math.abs(chargeVive - 1.9) < 0.1 && Math.abs(chargeMorte - 0.7) < 0.1) {
+        tableauUtilise = POUTRELLES_1_9_KPA;
+        nomTableau = "1,9 + 0,7 kPa (résidentiel)";
+    } else if (Math.abs(chargeVive - 4.8) < 0.1 && Math.abs(chargeMorte - 0.7) < 0.1) {
+        tableauUtilise = POUTRELLES_4_8_KPA;
+        nomTableau = "4,8 + 0,7 kPa (commercial)";
+    } else {
+        // Charges personnalisées - utiliser le tableau le plus proche
+        if (chargesTotales <= 2.6) {
+            tableauUtilise = POUTRELLES_1_9_KPA;
+            nomTableau = "1,9 + 0,7 kPa (estimation)";
+        } else {
+            tableauUtilise = POUTRELLES_4_8_KPA;
+            nomTableau = "4,8 + 0,7 kPa (estimation)";
         }
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #fef7f2;
-            min-height: 100vh;
-            padding: 20px;
+    document.getElementById('resultTableau').textContent = nomTableau;
+
+    // Recherche des poutrelles viables
+    const poutrellesViables = trouverPoutrellesViables(
+        porteeMetres, 
+        espacementMm, 
+        tableauUtilise, 
+        hauteurMaxMm, 
+        optimisation,
+        typePortee
+    );
+    
+    afficherResultatsPoutrelles(poutrellesViables, nomTableau);
+}
+
+function trouverPoutrellesViables(porteeMetres, espacementMm, tableau, hauteurMaxMm, optimisation, typePortee) {
+    const poutrellesViables = [];
+    
+    // Parcourir toutes les hauteurs disponibles
+    for (const hauteurInfo of HAUTEURS_DISPONIBLES) {
+        const hauteurMm = hauteurInfo.mm;
+        
+        // Vérifier contrainte de hauteur
+        if (hauteurMaxMm && hauteurMm > hauteurMaxMm) {
+            continue;
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-
-        .header {
-            background: #2E8B57;
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: 300;
-        }
-
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
-            min-height: 600px;
-        }
-
-        .input-section {
-            padding: 40px;
-            background: #f0f8f0;
-            border-right: 1px solid #e9ecef;
-        }
-
-        .results-section {
-            padding: 40px;
-            background: white;
-        }
-
-        .section-title {
-            font-size: 1.5em;
-            color: #2E8B57;
-            margin-bottom: 25px;
-            font-weight: 600;
-            border-bottom: 3px solid #32CD32;
-            padding-bottom: 10px;
-        }
-
-        .input-group {
-            margin-bottom: 25px;
-        }
-
-        .input-row {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .input-field {
-            flex: 1;
-        }
-
-        .dimension-input {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .dimension-input input {
-            flex: 1;
-        }
-
-        .dimension-input span {
-            font-size: 0.9em;
-            color: #666;
-            min-width: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #2E8B57;
-            font-size: 0.95em;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e9ecef;
-            border-radius: 6px;
-            font-size: 1em;
-            transition: all 0.3s ease;
-            background: white;
-        }
-
-        input:focus, select:focus {
-            outline: none;
-            border-color: #32CD32;
-            box-shadow: 0 0 0 3px rgba(50, 205, 50, 0.1);
-        }
-
-        .results-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .result-card {
-            background: #f0f8f0;
-            border-radius: 4px;
-            padding: 20px;
-            border-left: 4px solid #32CD32;
-        }
-
-        .result-label {
-            font-size: 0.9em;
-            color: #2E8B57;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
-
-        .result-value {
-            font-size: 1.3em;
-            color: #2E8B57;
-            font-weight: 700;
-        }
-
-        .poutrelle-options {
-            background: #f6fdf6;
-            border-radius: 4px;
-            padding: 25px;
-            margin-top: 20px;
-        }
-
-        .poutrelle-option {
-            background: #fefffe;
-            border-radius: 4px;
-            padding: 15px;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            border: 1px solid #e9ecef;
-        }
-
-        .poutrelle-option:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .poutrelle-option.selected {
-            border-left: 4px solid #32CD32;
-            background: #f0fdf0;
-        }
-
-        .poutrelle-title {
-            font-weight: 700;
-            color: #2E8B57;
-            margin-bottom: 8px;
-            font-size: 1.1em;
-        }
-
-        .poutrelle-specs {
-            font-size: 0.9em;
-            color: #228B22;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .no-solution {
-            background: #fdf2f2;
-            border: 2px solid #e74c3c;
-            border-radius: 4px;
-            padding: 20px;
-            text-align: center;
-            color: #c0392b;
-            font-weight: 600;
-        }
-
-        @media (max-width: 768px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-
-            .input-section {
-                border-right: none;
-                border-bottom: 1px solid #e9ecef;
-            }
-
-            .input-row {
-                flex-direction: column;
-                gap: 0;
-            }
-
-            .results-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .poutrelle-specs {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>Calculateur de Poutrelles Ajourées</h1>
-            <p>Dimensionnement selon les tableaux CECOBOIS</p>
-        </div>
-
-        <div class="main-content">
-            <div class="input-section">
-                <h2 class="section-title">Paramètres de conception</h2>
+        
+        if (!tableau[hauteurMm]) continue;
+        
+        const donnees = tableau[hauteurMm];
+        
+        // Parcourir toutes les séries pour cette hauteur
+        for (const [serie, espacements] of Object.entries(donnees)) {
+            // Vérifier si l'espacement demandé existe pour cette série
+            if (espacements[espacementMm] && espacements[espacementMm] >= porteeMetres) {
+                const porteeMax = espacements[espacementMm];
+                const marge = porteeMax - porteeMetres;
                 
-                <div class="input-group">
-                    <div class="input-row">
-                        <div class="input-field">
-                            <label for="portee">Portée libre</label>
-                            <div class="dimension-input">
-                                <input type="number" id="porteeMetres" step="0.1" min="3" max="12" placeholder="Mètres">
-                                <span>m</span>
-                            </div>
-                        </div>
-                        <div class="input-field">
-                            <label for="espacement">Espacement</label>
-                            <select id="espacement">
-                                <option value="">Sélectionner</option>
-                                <option value="305">305 mm (12")</option>
-                                <option value="406">406 mm (16")</option>
-                                <option value="488">488 mm (19.2")</option>
-                                <option value="610">610 mm (24")</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+                // Déterminer le coût relatif et la disponibilité
+                const coutRelatif = serie.includes('2x3') ? 1 : 1.2;
+                const classeBois = serie.split('-')[1];
+                const disponibilite = classeBois === 'EPS' ? 'Standard' : 
+                                   classeBois === '1650' ? 'Sur commande' : 'Sur commande spéciale';
+                
+                // Facteur de performance pour le tri
+                let facteurPerformance = porteeMax / hauteurMm;
+                if (typePortee === 'multiple') {
+                    facteurPerformance *= 1.1; // Bonus pour portées multiples
+                }
+                
+                poutrellesViables.push({
+                    hauteur: hauteurInfo,
+                    serie: serie,
+                    espacementMm: espacementMm,
+                    porteeMax: porteeMax,
+                    marge: marge,
+                    coutRelatif: coutRelatif,
+                    disponibilite: disponibilite,
+                    classeBois: classeBois,
+                    facteurPerformance: facteurPerformance
+                });
+            }
+        }
+    }
+    
+    // Trier selon l'optimisation choisie
+    if (optimisation === 'hauteur') {
+        poutrellesViables.sort((a, b) => {
+            if (a.hauteur.mm !== b.hauteur.mm) return a.hauteur.mm - b.hauteur.mm;
+            return a.coutRelatif - b.coutRelatif;
+        });
+    } else if (optimisation === 'espacement') {
+        poutrellesViables.sort((a, b) => {
+            return b.facteurPerformance - a.facteurPerformance;
+        });
+    } else if (optimisation === 'economique') {
+        poutrellesViables.sort((a, b) => {
+            const scoreA = a.coutRelatif * a.hauteur.mm / a.porteeMax;
+            const scoreB = b.coutRelatif * b.hauteur.mm / b.porteeMax;
+            return scoreA - scoreB;
+        });
+    } else {
+        // Tri par défaut : équilibre performance/coût
+        poutrellesViables.sort((a, b) => {
+            return b.facteurPerformance / a.coutRelatif - a.facteurPerformance / b.coutRelatif;
+        });
+    }
+    
+    return poutrellesViables;
+}
 
-                <div class="input-group">
-                    <div class="input-row">
-                        <div class="input-field">
-                            <label for="typePortee">Type de portée</label>
-                            <select id="typePortee">
-                                <option value="">Sélectionner</option>
-                                <option value="simple">Portée simple</option>
-                                <option value="multiple">Portée multiple</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+function afficherResultatsPoutrelles(poutrellesViables, nomTableau) {
+    const container = document.getElementById('poutrelleResults');
+    
+    if (poutrellesViables.length === 0) {
+        container.innerHTML = `
+            <div class="no-solution">
+                <h3>Aucune poutrelle viable trouvée</h3>
+                <p>Les charges ou la portée dépassent les capacités disponibles pour cet espacement.</p>
+                <p>Suggestions :</p>
+                <ul style="text-align: left; margin-top: 10px;">
+                    <li>Réduire la portée</li>
+                    <li>Choisir un espacement plus serré</li>
+                    <li>Augmenter la hauteur maximale autorisée</li>
+                    <li>Considérer des appuis intermédiaires</li>
+                </ul>
+            </div>
+        `;
+        return;
+    }
 
-                <div class="input-group">
-                    <label>Configuration du plancher</label>
-                    <div class="input-row">
-                        <div class="input-field">
-                            <label for="epaisseurSousPlancher">Épaisseur sous-plancher</label>
-                            <select id="epaisseurSousPlancher">
-                                <option value="">Sélectionner</option>
-                                <option value="16">5/8" (16 mm)</option>
-                                <option value="19">3/4" (19 mm)</option>
-                            </select>
-                        </div>
-                        <div class="input-field">
-                            <label for="fixation">Fixation</label>
-                            <select id="fixation">
-                                <option value="">Sélectionner</option>
-                                <option value="cloue_colle">Cloué et collé</option>
-                                <option value="cloue_seul">Cloué seulement</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="input-row">
-                        <div class="input-field">
-                            <label for="plafondGypse">Plafond gypse</label>
-                            <select id="plafondGypse">
-                                <option value="">Aucun</option>
-                                <option value="12">1/2" (12 mm)</option>
-                                <option value="16">5/8" (16 mm)</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+    let html = `
+        <div class="poutrelle-options">
+            <h3 style="margin-bottom: 20px; color: #2E8B57;">
+                Poutrelles ajourées viables (${poutrellesViables.length} option${poutrellesViables.length > 1 ? 's' : ''})
+            </h3>
+    `;
 
-                <div class="input-group">
-                    <label>Charges (kPa)</label>
-                    <div class="input-row">
-                        <div class="input-field">
-                            <label for="chargeMorte">Charge morte (CM)</label>
-                            <input type="number" id="chargeMorte" step="0.1" min="0" placeholder="Valeur CM">
-                        </div>
-                        <div class="input-field">
-                            <label for="chargeVive">Charge vive (CV)</label>
-                            <input type="number" id="chargeVive" step="0.1" min="0" placeholder="Valeur CV">
-                        </div>
-                    </div>
+    poutrellesViables.slice(0, 10).forEach((poutrelle, index) => { // Limiter à 10 résultats
+        const economique = poutrelle.serie.includes('2x3') ? " (économique)" : "";
+        const espacementDisplay = `${poutrelle.espacementMm} mm`;
+        
+        html += `
+            <div class="poutrelle-option" onclick="selectionnerPoutrelle(${index})">
+                <div class="poutrelle-title">
+                    ${poutrelle.serie} × ${poutrelle.hauteur.display}${economique}
                 </div>
-
-                <div class="input-group">
-                    <label>Contraintes dimensionnelles</label>
-                    <div class="input-row">
-                        <div class="input-field">
-                            <label for="hauteurMax">Hauteur max (mm)</label>
-                            <input type="number" id="hauteurMax" step="10" min="250" placeholder="Aucune contrainte">
-                        </div>
-                        <div class="input-field">
-                            <label for="optimisation">Optimisation</label>
-                            <select id="optimisation">
-                                <option value="">Sélectionner</option>
-                                <option value="hauteur">Hauteur minimale</option>
-                                <option value="espacement">Espacement maximal</option>
-                                <option value="economique">Plus économique</option>
-                            </select>
-                        </div>
-                    </div>
+                <div class="poutrelle-specs">
+                    <div><strong>Espacement:</strong> ${espacementDisplay}</div>
+                    <div><strong>Portée max:</strong> ${poutrelle.porteeMax.toFixed(2)} m</div>
+                    <div><strong>Marge:</strong> ${poutrelle.marge.toFixed(2)} m</div>
+                    <div><strong>Disponibilité:</strong> ${poutrelle.disponibilite}</div>
                 </div>
             </div>
+        `;
+    });
 
-            <div class="results-section">
-                <h2 class="section-title">Résultats de calcul</h2>
-                
-                <div class="results-grid">
-                    <div class="result-card">
-                        <div class="result-label">Portée de calcul</div>
-                        <div class="result-value" id="resultPortee">-</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-label">Charges combinées</div>
-                        <div class="result-value" id="resultCharges">-</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-label">Configuration</div>
-                        <div class="result-value" id="resultConfig">-</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-label">Tableau utilisé</div>
-                        <div class="result-value" id="resultTableau">-</div>
-                    </div>
-                </div>
-
-                <div id="poutrelleResults">
-                    <p style="text-align: center; color: #228B22; margin-top: 50px;">
-                        Entrez les paramètres pour voir les options de poutrelles.
-                    </p>
-                </div>
-            </div>
+    html += `
+        <div style="margin-top: 20px; padding: 15px; background: #e8f5e8; border-radius: 8px; font-size: 0.9em;">
+            <strong>Tableau utilisé:</strong> ${nomTableau}<br>
+            <strong>Critères:</strong> Flèche L/360 (surcharge), L/240 (charge totale), vibrations CCMC<br>
+            <em>Portées calculées pour portée simple avec charges uniformément réparties.</em>
         </div>
-    </div>
+    `;
 
-    <script src="poutrelles-script.js"></script>
-</body>
-</html>
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+function afficherMessageErreur(message) {
+    document.getElementById('poutrelleResults').innerHTML = `
+        <p style="text-align: center; color: #c0392b; margin-top: 50px;">
+            ${message}
+        </p>
+    `;
+    
+    // Effacer les résultats partiels
+    document.getElementById('resultPortee').textContent = '-';
+    document.getElementById('resultCharges').textContent = '-';
+    document.getElementById('resultConfig').textContent = '-';
+    document.getElementById('resultTableau').textContent = '-';
+}
+
+function selectionnerPoutrelle(index) {
+    // Retirer la sélection précédente
+    document.querySelectorAll('.poutrelle-option').forEach(option => {
+        option.classList.remove('selected');
+    });
+    
+    // Ajouter la sélection à l'option cliquée
+    document.querySelectorAll('.poutrelle-option')[index].classList.add('selected');
+}
+
+// Initialisation
+document.addEventListener('DOMContentLoaded', function() {
+    // Calculer automatiquement lors des changements de valeurs
+    const inputs = [
+        'porteeMetres', 'espacement', 'chargeVive', 'chargeMorte', 
+        'hauteurMax', 'optimisation', 'typePortee',
+        'epaisseurSousPlancher', 'fixation', 'plafondGypse'
+    ];
+    
+    inputs.forEach(inputId => {
+        const element = document.getElementById(inputId);
+        if (element) {
+            element.addEventListener('input', function() {
+                clearTimeout(this.timer);
+                this.timer = setTimeout(calculerPoutrelles, 500);
+            });
+            
+            element.addEventListener('change', function() {
+                clearTimeout(this.timer);
+                this.timer = setTimeout(calculerPoutrelles, 100);
+            });
+        }
+    });
+});
