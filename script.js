@@ -2,7 +2,7 @@
 // Basé sur l'analyse de treillis et les tableaux de dimensionnement
 
 // Tables de rigidité EI et coefficients K (système impérial)
-// Source: Tableau 6 du guide CECOBOIS
+// Source: Tableau 6 du guide CECOBOIS - valeurs déjà en 10^6
 const JOIST_PROPERTIES = {
     11.875: { // 11⅞"
         "2x3-EPS": { EI: 282, K: 4.75, VR: 2214 },
@@ -51,7 +51,7 @@ const JOIST_PROPERTIES = {
 };
 
 // Tables de portées admissibles pour charges résidentielles (40 psf + 15 psf)
-// Source: Adaptés des tableaux 12-15 du guide CECOBOIS
+// Source: Tableaux 12-15 du guide CECOBOIS (extraits corrigés)
 const ALLOWABLE_SPANS = {
     11.875: {
         "2x3-EPS": { 12: 19.4, 16: 16.7, 19.2: 15.1, 24: 13.3 },
@@ -191,10 +191,10 @@ function performCalculations(span, spacing, height, series, spanType, deadLoad, 
     const totalLiveLoad = Math.max(liveLoad, snowLoad); // charge vive gouvernante
     const totalLoad = deadLoad + totalLiveLoad;
     
-    // Propriétés de la poutrelle
+    // Propriétés de la poutrelle - valeurs déjà en 10^6
     const props = JOIST_PROPERTIES[height][series];
-    const EI = props.EI * 1000000; // conversion en lb·in²
-    const K = props.K * 1000000; // conversion en lb
+    const EI = props.EI * 1000000; // 10^6 lb·in² * 10^6 = lb·in²
+    const K = props.K * 1000000; // 10^6 lb * 10^6 = lb
     const VR = props.VR; // résistance au cisaillement en lb
 
     // Charge uniformément répartie (lb/in)
@@ -240,8 +240,8 @@ function performCalculations(span, spacing, height, series, spanType, deadLoad, 
         shearCheck: VMax <= VR,
         shearUtilization: (VMax / VR * 100),
         openings: openings,
-        EI: EI / 1000000,
-        K: K / 1000000,
+        EI: props.EI, // garder en 10^6
+        K: props.K, // garder en 10^6
         moment: MTotal,
         shear: VMax
     };
@@ -290,8 +290,8 @@ function checkVibrations(span, spacing, height, series) {
     const P = 225; // lb
     const spanInches = span * 12;
     const props = JOIST_PROPERTIES[height][series];
-    const EI = props.EI * 1000000;
-    const K = props.K * 1000000;
+    const EI = props.EI * 1000000; // conversion correcte
+    const K = props.K * 1000000; // conversion correcte
     
     // Équation (7) pour charge concentrée
     const deflectionPoint = (P * Math.pow(spanInches, 3)) / (48 * EI) + (2 * P * spanInches) / K;
@@ -389,7 +389,7 @@ function displayResults(results, recommendations) {
             <div class="verification-item">
                 <span>Flèche charge vive (L/360)</span>
                 <div>
-                    <span class="result-value">${(results.deflectionLive * 12).toFixed(3)}" ≤ ${(results.deflectionLimitLive * 12).toFixed(3)}"</span>
+                    <span class="result-value">${(results.deflectionLive).toFixed(3)}" ≤ ${(results.deflectionLimitLive).toFixed(3)}"</span>
                     <span class="status-badge ${results.deflectionLive <= results.deflectionLimitLive ? 'badge-ok' : 'badge-error'}">
                         ${results.deflectionLive <= results.deflectionLimitLive ? 'OK' : 'ÉCHEC'}
                     </span>
@@ -399,7 +399,7 @@ function displayResults(results, recommendations) {
             <div class="verification-item">
                 <span>Flèche totale (L/240)</span>
                 <div>
-                    <span class="result-value">${(results.deflectionTotal * 12).toFixed(3)}" ≤ ${(results.deflectionLimitTotal * 12).toFixed(3)}"</span>
+                    <span class="result-value">${(results.deflectionTotal).toFixed(3)}" ≤ ${(results.deflectionLimitTotal).toFixed(3)}"</span>
                     <span class="status-badge ${results.deflectionTotal <= results.deflectionLimitTotal ? 'badge-ok' : 'badge-error'}">
                         ${results.deflectionTotal <= results.deflectionLimitTotal ? 'OK' : 'ÉCHEC'}
                     </span>
