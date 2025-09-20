@@ -223,41 +223,6 @@
             color: #2c3e50;
         }
 
-        .calculate-btn {
-            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
-            color: white;
-            padding: 16px 32px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            width: 100%;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .calculate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
-        }
-
-        .calculate-btn:active {
-            transform: translateY(0);
-        }
-
-        .info-text {
-            font-style: italic;
-            color: #6c757d;
-            text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            background: rgba(139, 69, 19, 0.05);
-            border-radius: 8px;
-        }
-
         .load-group {
             display: flex;
             gap: 15px;
@@ -310,6 +275,70 @@
             color: #dc3545;
         }
 
+        .poutrelle-options {
+            background: #f9f6f3;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .poutrelle-option {
+            background: #fef7f2;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-left: 4px solid #8B4513;
+            position: relative;
+        }
+
+        .poutrelle-option:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .poutrelle-option.selected {
+            border-left: 4px solid #D2691E;
+            background: #fff3cd;
+        }
+
+        .poutrelle-title {
+            font-weight: 700;
+            color: #8B4513;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .poutrelle-specs {
+            font-size: 0.9em;
+            color: #A0522D;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .no-solution {
+            background: #fdf2f2;
+            border: 2px solid #e74c3c;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            color: #c0392b;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        .info-text {
+            font-style: italic;
+            color: #6c757d;
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(139, 69, 19, 0.05);
+            border-radius: 8px;
+        }
+
         @media (max-width: 768px) {
             .calculator-container {
                 flex-direction: column;
@@ -325,6 +354,10 @@
             }
             
             .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .poutrelle-specs {
                 grid-template-columns: 1fr;
             }
         }
@@ -353,16 +386,6 @@
                             <input type="number" id="span-ft-i" placeholder="0" min="0">
                             <span>pi</span>
                             <input type="number" id="span-in-i" placeholder="0" min="0" max="11">
-                            <span>po</span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Largeur tributaire</label>
-                        <div class="dimension-input">
-                            <input type="number" id="trib-ft-i" placeholder="0" min="0">
-                            <span>pi</span>
-                            <input type="number" id="trib-in-i" placeholder="0" min="0" max="11">
                             <span>po</span>
                         </div>
                     </div>
@@ -405,8 +428,8 @@
                         <label>Sous-plancher</label>
                         <div style="margin-bottom: 15px;">
                             <select id="subfloor-thickness-i">
-                                <option value="5/8">⅝" ou 19⁄32"</option>
-                                <option value="3/4">¾" ou 23⁄32"</option>
+                                <option value="5/8">⅝" ou 19/32"</option>
+                                <option value="3/4">¾" ou 23/32"</option>
                             </select>
                         </div>
                         <div class="checkbox-group">
@@ -464,46 +487,36 @@
                         </select>
                     </div>
 
-                    <button class="calculate-btn" onclick="calculateI()">Calculer</button>
+                    <div class="form-group">
+                        <label>Espacement souhaité (po)</label>
+                        <select id="spacing-preference-i">
+                            <option value="">Optimal</option>
+                            <option value="12">12"</option>
+                            <option value="16">16"</option>
+                            <option value="19.2">19.2"</option>
+                            <option value="24">24"</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="results-panel">
                     <div class="section-title">Résultats de calcul</div>
                     
-                    <div class="result-box">
-                        <div class="result-label">Série recommandée</div>
-                        <div class="result-value" id="series-result-i">-</div>
-                    </div>
-
-                    <div class="result-box">
-                        <div class="result-label">Hauteur (po)</div>
-                        <div class="result-value" id="height-result-i">-</div>
-                    </div>
-
                     <div class="results-grid">
                         <div class="result-box">
-                            <div class="result-label">Espacement recommandé</div>
-                            <div class="result-value" id="spacing-result-i">-</div>
-                        </div>
-                        <div class="result-box">
-                            <div class="result-label">Portée maximale</div>
-                            <div class="result-value" id="max-span-result-i">-</div>
-                        </div>
-                    </div>
-
-                    <div class="results-grid">
-                        <div class="result-box">
-                            <div class="result-label">Charge totale non pondérée (Wt)</div>
+                            <div class="result-label">Charge totale non pondérée</div>
                             <div class="result-value" id="total-load-result-i">-</div>
                         </div>
                         <div class="result-box">
-                            <div class="result-label">Charge totale pondérée (Wf)</div>
+                            <div class="result-label">Charge totale pondérée</div>
                             <div class="result-value" id="factored-load-result-i">-</div>
                         </div>
                     </div>
 
-                    <div class="info-text">
-                        Entrez les paramètres pour voir les options de poutrelles.
+                    <div id="poutrelle-results-i">
+                        <div class="info-text">
+                            Entrez les paramètres pour voir les options de poutrelles.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -551,6 +564,7 @@
                     <div class="form-group">
                         <label>Espacement (c/c)</label>
                         <select id="spacing-a">
+                            <option value="">Sélectionner</option>
                             <option value="12">12" (305 mm)</option>
                             <option value="16">16" (406 mm)</option>
                             <option value="19.2">19,2" (487 mm)</option>
@@ -572,34 +586,11 @@
                             <option value="24">24"</option>
                         </select>
                     </div>
-
-                    <button class="calculate-btn" onclick="calculateAjourees()">Calculer</button>
                 </div>
 
                 <div class="results-panel">
                     <div class="section-title">Résultats de calcul</div>
                     
-                    <div class="result-box">
-                        <div class="result-label">Série recommandée</div>
-                        <div class="result-value" id="series-result-a">-</div>
-                    </div>
-
-                    <div class="result-box">
-                        <div class="result-label">Hauteur recommandée</div>
-                        <div class="result-value" id="height-result-a">-</div>
-                    </div>
-
-                    <div class="results-grid">
-                        <div class="result-box">
-                            <div class="result-label">Portée admissible</div>
-                            <div class="result-value" id="allowable-span-a">-</div>
-                        </div>
-                        <div class="result-box">
-                            <div class="result-label">Ratio portée/demande</div>
-                            <div class="result-value" id="span-ratio-a">-</div>
-                        </div>
-                    </div>
-
                     <div class="results-grid">
                         <div class="result-box">
                             <div class="result-label">Charges appliquées</div>
@@ -611,8 +602,10 @@
                         </div>
                     </div>
 
-                    <div class="info-text">
-                        Entrez les paramètres pour voir les options de poutrelles ajourées.
+                    <div id="poutrelle-results-a">
+                        <div class="info-text">
+                            Entrez les paramètres pour voir les options de poutrelles ajourées.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1037,36 +1030,57 @@
             return `${feet}'-${inches}"`;
         }
 
+        function selectPoutrelle(index, tabType) {
+            // Remove previous selection
+            document.querySelectorAll('.poutrelle-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selection to clicked option
+            document.querySelectorAll('.poutrelle-option')[index].classList.add('selected');
+        }
+
         function calculateI() {
             // Get inputs
             const spanFt = parseFloat(document.getElementById('span-ft-i').value) || 0;
             const spanIn = parseFloat(document.getElementById('span-in-i').value) || 0;
             const totalSpanFt = spanFt + spanIn/12;
             
-            const tribFt = parseFloat(document.getElementById('trib-ft-i').value) || 0;
-            const tribIn = parseFloat(document.getElementById('trib-in-i').value) || 0;
-            const tributaryWidth = tribFt + tribIn/12;
-            
-            if (totalSpanFt === 0 || tributaryWidth === 0) {
-                alert('Veuillez entrer une portée et une largeur tributaire valides.');
+            if (totalSpanFt === 0) {
+                resetResultsI();
                 return;
             }
             
-            const deadLoad = parseFloat(document.getElementById('dead-load-i').value) || 15;
-            const liveLoad = parseFloat(document.getElementById('live-load-i').value) || 40;
+            const deadLoad = parseFloat(document.getElementById('dead-load-i').value) || 0;
+            const liveLoad = parseFloat(document.getElementById('live-load-i').value) || 0;
             const snowLoad = parseFloat(document.getElementById('snow-load-i').value) || 0;
             const subfloorThickness = document.getElementById('subfloor-thickness-i').value;
             const attachment = document.querySelector('input[name="subfloor-attachment-i"]:checked').value;
             const spanType = document.querySelector('input[name="span-type-i"]:checked').value;
             const gypsum = document.querySelector('input[name="gypsum-i"]:checked').value;
             const maxHeight = parseFloat(document.getElementById('max-height-i').value) || 999;
+            const spacingPreference = document.getElementById('spacing-preference-i').value;
+            
+            if (!deadLoad || !liveLoad) {
+                resetResultsI();
+                return;
+            }
             
             // Calculate loads
             const totalUnfactoredLoad = deadLoad + Math.max(liveLoad, snowLoad);
             const factoredLoad = 1.25 * deadLoad + 1.5 * Math.max(liveLoad, snowLoad);
             
-            let bestSolution = null;
-            let bestSpacing = 0;
+            // Update load results
+            document.getElementById('total-load-result-i').textContent = `${totalUnfactoredLoad.toFixed(0)} lb/pi.ca.`;
+            document.getElementById('factored-load-result-i').textContent = `${factoredLoad.toFixed(0)} lb/pi.ca.`;
+            
+            // Find viable options
+            const viableOptions = findViableOptionsI(totalSpanFt, subfloorThickness, attachment, spanType, gypsum, maxHeight, spacingPreference);
+            displayResultsI(viableOptions, totalUnfactoredLoad, factoredLoad);
+        }
+
+        function findViableOptionsI(totalSpanFt, subfloorThickness, attachment, spanType, gypsum, maxHeight, spacingPreference) {
+            const viableOptions = [];
             
             // Check all series
             for (const [seriesName, seriesData] of Object.entries(iJoistData)) {
@@ -1080,39 +1094,99 @@
                         const heightData = gypsumData[height];
                         if (!heightData) continue;
                         
-                        for (const [spacing, spanStr] of Object.entries(heightData)) {
-                            const spacingNum = parseFloat(spacing);
+                        const spacings = spacingPreference ? [parseFloat(spacingPreference)] : [12, 16, 19.2, 24];
+                        
+                        for (const spacing of spacings) {
+                            const spanStr = heightData[spacing];
+                            if (!spanStr || spanStr === "n/d") continue;
+                            
                             const allowableSpan = parseSpan(spanStr);
                             
-                            if (allowableSpan >= totalSpanFt && spacingNum > bestSpacing) {
-                                bestSolution = {
+                            if (allowableSpan >= totalSpanFt) {
+                                viableOptions.push({
                                     series: seriesName,
                                     height: height,
-                                    spacing: spacingNum,
-                                    maxSpan: spanStr
-                                };
-                                bestSpacing = spacingNum;
+                                    spacing: spacing,
+                                    maxSpan: spanStr,
+                                    allowableSpanFt: allowableSpan,
+                                    ratio: allowableSpan / totalSpanFt
+                                });
                             }
                         }
                     }
                 }
             }
             
-            if (bestSolution) {
-                document.getElementById('series-result-i').textContent = bestSolution.series;
-                document.getElementById('height-result-i').textContent = `${bestSolution.height}"`;
-                document.getElementById('spacing-result-i').textContent = `${bestSolution.spacing}"`;
-                document.getElementById('max-span-result-i').textContent = bestSolution.maxSpan;
-                document.getElementById('total-load-result-i').textContent = `${totalUnfactoredLoad.toFixed(0)} lb/pi.ca.`;
-                document.getElementById('factored-load-result-i').textContent = `${factoredLoad.toFixed(0)} lb/pi.ca.`;
-            } else {
-                document.getElementById('series-result-i').textContent = 'Aucune solution trouvée';
-                document.getElementById('height-result-i').textContent = '-';
-                document.getElementById('spacing-result-i').textContent = '-';
-                document.getElementById('max-span-result-i').textContent = '-';
-                document.getElementById('total-load-result-i').textContent = `${totalUnfactoredLoad.toFixed(0)} lb/pi.ca.`;
-                document.getElementById('factored-load-result-i').textContent = `${factoredLoad.toFixed(0)} lb/pi.ca.`;
+            // Sort by ratio (highest first), then by spacing (largest first)
+            viableOptions.sort((a, b) => {
+                if (Math.abs(a.ratio - b.ratio) < 0.01) {
+                    return b.spacing - a.spacing;
+                }
+                return b.ratio - a.ratio;
+            });
+            
+            return viableOptions;
+        }
+
+        function displayResultsI(viableOptions, totalLoad, factoredLoad) {
+            const container = document.getElementById('poutrelle-results-i');
+            
+            if (viableOptions.length === 0) {
+                container.innerHTML = `
+                    <div class="no-solution">
+                        <h3>Aucune poutrelle viable trouvée</h3>
+                        <p>Les paramètres entrés ne permettent pas de trouver une solution viable.</p>
+                        <p>Suggestions : Augmenter la hauteur maximale ou réduire la portée.</p>
+                    </div>
+                `;
+                return;
             }
+
+            let html = `
+                <div class="poutrelle-options">
+                    <h3 style="margin-bottom: 20px; color: #8B4513;">
+                        Poutrelles viables (${viableOptions.length} option${viableOptions.length > 1 ? 's' : ''})
+                    </h3>
+            `;
+
+            viableOptions.forEach((option, index) => {
+                const utilizationPercent = ((1 / option.ratio) * 100).toFixed(0);
+                
+                html += `
+                    <div class="poutrelle-option" onclick="selectPoutrelle(${index}, 'i')">
+                        <div class="poutrelle-title">
+                            ${option.series} - ${option.height}" @ ${option.spacing}" c/c
+                        </div>
+                        <div class="poutrelle-specs">
+                            <div><strong>Portée max:</strong> ${option.maxSpan}</div>
+                            <div><strong>Utilisation:</strong> ${utilizationPercent}%</div>
+                            <div><strong>Ratio:</strong> ${option.ratio.toFixed(2)}</div>
+                            <div><strong>Espacement:</strong> ${option.spacing}"</div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                <div style="margin-top: 20px; padding: 15px; background: #fff3cd; border-radius: 8px; font-size: 0.9em;">
+                    <strong>Charges de conception:</strong><br>
+                    Charge totale non pondérée: ${totalLoad.toFixed(0)} lb/pi.ca. | 
+                    Charge totale pondérée: ${factoredLoad.toFixed(0)} lb/pi.ca.
+                </div>
+            `;
+
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function resetResultsI() {
+            document.getElementById('total-load-result-i').textContent = '-';
+            document.getElementById('factored-load-result-i').textContent = '-';
+            document.getElementById('poutrelle-results-i').innerHTML = `
+                <div class="info-text">
+                    Entrez les paramètres pour voir les options de poutrelles.
+                </div>
+            `;
         }
 
         function calculateAjourees() {
@@ -1122,7 +1196,7 @@
             const totalSpanFt = spanFt + spanIn/12;
             
             if (totalSpanFt === 0) {
-                alert('Veuillez entrer une portée valide.');
+                resetResultsA();
                 return;
             }
             
@@ -1131,22 +1205,34 @@
             const spacing = parseFloat(document.getElementById('spacing-a').value);
             const maxHeight = parseFloat(document.getElementById('max-height-a').value) || 999;
             
-            if (!deadLoad || !liveLoad) {
-                alert('Veuillez sélectionner les charges.');
+            if (!deadLoad || !liveLoad || !spacing) {
+                resetResultsA();
                 return;
             }
+            
+            // Update applied loads
+            document.getElementById('applied-loads-a').textContent = `${deadLoad} + ${liveLoad} lb/pi.ca.`;
             
             // Determine load case
             const loadCase = `${liveLoad}_${deadLoad}`;
             const data = openWebJoistData[loadCase];
             
             if (!data) {
-                alert('Combinaison de charges non supportée.');
+                document.getElementById('poutrelle-results-a').innerHTML = `
+                    <div class="no-solution">
+                        <h3>Combinaison de charges non supportée</h3>
+                    </div>
+                `;
                 return;
             }
             
-            let bestSolution = null;
-            let bestRatio = 0;
+            // Find viable options
+            const viableOptions = findViableOptionsA(data, totalSpanFt, spacing, maxHeight);
+            displayResultsA(viableOptions, deadLoad, liveLoad, totalSpanFt, spacing);
+        }
+
+        function findViableOptionsA(data, totalSpanFt, spacing, maxHeight) {
+            const viableOptions = [];
             
             // Check all series and heights
             for (const [series, heightData] of Object.entries(data)) {
@@ -1157,54 +1243,106 @@
                     const allowableSpan = spacingData[spacing];
                     if (allowableSpan && allowableSpan > 0) {
                         const ratio = allowableSpan / totalSpanFt;
-                        if (ratio > bestRatio) {
-                            bestSolution = {
-                                series: series,
-                                height: height,
-                                allowableSpan: allowableSpan,
-                                ratio: ratio
-                            };
-                            bestRatio = ratio;
-                        }
+                        viableOptions.push({
+                            series: series,
+                            height: height,
+                            allowableSpan: allowableSpan,
+                            ratio: ratio
+                        });
                     }
                 }
             }
             
-            if (bestSolution) {
-                document.getElementById('series-result-a').textContent = bestSolution.series;
-                document.getElementById('height-result-a').textContent = `${bestSolution.height}"`;
-                document.getElementById('allowable-span-a').textContent = formatSpan(bestSolution.allowableSpan);
-                document.getElementById('span-ratio-a').textContent = bestSolution.ratio.toFixed(2);
-                document.getElementById('applied-loads-a').textContent = `${deadLoad} + ${liveLoad} lb/pi.ca.`;
-                
-                const statusBox = document.getElementById('status-box-a');
-                const statusElement = document.getElementById('status-a');
-                
-                if (bestSolution.ratio >= 1.0) {
-                    statusElement.textContent = 'CONFORME';
-                    statusBox.className = 'result-box status-success';
-                } else {
-                    statusElement.textContent = 'NON CONFORME';
-                    statusBox.className = 'result-box status-error';
-                }
+            // Sort by ratio (highest first)
+            viableOptions.sort((a, b) => b.ratio - a.ratio);
+            
+            return viableOptions;
+        }
+
+        function displayResultsA(viableOptions, deadLoad, liveLoad, totalSpanFt, spacing) {
+            const container = document.getElementById('poutrelle-results-a');
+            const statusBox = document.getElementById('status-box-a');
+            const statusElement = document.getElementById('status-a');
+            
+            if (viableOptions.length === 0) {
+                statusElement.textContent = 'NON CONFORME';
+                statusBox.className = 'result-box status-error';
+                container.innerHTML = `
+                    <div class="no-solution">
+                        <h3>Aucune solution trouvée</h3>
+                        <p>Aucune poutrelle ajourée ne peut supporter cette portée avec ces charges.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const bestOption = viableOptions[0];
+            
+            if (bestOption.ratio >= 1.0) {
+                statusElement.textContent = 'CONFORME';
+                statusBox.className = 'result-box status-success';
             } else {
-                document.getElementById('series-result-a').textContent = 'Aucune solution';
-                document.getElementById('height-result-a').textContent = '-';
-                document.getElementById('allowable-span-a').textContent = '-';
-                document.getElementById('span-ratio-a').textContent = '-';
-                document.getElementById('applied-loads-a').textContent = `${deadLoad} + ${liveLoad} lb/pi.ca.`;
-                
-                const statusBox = document.getElementById('status-box-a');
-                const statusElement = document.getElementById('status-a');
                 statusElement.textContent = 'NON CONFORME';
                 statusBox.className = 'result-box status-error';
             }
+
+            let html = `
+                <div class="poutrelle-options">
+                    <h3 style="margin-bottom: 20px; color: #8B4513;">
+                        Poutrelles ajourées viables (${viableOptions.length} option${viableOptions.length > 1 ? 's' : ''})
+                    </h3>
+            `;
+
+            viableOptions.forEach((option, index) => {
+                const utilizationPercent = ((1 / option.ratio) * 100).toFixed(0);
+                const statusClass = option.ratio >= 1.0 ? 'status-success' : 'status-error';
+                
+                html += `
+                    <div class="poutrelle-option ${statusClass}" onclick="selectPoutrelle(${index}, 'a')">
+                        <div class="poutrelle-title">
+                            ${option.series} - ${option.height}" @ ${spacing}" c/c
+                        </div>
+                        <div class="poutrelle-specs">
+                            <div><strong>Portée admissible:</strong> ${formatSpan(option.allowableSpan)}</div>
+                            <div><strong>Ratio:</strong> ${option.ratio.toFixed(2)}</div>
+                            <div><strong>Utilisation:</strong> ${utilizationPercent}%</div>
+                            <div><strong>Statut:</strong> ${option.ratio >= 1.0 ? 'Conforme' : 'Non conforme'}</div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                <div style="margin-top: 20px; padding: 15px; background: #fff3cd; border-radius: 8px; font-size: 0.9em;">
+                    <strong>Paramètres de conception:</strong><br>
+                    Portée demandée: ${formatSpan(totalSpanFt)} | 
+                    Charges: ${deadLoad} + ${liveLoad} lb/pi.ca. | 
+                    Espacement: ${spacing}"
+                </div>
+            `;
+
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function resetResultsA() {
+            document.getElementById('applied-loads-a').textContent = '-';
+            const statusBox = document.getElementById('status-box-a');
+            const statusElement = document.getElementById('status-a');
+            statusElement.textContent = '-';
+            statusBox.className = 'result-box';
+            
+            document.getElementById('poutrelle-results-a').innerHTML = `
+                <div class="info-text">
+                    Entrez les paramètres pour voir les options de poutrelles ajourées.
+                </div>
+            `;
         }
 
         // Add event listeners for real-time calculation
         document.addEventListener('DOMContentLoaded', function() {
             // I-joist inputs
-            const iInputs = ['span-ft-i', 'span-in-i', 'trib-ft-i', 'trib-in-i', 'dead-load-i', 'live-load-i', 'snow-load-i', 'subfloor-thickness-i', 'max-height-i'];
+            const iInputs = ['span-ft-i', 'span-in-i', 'dead-load-i', 'live-load-i', 'snow-load-i', 'subfloor-thickness-i', 'max-height-i', 'spacing-preference-i'];
             iInputs.forEach(id => {
                 const element = document.getElementById(id);
                 if (element) {
