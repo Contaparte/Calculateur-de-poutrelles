@@ -1,4 +1,4 @@
-// Données des poutrelles en I basées sur les documents PDF
+// Données des poutrelles en I basées sur les documents PDF - COMPLÈTES
 const iJoistData = {
     "AJS® 140": {
         heights: [9.5, 11.875],
@@ -115,6 +115,20 @@ const iJoistData = {
                             14: {12: "19-8", 16: "18-1", 19.2: "17-4", 24: "n/d"},
                             16: {12: "21-6", 16: "19-8", 19.2: "18-8", 24: "n/d"}
                         }
+                    },
+                    "multiple": {
+                        "no_gypsum": {
+                            9.5: {12: "16-8", 16: "15-6", 19.2: "14-11", 24: "n/d"},
+                            11.875: {12: "18-11", 16: "17-6", 19.2: "16-10", 24: "n/d"},
+                            14: {12: "21-2", 16: "19-4", 19.2: "18-5", 24: "n/d"},
+                            16: {12: "23-1", 16: "21-2", 19.2: "20-1", 24: "n/d"}
+                        },
+                        "half_gypsum": {
+                            9.5: {12: "17-1", 16: "15-11", 19.2: "15-3", 24: "n/d"},
+                            11.875: {12: "19-7", 16: "17-11", 19.2: "17-3", 24: "n/d"},
+                            14: {12: "21-10", 16: "20-0", 19.2: "19-0", 24: "n/d"},
+                            16: {12: "23-10", 16: "21-11", 19.2: "20-9", 24: "n/d"}
+                        }
                     }
                 },
                 "glued-nailed": {
@@ -130,6 +144,20 @@ const iJoistData = {
                             11.875: {12: "18-10", 16: "17-8", 19.2: "17-0", 24: "n/d"},
                             14: {12: "21-0", 16: "19-6", 19.2: "18-8", 24: "n/d"},
                             16: {12: "22-10", 16: "21-3", 19.2: "20-4", 24: "n/d"}
+                        }
+                    },
+                    "multiple": {
+                        "no_gypsum": {
+                            9.5: {12: "17-7", 16: "16-7", 19.2: "16-0", 24: "n/d"},
+                            11.875: {12: "20-2", 16: "18-9", 19.2: "18-0", 24: "n/d"},
+                            14: {12: "22-6", 16: "20-10", 19.2: "19-11", 24: "n/d"},
+                            16: {12: "24-6", 16: "22-8", 19.2: "21-8", 24: "n/d"}
+                        },
+                        "half_gypsum": {
+                            9.5: {12: "18-1", 16: "17-1", 19.2: "16-6", 24: "n/d"},
+                            11.875: {12: "20-11", 16: "19-5", 19.2: "18-7", 24: "n/d"},
+                            14: {12: "23-3", 16: "21-7", 19.2: "20-8", 24: "n/d"},
+                            16: {12: "25-4", 16: "23-7", 19.2: "22-7", 24: "n/d"}
                         }
                     }
                 }
@@ -149,6 +177,20 @@ const iJoistData = {
                             14: {12: "20-9", 16: "19-0", 19.2: "18-0", 24: "17-1"},
                             16: {12: "22-8", 16: "20-9", 19.2: "19-8", 24: "18-5"}
                         }
+                    },
+                    "multiple": {
+                        "no_gypsum": {
+                            9.5: {12: "17-5", 16: "16-3", 19.2: "15-6", 24: "14-9"},
+                            11.875: {12: "20-0", 16: "18-4", 19.2: "17-6", 24: "16-8"},
+                            14: {12: "22-4", 16: "20-5", 19.2: "19-4", 24: "18-2"},
+                            16: {12: "24-5", 16: "22-4", 19.2: "21-2", 24: "19-9"}
+                        },
+                        "half_gypsum": {
+                            9.5: {12: "17-9", 16: "16-7", 19.2: "15-11", 24: "15-1"},
+                            11.875: {12: "20-7", 16: "18-11", 19.2: "17-11", 24: "17-1"},
+                            14: {12: "23-0", 16: "21-1", 19.2: "20-0", 24: "18-9"},
+                            16: {12: "25-1", 16: "23-1", 19.2: "21-10", 24: "19-9"}
+                        }
                     }
                 },
                 "glued-nailed": {
@@ -164,6 +206,20 @@ const iJoistData = {
                             11.875: {12: "20-2", 16: "18-9", 19.2: "17-11", 24: "17-3"},
                             14: {12: "22-5", 16: "20-10", 19.2: "19-11", 24: "18-11"},
                             16: {12: "24-5", 16: "22-9", 19.2: "21-8", 24: "20-7"}
+                        }
+                    },
+                    "multiple": {
+                        "no_gypsum": {
+                            9.5: {12: "18-9", 16: "17-7", 19.2: "16-11", 24: "16-3"},
+                            11.875: {12: "21-8", 16: "20-1", 19.2: "19-2", 24: "18-3"},
+                            14: {12: "24-1", 16: "22-4", 19.2: "21-4", 24: "19-5"},
+                            16: {12: "26-3", 16: "24-4", 19.2: "23-2", 24: "19-9"}
+                        },
+                        "half_gypsum": {
+                            9.5: {12: "19-4", 16: "18-0", 19.2: "17-4", 24: "16-8"},
+                            11.875: {12: "22-4", 16: "20-10", 19.2: "19-10", 24: "18-10"},
+                            14: {12: "24-10", 16: "23-1", 19.2: "22-1", 24: "19-5"},
+                            16: {12: "27-1", 16: "25-2", 19.2: "24-1", 24: "19-9"}
                         }
                     }
                 }
@@ -196,6 +252,28 @@ const iJoistData = {
                             22: {12: "28-11", 16: "26-6", 19.2: "25-2", 24: "n/d"},
                             24: {12: "30-7", 16: "28-1", 19.2: "26-8", 24: "n/d"}
                         }
+                    },
+                    "multiple": {
+                        "no_gypsum": {
+                            9.5: {12: "17-10", 16: "16-8", 19.2: "16-0", 24: "n/d"},
+                            11.875: {12: "20-8", 16: "18-11", 19.2: "18-0", 24: "n/d"},
+                            14: {12: "23-1", 16: "21-1", 19.2: "20-0", 24: "n/d"},
+                            16: {12: "25-2", 16: "23-0", 19.2: "21-10", 24: "n/d"},
+                            18: {12: "27-4", 16: "25-1", 19.2: "23-9", 24: "n/d"},
+                            20: {12: "29-4", 16: "26-10", 19.2: "25-5", 24: "n/d"},
+                            22: {12: "31-2", 16: "28-6", 19.2: "27-1", 24: "n/d"},
+                            24: {12: "33-2", 16: "30-2", 19.2: "28-8", 24: "n/d"}
+                        },
+                        "half_gypsum": {
+                            9.5: {12: "18-3", 16: "17-0", 19.2: "16-4", 24: "n/d"},
+                            11.875: {12: "21-3", 16: "19-6", 19.2: "18-6", 24: "n/d"},
+                            14: {12: "23-9", 16: "21-9", 19.2: "20-7", 24: "n/d"},
+                            16: {12: "25-11", 16: "23-9", 19.2: "22-6", 24: "n/d"},
+                            18: {12: "28-2", 16: "25-10", 19.2: "24-6", 24: "n/d"},
+                            20: {12: "30-2", 16: "27-8", 19.2: "26-3", 24: "n/d"},
+                            22: {12: "32-1", 16: "29-5", 19.2: "27-11", 24: "n/d"},
+                            24: {12: "34-5", 16: "31-2", 19.2: "29-7", 24: "n/d"}
+                        }
                     }
                 },
                 "glued-nailed": {
@@ -220,8 +298,30 @@ const iJoistData = {
                             22: {12: "30-2", 16: "27-11", 19.2: "26-8", 24: "n/d"},
                             24: {12: "31-11", 16: "29-7", 19.2: "28-3", 24: "n/d"}
                         }
+                    },
+                    "multiple": {
+                        "no_gypsum": {
+                            9.5: {12: "18-10", 16: "17-7", 19.2: "16-11", 24: "n/d"},
+                            11.875: {12: "21-9", 16: "20-2", 19.2: "19-3", 24: "n/d"},
+                            14: {12: "24-2", 16: "22-4", 19.2: "21-4", 24: "n/d"},
+                            16: {12: "26-4", 16: "24-4", 19.2: "23-3", 24: "n/d"},
+                            18: {12: "28-7", 16: "26-5", 19.2: "25-3", 24: "n/d"},
+                            20: {12: "30-7", 16: "28-3", 19.2: "26-11", 24: "n/d"},
+                            22: {12: "32-6", 16: "30-0", 19.2: "28-7", 24: "n/d"},
+                            24: {12: "34-11", 16: "31-8", 19.2: "30-3", 24: "n/d"}
+                        },
+                        "half_gypsum": {
+                            9.5: {12: "19-4", 16: "18-0", 19.2: "17-4", 24: "n/d"},
+                            11.875: {12: "22-5", 16: "20-9", 19.2: "19-10", 24: "n/d"},
+                            14: {12: "24-11", 16: "23-1", 19.2: "22-1", 24: "n/d"},
+                            16: {12: "27-2", 16: "25-2", 19.2: "24-0", 24: "n/d"},
+                            18: {12: "29-5", 16: "27-3", 19.2: "26-1", 24: "n/d"},
+                            20: {12: "31-6", 16: "29-2", 19.2: "27-11", 24: "n/d"},
+                            22: {12: "33-9", 16: "31-0", 19.2: "29-7", 24: "n/d"},
+                            24: {12: "36-4", 16: "32-10", 19.2: "31-4", 24: "n/d"}
+                        }
                     }
-                },
+                }
             },
             "3/4": {
                 "nailed": {
@@ -246,6 +346,28 @@ const iJoistData = {
                             22: {12: "30-5", 16: "27-11", 19.2: "26-5", 24: "24-10"},
                             24: {12: "32-2", 16: "29-7", 19.2: "28-0", 24: "26-3"}
                         }
+                    },
+                    "multiple": {
+                        "no_gypsum": {
+                            9.5: {12: "18-10", 16: "17-5", 19.2: "16-8", 24: "15-10"},
+                            11.875: {12: "21-10", 16: "20-0", 19.2: "18-11", 24: "17-10"},
+                            14: {12: "24-4", 16: "22-3", 19.2: "21-1", 24: "19-5"},
+                            16: {12: "26-7", 16: "24-4", 19.2: "23-0", 24: "19-9"},
+                            18: {12: "28-11", 16: "26-6", 19.2: "25-1", 24: "23-6"},
+                            20: {12: "31-0", 16: "28-4", 19.2: "26-10", 24: "25-2"},
+                            22: {12: "33-1", 16: "30-2", 19.2: "28-6", 24: "26-9"},
+                            24: {12: "35-8", 16: "31-11", 19.2: "30-2", 24: "28-4"}
+                        },
+                        "half_gypsum": {
+                            9.5: {12: "19-3", 16: "17-9", 19.2: "17-0", 24: "16-2"},
+                            11.875: {12: "22-5", 16: "20-6", 19.2: "19-5", 24: "18-3"},
+                            14: {12: "25-0", 16: "22-11", 19.2: "21-8", 24: "19-5"},
+                            16: {12: "27-3", 16: "25-0", 19.2: "23-8", 24: "19-9"},
+                            18: {12: "29-7", 16: "27-2", 19.2: "25-9", 24: "24-2"},
+                            20: {12: "31-9", 16: "29-2", 19.2: "27-7", 24: "25-11"},
+                            22: {12: "34-2", 16: "31-0", 19.2: "29-4", 24: "27-7"},
+                            24: {12: "36-10", 16: "32-11", 19.2: "31-1", 24: "29-2"}
+                        }
                     }
                 },
                 "glued-nailed": {
@@ -269,6 +391,28 @@ const iJoistData = {
                             20: {12: "30-3", 16: "28-1", 19.2: "26-9", 24: "25-4"},
                             22: {12: "32-2", 16: "29-10", 19.2: "28-5", 24: "26-11"},
                             24: {12: "34-5", 16: "31-6", 19.2: "30-0", 24: "28-5"}
+                        }
+                    },
+                    "multiple": {
+                        "no_gypsum": {
+                            9.5: {12: "20-2", 16: "18-8", 19.2: "17-11", 24: "17-2"},
+                            11.875: {12: "23-4", 16: "21-7", 19.2: "20-7", 24: "19-1"},
+                            14: {12: "25-11", 16: "23-11", 19.2: "22-10", 24: "19-5"},
+                            16: {12: "28-2", 16: "26-1", 19.2: "24-8", 24: "19-9"},
+                            18: {12: "30-7", 16: "28-3", 19.2: "26-11", 24: "25-5"},
+                            20: {12: "32-8", 16: "30-2", 19.2: "28-9", 24: "27-2"},
+                            22: {12: "35-5", 16: "32-1", 19.2: "30-6", 24: "28-10"},
+                            24: {12: "38-1", 16: "34-4", 19.2: "32-3", 24: "30-6"}
+                        },
+                        "half_gypsum": {
+                            9.5: {12: "20-8", 16: "19-2", 19.2: "18-4", 24: "17-6"},
+                            11.875: {12: "23-11", 16: "22-2", 19.2: "21-2", 24: "19-1"},
+                            14: {12: "26-7", 16: "24-8", 19.2: "23-6", 24: "19-5"},
+                            16: {12: "28-11", 16: "26-10", 19.2: "24-8", 24: "19-9"},
+                            18: {12: "31-4", 16: "29-1", 19.2: "27-9", 24: "26-3"},
+                            20: {12: "33-10", 16: "31-1", 19.2: "29-8", 24: "28-1"},
+                            22: {12: "36-7", 16: "33-2", 19.2: "31-6", 24: "29-10"},
+                            24: {12: "39-5", 16: "35-9", 19.2: "33-6", 24: "31-6"}
                         }
                     }
                 }
@@ -504,7 +648,7 @@ function formatSpan(totalFeet) {
     return `${feet}'-${inches}"`;
 }
 
-function showTab(tabName, clickedTab) {
+function showTab(tabName) {
     // Masquer tous les contenus d'onglets
     const contents = document.querySelectorAll('.tab-content');
     contents.forEach(content => content.classList.remove('active'));
@@ -517,7 +661,7 @@ function showTab(tabName, clickedTab) {
     document.getElementById(tabName).classList.add('active');
     
     // Ajouter la classe active à l'onglet cliqué
-    clickedTab.classList.add('active');
+    event.target.classList.add('active');
 }
 
 function selectionnerPoutrelle(index, tabType) {
@@ -655,230 +799,4 @@ function afficherResultatsPoutrellesI(poutrellesViables, chargeTotaleNonPonderee
                 </div>
                 <div class="poutrelle-specs">
                     <div><strong>Portée max:</strong> ${poutrelle.maxSpan}</div>
-                    <div><strong>Utilisation:</strong> ${utilizationPercent}%</div>
-                    <div><strong>Ratio:</strong> ${poutrelle.ratio.toFixed(2)}</div>
-                    <div><strong>Espacement:</strong> ${poutrelle.spacing}"</div>
-                </div>
-            </div>
-        `;
-    });
-
-    html += `
-        <div style="margin-top: 20px; padding: 15px; background: #fff3cd; border-radius: 8px; font-size: 0.9em;">
-            <strong>Charges de conception:</strong><br>
-            Charge totale non pondérée: ${chargeTotaleNonPonderee.toFixed(0)} lb/pi.ca. | 
-            Charge totale pondérée: ${chargeTotalePonderee.toFixed(0)} lb/pi.ca.
-        </div>
-    `;
-
-    html += '</div>';
-    container.innerHTML = html;
-}
-
-function resetResultsI() {
-    document.getElementById('resultTotaleNonPonderee-i').textContent = '-';
-    document.getElementById('resultTotalePonderee-i').textContent = '-';
-    document.getElementById('poutrelleResults-i').innerHTML = `
-        <p style="text-align: center; color: #A0522D; margin-top: 50px;">
-            Entrez les paramètres pour voir les options de poutrelles.
-        </p>
-    `;
-}
-
-// Fonctions pour les poutrelles ajourées
-function calculerPoutrellesAjourees() {
-    // Récupération des valeurs d'entrée
-    const porteePieds = parseFloat(document.getElementById('porteePieds-a').value) || 0;
-    const porteePouces = parseFloat(document.getElementById('porteePouces-a').value) || 0;
-    const portee = porteePieds + (porteePouces / 12);
-    
-    const chargeMorte = parseFloat(document.getElementById('chargeMorte-a').value);
-    const chargeVive = parseFloat(document.getElementById('chargeVive-a').value);
-    const espacement = parseFloat(document.getElementById('espacement-a').value);
-    const hauteurMax = parseFloat(document.getElementById('hauteurMax-a').value) || 999;
-
-    // Validation des entrées - vérifier que les valeurs requises sont présentes et valides
-    if (portee <= 0 || isNaN(chargeMorte) || isNaN(chargeVive) || isNaN(espacement) || chargeMorte <= 0 || chargeVive <= 0 || espacement <= 0) {
-        resetResultsA();
-        return;
-    }
-
-    // Affichage des charges appliquées
-    document.getElementById('resultChargesAppliquees-a').textContent = `${chargeMorte} + ${chargeVive} lb/pi.ca.`;
-
-    // Déterminer le cas de charge
-    const loadCase = `${chargeVive}_${chargeMorte}`;
-    const data = openWebJoistData[loadCase];
-    
-    if (!data) {
-        document.getElementById('poutrelleResults-a').innerHTML = `
-            <div class="no-solution">
-                <h3>Combinaison de charges non supportée</h3>
-                <p>Les charges ${chargeVive} lb/pi² (CV) + ${chargeMorte} lb/pi² (CM) ne sont pas dans les tables disponibles.</p>
-            </div>
-        `;
-        return;
-    }
-
-    // Recherche des poutrelles viables
-    const poutrellesViables = trouverPoutrellesViablesA(data, portee, espacement, hauteurMax);
-    afficherResultatsPoutrellesA(poutrellesViables, chargeMorte, chargeVive, portee, espacement);
-}
-
-function trouverPoutrellesViablesA(data, portee, espacement, hauteurMax) {
-    const poutrellesViables = [];
-    
-    // Vérifier toutes les séries et hauteurs
-    for (const [series, heightData] of Object.entries(data)) {
-        for (const [heightStr, spacingData] of Object.entries(heightData)) {
-            const height = parseFloat(heightStr);
-            if (height > hauteurMax) continue;
-            
-            const allowableSpan = spacingData[espacement];
-            if (allowableSpan && allowableSpan > 0) {
-                const ratio = allowableSpan / portee;
-                poutrellesViables.push({
-                    series: series,
-                    height: height,
-                    allowableSpan: allowableSpan,
-                    ratio: ratio
-                });
-            }
-        }
-    }
-    
-    // Trier par ratio (le plus élevé en premier)
-    poutrellesViables.sort((a, b) => b.ratio - a.ratio);
-    
-    return poutrellesViables;
-}
-
-function afficherResultatsPoutrellesA(poutrellesViables, chargeMorte, chargeVive, portee, espacement) {
-    const container = document.getElementById('poutrelleResults-a');
-    const statusBox = document.getElementById('status-box-a');
-    const statusElement = document.getElementById('resultStatut-a');
-    
-    if (poutrellesViables.length === 0) {
-        statusElement.textContent = 'NON CONFORME';
-        statusBox.className = 'result-card status-error';
-        container.innerHTML = `
-            <div class="no-solution">
-                <h3>Aucune solution trouvée</h3>
-                <p>Aucune poutrelle ajourée ne peut supporter cette portée avec ces charges.</p>
-            </div>
-        `;
-        return;
-    }
-
-    const bestOption = poutrellesViables[0];
-    
-    if (bestOption.ratio >= 1.0) {
-        statusElement.textContent = 'CONFORME';
-        statusBox.className = 'result-card status-success';
-    } else {
-        statusElement.textContent = 'NON CONFORME';
-        statusBox.className = 'result-card status-error';
-    }
-
-    let html = `
-        <div class="poutrelle-options">
-            <h3 style="margin-bottom: 20px; color: #D2691E;">
-                Poutrelles ajourées viables (${poutrellesViables.length} option${poutrellesViables.length > 1 ? 's' : ''})
-            </h3>
-    `;
-
-    poutrellesViables.forEach((poutrelle, index) => {
-        const utilizationPercent = ((1 / poutrelle.ratio) * 100).toFixed(0);
-        const statusClass = poutrelle.ratio >= 1.0 ? 'status-success' : 'status-error';
-        
-        html += `
-            <div class="poutrelle-option ${statusClass}" onclick="selectionnerPoutrelle(${index}, 'a')">
-                <div class="poutrelle-title">
-                    ${poutrelle.series} - ${poutrelle.height}" @ ${espacement}" c/c
-                </div>
-                <div class="poutrelle-specs">
-                    <div><strong>Portée admissible:</strong> ${formatSpan(poutrelle.allowableSpan)}</div>
-                    <div><strong>Ratio:</strong> ${poutrelle.ratio.toFixed(2)}</div>
-                    <div><strong>Utilisation:</strong> ${utilizationPercent}%</div>
-                    <div><strong>Statut:</strong> ${poutrelle.ratio >= 1.0 ? 'Conforme' : 'Non conforme'}</div>
-                </div>
-            </div>
-        `;
-    });
-
-    html += `
-        <div style="margin-top: 20px; padding: 15px; background: #fff3cd; border-radius: 8px; font-size: 0.9em;">
-            <strong>Paramètres de conception:</strong><br>
-            Portée demandée: ${formatSpan(portee)} | 
-            Charges: ${chargeMorte} + ${chargeVive} lb/pi.ca. | 
-            Espacement: ${espacement}"
-        </div>
-    `;
-
-    html += '</div>';
-    container.innerHTML = html;
-}
-
-function resetResultsA() {
-    document.getElementById('resultChargesAppliquees-a').textContent = '-';
-    const statusBox = document.getElementById('status-box-a');
-    const statusElement = document.getElementById('resultStatut-a');
-    statusElement.textContent = '-';
-    statusBox.className = 'result-card';
-    
-    document.getElementById('poutrelleResults-a').innerHTML = `
-        <p style="text-align: center; color: #A0522D; margin-top: 50px;">
-            Entrez les paramètres pour voir les options de poutrelles ajourées.
-        </p>
-    `;
-}
-
-// Initialisation
-document.addEventListener('DOMContentLoaded', function() {
-    // Test initial
-    console.log('Calculateur de poutrelles chargé');
-    
-    // Ajout des écouteurs d'événements pour les poutrelles en I
-    const inputsI = ['porteePieds-i', 'porteePouces-i', 'chargeMorte-i', 'chargeVive-i', 'chargeViveNeige-i', 'subfloorThickness-i', 'hauteurMax-i', 'espacementPrefere-i'];
-    inputsI.forEach(inputId => {
-        const element = document.getElementById(inputId);
-        if (element) {
-            element.addEventListener('input', function() {
-                clearTimeout(this.timer);
-                this.timer = setTimeout(calculerPoutrellesI, 300);
-            });
-            element.addEventListener('change', calculerPoutrellesI);
-        } else {
-            console.warn(`Element ${inputId} non trouvé`);
-        }
-    });
-    
-    // Boutons radio pour les poutrelles en I
-    document.querySelectorAll('input[name="subfloor-attachment-i"]').forEach(input => {
-        input.addEventListener('change', calculerPoutrellesI);
-    });
-    document.querySelectorAll('input[name="span-type-i"]').forEach(input => {
-        input.addEventListener('change', calculerPoutrellesI);
-    });
-    document.querySelectorAll('input[name="gypsum-i"]').forEach(input => {
-        input.addEventListener('change', calculerPoutrellesI);
-    });
-    
-    // Ajout des écouteurs d'événements pour les poutrelles ajourées
-    const inputsA = ['porteePieds-a', 'porteePouces-a', 'chargeMorte-a', 'chargeVive-a', 'espacement-a', 'hauteurMax-a'];
-    inputsA.forEach(inputId => {
-        const element = document.getElementById(inputId);
-        if (element) {
-            element.addEventListener('input', function() {
-                clearTimeout(this.timer);
-                this.timer = setTimeout(calculerPoutrellesAjourees, 300);
-            });
-            element.addEventListener('change', calculerPoutrellesAjourees);
-        } else {
-            console.warn(`Element ${inputId} non trouvé`);
-        }
-    });
-    
-    // Appel initial pour tester
-    calculerPoutrellesI();
-});
+                    <div><strong>Utilisation:</strong> ${utilizationPercent}%</div
