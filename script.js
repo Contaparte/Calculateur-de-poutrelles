@@ -660,8 +660,13 @@ function showTab(tabName) {
     // Afficher le contenu de l'onglet sélectionné
     document.getElementById(tabName).classList.add('active');
     
-    // Ajouter la classe active à l'onglet cliqué
-    event.target.classList.add('active');
+    // Ajouter la classe active à l'onglet correspondant
+    const activeTab = Array.from(tabs).find(tab => 
+        tab.getAttribute('onclick').includes(tabName)
+    );
+    if (activeTab) {
+        activeTab.classList.add('active');
+    }
 }
 
 function selectionnerPoutrelle(index, tabType) {
@@ -799,4 +804,230 @@ function afficherResultatsPoutrellesI(poutrellesViables, chargeTotaleNonPonderee
                 </div>
                 <div class="poutrelle-specs">
                     <div><strong>Portée max:</strong> ${poutrelle.maxSpan}</div>
-                    <div><strong>Utilisation:</strong> ${utilizationPercent}%</div
+                    <div><strong>Utilisation:</strong> ${utilizationPercent}%</div>
+                    <div><strong>Ratio:</strong> ${poutrelle.ratio.toFixed(2)}</div>
+                    <div><strong>Espacement:</strong> ${poutrelle.spacing}"</div>
+                </div>
+            </div>
+        `;
+    });
+
+    html += `
+        <div style="margin-top: 20px; padding: 15px; background: #fff3cd; border-radius: 8px; font-size: 0.9em;">
+            <strong>Charges de conception:</strong><br>
+            Charge totale non pondérée: ${chargeTotaleNonPonderee.toFixed(0)} lb/pi.ca. | 
+            Charge totale pondérée: ${chargeTotalePonderee.toFixed(0)} lb/pi.ca.
+        </div>
+    `;
+
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+function resetResultsI() {
+    document.getElementById('resultTotaleNonPonderee-i').textContent = '-';
+    document.getElementById('resultTotalePonderee-i').textContent = '-';
+    document.getElementById('poutrelleResults-i').innerHTML = `
+        <p style="text-align: center; color: #A0522D; margin-top: 50px;">
+            Entrez les paramètres pour voir les options de poutrelles.
+        </p>
+    `;
+}
+
+// Fonctions pour les poutrelles ajourées
+function calculerPoutrellesAjourees() {
+    // Récupération des valeurs d'entrée
+    const porteePieds = parseFloat(document.getElementById('porteePieds-a').value) || 0;
+    const porteePouces = parseFloat(document.getElementById('porteePouces-a').value) || 0;
+    const portee = porteePieds + (porteePouces / 12);
+    
+    const chargeMorte = parseFloat(document.getElementById('chargeMorte-a').value);
+    const chargeVive = parseFloat(document.getElementById('chargeVive-a').value);
+    const espacement = parseFloat(document.getElementById('espacement-a').value);
+    const hauteurMax = parseFloat(document.getElementById('hauteurMax-a').value) || 999;
+
+    // Validation des entrées - vérifier que les valeurs requises sont présentes et valides
+    if (portee <= 0 || isNaN(chargeMorte) || isNaN(chargeVive) || isNaN(espacement) || chargeMorte <= 0 || chargeVive <= 0 || espacement <= 0) {
+        resetResultsA();
+        return;
+    }
+
+    // Affichage des charges appliquées
+    document.getElementById('resultChargesAppliquees-a').textContent = `${chargeMorte} + ${chargeVive} lb/pi.ca.`;
+
+    // Déterminer le cas de charge
+    const loadCase = `${chargeVive}_${chargeMorte}`;
+    const data = openWebJoistData[loadCase];
+    
+    if (!data) {
+        document.getElementById('poutrelleResults-a').innerHTML = `
+            <div class="no-solution">
+                <h3>Combinaison de charges non supportée</h3>
+                <p>Les charges ${chargeVive} lb/pi² (CV) + ${chargeMorte} lb/pi² (CM) ne sont pas dans les tables disponibles.</p>
+            </div>
+        `;
+        return;
+    }
+
+    // Recherche des poutrelles viables
+    const poutrellesViables = trouverPoutrellesViablesA(data, portee, espacement, hauteurMax);
+    afficherResultatsPoutrellesA(poutrellesViables, chargeMorte, chargeVive, portee, espacement);
+}
+
+function trouverPoutrellesViablesA(data, portee, espacement, hauteurMax) {
+    const poutrellesViables = [];
+    
+    // Vérifier toutes les séries et hauteurs
+    for (const [series, heightData] of Object.entries(data)) {
+        for (const [heightStr, spacingData] of Object.entries(heightData)) {
+            const height = parseFloat(heightStr);
+            if (height > hauteurMax) continue;
+            
+            const allowableSpan = spacingData[espacement];
+            if (allowableSpan && allowableSpan > 0) {
+                const ratio = allowableSpan / portee;
+                poutrellesViables.push({
+                    series: series,
+                    height: height,
+                    allowableSpan: allowableSpan,
+                    ratio: ratio
+                });
+            }
+        }
+    }
+    
+    // Trier par ratio (le plus élevé en premier)
+    poutrellesViables.sort((a, b) => b.ratio - a.ratio);
+    
+    return poutrellesViables;
+}
+
+function afficherResultatsPoutrellesA(poutrellesViables, chargeMorte, chargeVive, portee, espacement) {
+    const container = document.getElementById('poutrelleResults-a');
+    const statusBox = document.getElementById('status-box-a');
+    const statusElement = document.getElementById('resultStatut-a');
+    
+    if (poutrellesViables.length === 0) {
+        statusElement.textContent = 'NON CONFORME';
+        statusBox.className = 'result-card status-error';
+        container.innerHTML = `
+            <div class="no-solution">
+                <h3>Aucune solution trouvée</h3>
+                <p>Aucune poutrelle ajourée ne peut supporter cette portée avec ces charges.</p>
+            </div>
+        `;
+        return;
+    }
+
+    const bestOption = poutrellesViables[0];
+    
+    if (bestOption.ratio >= 1.0) {
+        statusElement.textContent = 'CONFORME';
+        statusBox.className = 'result-card status-success';
+    } else {
+        statusElement.textContent = 'NON CONFORME';
+        statusBox.className = 'result-card status-error';
+    }
+
+    let html = `
+        <div class="poutrelle-options">
+            <h3 style="margin-bottom: 20px; color: #D2691E;">
+                Poutrelles ajourées viables (${poutrellesViables.length} option${poutrellesViables.length > 1 ? 's' : ''})
+            </h3>
+    `;
+
+    poutrellesViables.forEach((poutrelle, index) => {
+        const utilizationPercent = ((1 / poutrelle.ratio) * 100).toFixed(0);
+        const statusClass = poutrelle.ratio >= 1.0 ? 'status-success' : 'status-error';
+        
+        html += `
+            <div class="poutrelle-option ${statusClass}" onclick="selectionnerPoutrelle(${index}, 'a')">
+                <div class="poutrelle-title">
+                    ${poutrelle.series} - ${poutrelle.height}" @ ${espacement}" c/c
+                </div>
+                <div class="poutrelle-specs">
+                    <div><strong>Portée admissible:</strong> ${formatSpan(poutrelle.allowableSpan)}</div>
+                    <div><strong>Ratio:</strong> ${poutrelle.ratio.toFixed(2)}</div>
+                    <div><strong>Utilisation:</strong> ${utilizationPercent}%</div>
+                    <div><strong>Statut:</strong> ${poutrelle.ratio >= 1.0 ? 'Conforme' : 'Non conforme'}</div>
+                </div>
+            </div>
+        `;
+    });
+
+    html += `
+        <div style="margin-top: 20px; padding: 15px; background: #fff3cd; border-radius: 8px; font-size: 0.9em;">
+            <strong>Paramètres de conception:</strong><br>
+            Portée demandée: ${formatSpan(portee)} | 
+            Charges: ${chargeMorte} + ${chargeVive} lb/pi.ca. | 
+            Espacement: ${espacement}"
+        </div>
+    `;
+
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+function resetResultsA() {
+    document.getElementById('resultChargesAppliquees-a').textContent = '-';
+    const statusBox = document.getElementById('status-box-a');
+    const statusElement = document.getElementById('resultStatut-a');
+    statusElement.textContent = '-';
+    statusBox.className = 'result-card';
+    
+    document.getElementById('poutrelleResults-a').innerHTML = `
+        <p style="text-align: center; color: #A0522D; margin-top: 50px;">
+            Entrez les paramètres pour voir les options de poutrelles ajourées.
+        </p>
+    `;
+}
+
+// Initialisation
+document.addEventListener('DOMContentLoaded', function() {
+    // Test initial
+    console.log('Calculateur de poutrelles chargé');
+    
+    // Ajout des écouteurs d'événements pour les poutrelles en I
+    const inputsI = ['porteePieds-i', 'porteePouces-i', 'chargeMorte-i', 'chargeVive-i', 'chargeViveNeige-i', 'subfloorThickness-i', 'hauteurMax-i', 'espacementPrefere-i'];
+    inputsI.forEach(inputId => {
+        const element = document.getElementById(inputId);
+        if (element) {
+            element.addEventListener('input', function() {
+                clearTimeout(this.timer);
+                this.timer = setTimeout(calculerPoutrellesI, 300);
+            });
+            element.addEventListener('change', calculerPoutrellesI);
+        } else {
+            console.warn(`Element ${inputId} non trouvé`);
+        }
+    });
+    
+    // Boutons radio pour les poutrelles en I
+    document.querySelectorAll('input[name="subfloor-attachment-i"]').forEach(input => {
+        input.addEventListener('change', calculerPoutrellesI);
+    });
+    document.querySelectorAll('input[name="span-type-i"]').forEach(input => {
+        input.addEventListener('change', calculerPoutrellesI);
+    });
+    document.querySelectorAll('input[name="gypsum-i"]').forEach(input => {
+        input.addEventListener('change', calculerPoutrellesI);
+    });
+    
+    // Ajout des écouteurs d'événements pour les poutrelles ajourées
+    const inputsA = ['porteePieds-a', 'porteePouces-a', 'chargeMorte-a', 'chargeVive-a', 'espacement-a', 'hauteurMax-a'];
+    inputsA.forEach(inputId => {
+        const element = document.getElementById(inputId);
+        if (element) {
+            element.addEventListener('input', function() {
+                clearTimeout(this.timer);
+                this.timer = setTimeout(calculerPoutrellesAjourees, 300);
+            });
+            element.addEventListener('change', calculerPoutrellesAjourees);
+        } else {
+            console.warn(`Element ${inputId} non trouvé`);
+        }
+    });
+    
+    // Appel initial pour tester
+    calculerPoutrellesI();
+});
