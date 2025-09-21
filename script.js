@@ -633,6 +633,398 @@ const openWebJoistData = {
     }
 };
 
+// Données des solives CCQ basées sur le Tableau 9.23.4.2.-A du Code de construction du Québec
+const ccqJoistData = {
+    "douglas-fir-larch": {
+        "select-structural": {
+            "38x89": {
+                "lattes-continues": {300: 2.13, 400: 1.97, 600: 1.73},
+                "entretoises": {300: 2.19, 400: 1.99, 600: 1.73},
+                "lattes-entretoises": {300: 2.19, 400: 1.99, 600: 1.73}
+            },
+            "38x140": {
+                "lattes-continues": {300: 3.23, 400: 3.07, 600: 2.73},
+                "entretoises": {300: 3.44, 400: 3.12, 600: 2.73},
+                "lattes-entretoises": {300: 3.44, 400: 3.12, 600: 2.73}
+            },
+            "38x184": {
+                "lattes-continues": {300: 3.88, 400: 3.69, 600: 3.51},
+                "entretoises": {300: 4.18, 400: 3.92, 600: 3.59},
+                "lattes-entretoises": {300: 4.37, 400: 4.07, 600: 3.59}
+            },
+            "38x235": {
+                "lattes-continues": {300: 4.57, 400: 4.34, 600: 4.13},
+                "entretoises": {300: 4.86, 400: 4.57, 600: 4.29},
+                "lattes-entretoises": {300: 5.05, 400: 4.70, 600: 4.39}
+            },
+            "38x286": {
+                "lattes-continues": {300: 5.21, 400: 4.95, 600: 4.71},
+                "entretoises": {300: 5.49, 400: 5.16, 600: 4.85},
+                "lattes-entretoises": {300: 5.66, 400: 5.28, 600: 4.92}
+            }
+        },
+        "no1-2": {
+            "38x89": {
+                "lattes-continues": {300: 2.00, 400: 1.85, 600: 1.66},
+                "entretoises": {300: 2.09, 400: 1.90, 600: 1.66},
+                "lattes-entretoises": {300: 2.09, 400: 1.90, 600: 1.66}
+            },
+            "38x140": {
+                "lattes-continues": {300: 3.09, 400: 2.91, 600: 2.62},
+                "entretoises": {300: 3.29, 400: 2.99, 600: 2.62},
+                "lattes-entretoises": {300: 3.29, 400: 2.99, 600: 2.62}
+            },
+            "38x184": {
+                "lattes-continues": {300: 3.71, 400: 3.53, 600: 3.36},
+                "entretoises": {300: 4.00, 400: 3.76, 600: 3.44},
+                "lattes-entretoises": {300: 4.19, 400: 3.90, 600: 3.44}
+            },
+            "38x235": {
+                "lattes-continues": {300: 4.38, 400: 4.16, 600: 3.96},
+                "entretoises": {300: 4.66, 400: 4.38, 600: 4.11},
+                "lattes-entretoises": {300: 4.84, 400: 4.51, 600: 4.20}
+            },
+            "38x286": {
+                "lattes-continues": {300: 4.99, 400: 4.75, 600: 4.52},
+                "entretoises": {300: 5.26, 400: 4.94, 600: 4.65},
+                "lattes-entretoises": {300: 5.43, 400: 5.06, 600: 4.72}
+            }
+        },
+        "no3": {
+            "38x89": {
+                "lattes-continues": {300: 1.90, 400: 1.69, 600: 1.38},
+                "entretoises": {300: 1.95, 400: 1.69, 600: 1.38},
+                "lattes-entretoises": {300: 1.95, 400: 1.69, 600: 1.38}
+            },
+            "38x140": {
+                "lattes-continues": {300: 2.78, 400: 2.41, 600: 1.97},
+                "entretoises": {300: 2.78, 400: 2.41, 600: 1.97},
+                "lattes-entretoises": {300: 2.78, 400: 2.41, 600: 1.97}
+            },
+            "38x184": {
+                "lattes-continues": {300: 3.38, 400: 2.93, 600: 2.39},
+                "entretoises": {300: 3.38, 400: 2.93, 600: 2.39},
+                "lattes-entretoises": {300: 3.38, 400: 2.93, 600: 2.39}
+            },
+            "38x235": {
+                "lattes-continues": {300: 4.14, 400: 3.58, 600: 2.93},
+                "entretoises": {300: 4.14, 400: 3.58, 600: 2.93},
+                "lattes-entretoises": {300: 4.14, 400: 3.58, 600: 2.93}
+            },
+            "38x286": {
+                "lattes-continues": {300: 4.80, 400: 4.16, 600: 3.39},
+                "entretoises": {300: 4.80, 400: 4.16, 600: 3.39},
+                "lattes-entretoises": {300: 4.80, 400: 4.16, 600: 3.39}
+            }
+        },
+        "construction": {
+            "38x89": {
+                "lattes-continues": {300: 1.90, 400: 1.77, 600: 1.61},
+                "entretoises": {300: 2.03, 400: 1.84, 600: 1.61},
+                "lattes-entretoises": {300: 2.03, 400: 1.84, 600: 1.61}
+            }
+        },
+        "standard": {
+            "38x89": {
+                "lattes-continues": {300: 1.81, 400: 1.63, 600: 1.33},
+                "entretoises": {300: 1.88, 400: 1.63, 600: 1.33},
+                "lattes-entretoises": {300: 1.88, 400: 1.63, 600: 1.33}
+            }
+        }
+    },
+    "hem-fir": {
+        "select-structural": {
+            "38x89": {
+                "lattes-continues": {300: 2.08, 400: 1.93, 600: 1.71},
+                "entretoises": {300: 2.16, 400: 1.96, 600: 1.71},
+                "lattes-entretoises": {300: 2.16, 400: 1.96, 600: 1.71}
+            },
+            "38x140": {
+                "lattes-continues": {300: 3.18, 400: 3.03, 600: 2.69},
+                "entretoises": {300: 3.39, 400: 3.08, 600: 2.69},
+                "lattes-entretoises": {300: 3.39, 400: 3.08, 600: 2.69}
+            },
+            "38x184": {
+                "lattes-continues": {300: 3.82, 400: 3.64, 600: 3.46},
+                "entretoises": {300: 4.12, 400: 3.87, 600: 3.54},
+                "lattes-entretoises": {300: 4.31, 400: 4.02, 600: 3.54}
+            },
+            "38x235": {
+                "lattes-continues": {300: 4.50, 400: 4.28, 600: 4.08},
+                "entretoises": {300: 4.80, 400: 4.51, 600: 4.23},
+                "lattes-entretoises": {300: 4.98, 400: 4.64, 600: 4.33}
+            },
+            "38x286": {
+                "lattes-continues": {300: 5.14, 400: 4.89, 600: 4.65},
+                "entretoises": {300: 5.42, 400: 5.09, 600: 4.78},
+                "lattes-entretoises": {300: 5.59, 400: 5.21, 600: 4.86}
+            }
+        },
+        "no1-2": {
+            "38x89": {
+                "lattes-continues": {300: 2.00, 400: 1.85, 600: 1.66},
+                "entretoises": {300: 2.09, 400: 1.90, 600: 1.66},
+                "lattes-entretoises": {300: 2.09, 400: 1.90, 600: 1.66}
+            },
+            "38x140": {
+                "lattes-continues": {300: 3.09, 400: 2.91, 600: 2.62},
+                "entretoises": {300: 3.29, 400: 2.99, 600: 2.62},
+                "lattes-entretoises": {300: 3.29, 400: 2.99, 600: 2.62}
+            },
+            "38x184": {
+                "lattes-continues": {300: 3.71, 400: 3.53, 600: 3.36},
+                "entretoises": {300: 4.00, 400: 3.76, 600: 3.44},
+                "lattes-entretoises": {300: 4.19, 400: 3.90, 600: 3.44}
+            },
+            "38x235": {
+                "lattes-continues": {300: 4.38, 400: 4.16, 600: 3.96},
+                "entretoises": {300: 4.66, 400: 4.38, 600: 4.11},
+                "lattes-entretoises": {300: 4.84, 400: 4.51, 600: 4.20}
+            },
+            "38x286": {
+                "lattes-continues": {300: 4.99, 400: 4.75, 600: 4.52},
+                "entretoises": {300: 5.26, 400: 4.94, 600: 4.65},
+                "lattes-entretoises": {300: 5.43, 400: 5.06, 600: 4.72}
+            }
+        },
+        "no3": {
+            "38x89": {
+                "lattes-continues": {300: 1.90, 400: 1.77, 600: 1.61},
+                "entretoises": {300: 2.03, 400: 1.84, 600: 1.61},
+                "lattes-entretoises": {300: 2.03, 400: 1.84, 600: 1.61}
+            },
+            "38x140": {
+                "lattes-continues": {300: 2.99, 400: 2.78, 600: 2.43},
+                "entretoises": {300: 3.19, 400: 2.90, 600: 2.43},
+                "lattes-entretoises": {300: 3.19, 400: 2.90, 600: 2.43}
+            },
+            "38x184": {
+                "lattes-continues": {300: 3.60, 400: 3.42, 600: 2.95},
+                "entretoises": {300: 3.88, 400: 3.61, 600: 2.95},
+                "lattes-entretoises": {300: 4.06, 400: 3.61, 600: 2.95}
+            },
+            "38x235": {
+                "lattes-continues": {300: 4.24, 400: 4.03, 600: 3.61},
+                "entretoises": {300: 4.51, 400: 4.24, 600: 3.61},
+                "lattes-entretoises": {300: 4.68, 400: 4.37, 600: 3.61}
+            },
+            "38x286": {
+                "lattes-continues": {300: 4.84, 400: 4.60, 600: 4.19},
+                "entretoises": {300: 5.10, 400: 4.79, 600: 4.19},
+                "lattes-entretoises": {300: 5.26, 400: 4.90, 600: 4.19}
+            }
+        },
+        "construction": {
+            "38x89": {
+                "lattes-continues": {300: 1.90, 400: 1.77, 600: 1.61},
+                "entretoises": {300: 2.03, 400: 1.84, 600: 1.61},
+                "lattes-entretoises": {300: 2.03, 400: 1.84, 600: 1.61}
+            }
+        },
+        "standard": {
+            "38x89": {
+                "lattes-continues": {300: 1.81, 400: 1.68, 600: 1.39},
+                "entretoises": {300: 1.96, 400: 1.71, 600: 1.39},
+                "lattes-entretoises": {300: 1.96, 400: 1.71, 600: 1.39}
+            }
+        }
+    },
+    "spruce-pine-fir": {
+        "select-structural": {
+            "38x89": {
+                "lattes-continues": {300: 1.95, 400: 1.81, 600: 1.64},
+                "entretoises": {300: 2.06, 400: 1.87, 600: 1.64},
+                "lattes-entretoises": {300: 2.06, 400: 1.87, 600: 1.64}
+            },
+            "38x140": {
+                "lattes-continues": {300: 3.05, 400: 2.85, 600: 2.57},
+                "entretoises": {300: 3.24, 400: 2.95, 600: 2.57},
+                "lattes-entretoises": {300: 3.24, 400: 2.95, 600: 2.57}
+            },
+            "38x184": {
+                "lattes-continues": {300: 3.66, 400: 3.48, 600: 3.31},
+                "entretoises": {300: 3.94, 400: 3.70, 600: 3.38},
+                "lattes-entretoises": {300: 4.12, 400: 3.84, 600: 3.38}
+            },
+            "38x235": {
+                "lattes-continues": {300: 4.31, 400: 4.10, 600: 3.90},
+                "entretoises": {300: 4.59, 400: 4.31, 600: 4.05},
+                "lattes-entretoises": {300: 4.76, 400: 4.44, 600: 4.14}
+            },
+            "38x286": {
+                "lattes-continues": {300: 4.91, 400: 4.67, 600: 4.45},
+                "entretoises": {300: 5.18, 400: 4.87, 600: 4.57},
+                "lattes-entretoises": {300: 5.34, 400: 4.98, 600: 4.64}
+            }
+        },
+        "no1-2": {
+            "38x89": {
+                "lattes-continues": {300: 1.86, 400: 1.72, 600: 1.58},
+                "entretoises": {300: 1.99, 400: 1.81, 600: 1.58},
+                "lattes-entretoises": {300: 1.99, 400: 1.81, 600: 1.58}
+            },
+            "38x140": {
+                "lattes-continues": {300: 2.92, 400: 2.71, 600: 2.49},
+                "entretoises": {300: 3.14, 400: 2.85, 600: 2.49},
+                "lattes-entretoises": {300: 3.14, 400: 2.85, 600: 2.49}
+            },
+            "38x184": {
+                "lattes-continues": {300: 3.54, 400: 3.36, 600: 3.20},
+                "entretoises": {300: 3.81, 400: 3.58, 600: 3.27},
+                "lattes-entretoises": {300: 3.99, 400: 3.72, 600: 3.27}
+            },
+            "38x235": {
+                "lattes-continues": {300: 4.17, 400: 3.96, 600: 3.77},
+                "entretoises": {300: 4.44, 400: 4.17, 600: 3.92},
+                "lattes-entretoises": {300: 4.60, 400: 4.29, 600: 4.00}
+            },
+            "38x286": {
+                "lattes-continues": {300: 4.75, 400: 4.52, 600: 4.30},
+                "entretoises": {300: 5.01, 400: 4.71, 600: 4.42},
+                "lattes-entretoises": {300: 5.17, 400: 4.82, 600: 4.49}
+            }
+        },
+        "no3": {
+            "38x89": {
+                "lattes-continues": {300: 1.81, 400: 1.68, 600: 1.55},
+                "entretoises": {300: 1.96, 400: 1.78, 600: 1.55},
+                "lattes-entretoises": {300: 1.96, 400: 1.78, 600: 1.55}
+            },
+            "38x140": {
+                "lattes-continues": {300: 2.84, 400: 2.64, 600: 2.43},
+                "entretoises": {300: 3.08, 400: 2.80, 600: 2.43},
+                "lattes-entretoises": {300: 3.08, 400: 2.80, 600: 2.43}
+            },
+            "38x184": {
+                "lattes-continues": {300: 3.47, 400: 3.30, 600: 2.95},
+                "entretoises": {300: 3.74, 400: 3.52, 600: 2.95},
+                "lattes-entretoises": {300: 3.92, 400: 3.61, 600: 2.95}
+            },
+            "38x235": {
+                "lattes-continues": {300: 4.09, 400: 3.89, 600: 3.61},
+                "entretoises": {300: 4.36, 400: 4.09, 600: 3.61},
+                "lattes-entretoises": {300: 4.52, 400: 4.22, 600: 3.61}
+            },
+            "38x286": {
+                "lattes-continues": {300: 4.67, 400: 4.44, 600: 4.19},
+                "entretoises": {300: 4.92, 400: 4.62, 600: 4.19},
+                "lattes-entretoises": {300: 5.08, 400: 4.73, 600: 4.19}
+            }
+        },
+        "construction": {
+            "38x89": {
+                "lattes-continues": {300: 1.81, 400: 1.68, 600: 1.55},
+                "entretoises": {300: 1.96, 400: 1.78, 600: 1.55},
+                "lattes-entretoises": {300: 1.96, 400: 1.78, 600: 1.55}
+            }
+        },
+        "standard": {
+            "38x89": {
+                "lattes-continues": {300: 1.70, 400: 1.58, 600: 1.44},
+                "entretoises": {300: 1.88, 400: 1.71, 600: 1.44},
+                "lattes-entretoises": {300: 1.88, 400: 1.71, 600: 1.44}
+            }
+        }
+    },
+    "northern-species": {
+        "select-structural": {
+            "38x89": {
+                "lattes-continues": {300: 1.65, 400: 1.53, 600: 1.42},
+                "entretoises": {300: 1.84, 400: 1.68, 600: 1.46},
+                "lattes-entretoises": {300: 1.84, 400: 1.68, 600: 1.46}
+            },
+            "38x140": {
+                "lattes-continues": {300: 2.59, 400: 2.41, 600: 2.24},
+                "entretoises": {300: 2.90, 400: 2.63, 600: 2.30},
+                "lattes-entretoises": {300: 2.90, 400: 2.63, 600: 2.30}
+            },
+            "38x184": {
+                "lattes-continues": {300: 3.27, 400: 3.11, 600: 2.94},
+                "entretoises": {300: 3.52, 400: 3.31, 600: 3.03},
+                "lattes-entretoises": {300: 3.69, 400: 3.44, 600: 3.03}
+            },
+            "38x235": {
+                "lattes-continues": {300: 3.85, 400: 3.66, 600: 3.48},
+                "entretoises": {300: 4.10, 400: 3.85, 600: 3.62},
+                "lattes-entretoises": {300: 4.26, 400: 3.97, 600: 3.70}
+            },
+            "38x286": {
+                "lattes-continues": {300: 4.39, 400: 4.18, 600: 3.97},
+                "entretoises": {300: 4.63, 400: 4.35, 600: 4.09},
+                "lattes-entretoises": {300: 4.78, 400: 4.45, 600: 4.15}
+            }
+        },
+        "no1-2": {
+            "38x89": {
+                "lattes-continues": {300: 1.59, 400: 1.48, 600: 1.37},
+                "entretoises": {300: 1.80, 400: 1.64, 600: 1.43},
+                "lattes-entretoises": {300: 1.80, 400: 1.64, 600: 1.43}
+            },
+            "38x140": {
+                "lattes-continues": {300: 2.51, 400: 2.33, 600: 2.16},
+                "entretoises": {300: 2.83, 400: 2.57, 600: 2.25},
+                "lattes-entretoises": {300: 2.83, 400: 2.57, 600: 2.25}
+            },
+            "38x184": {
+                "lattes-continues": {300: 3.19, 400: 3.04, 600: 2.84},
+                "entretoises": {300: 3.44, 400: 3.23, 600: 2.96},
+                "lattes-entretoises": {300: 3.60, 400: 3.36, 600: 2.96}
+            },
+            "38x235": {
+                "lattes-continues": {300: 3.76, 400: 3.58, 600: 3.41},
+                "entretoises": {300: 4.01, 400: 3.77, 600: 3.54},
+                "lattes-entretoises": {300: 4.16, 400: 3.88, 600: 3.62}
+            },
+            "38x286": {
+                "lattes-continues": {300: 4.29, 400: 4.08, 600: 3.88},
+                "entretoises": {300: 4.53, 400: 4.25, 600: 4.00},
+                "lattes-entretoises": {300: 4.67, 400: 4.35, 600: 4.06}
+            }
+        },
+        "no3": {
+            "38x89": {
+                "lattes-continues": {300: 1.54, 400: 1.43, 600: 1.32},
+                "entretoises": {300: 1.74, 400: 1.57, 600: 1.36},
+                "lattes-entretoises": {300: 1.76, 400: 1.60, 600: 1.36}
+            },
+            "38x140": {
+                "lattes-continues": {300: 2.42, 400: 2.24, 600: 1.94},
+                "entretoises": {300: 2.74, 400: 2.38, 600: 1.94},
+                "lattes-entretoises": {300: 2.75, 400: 2.38, 600: 1.94}
+            },
+            "38x184": {
+                "lattes-continues": {300: 3.12, 400: 2.90, 600: 2.37},
+                "entretoises": {300: 3.35, 400: 2.90, 600: 2.37},
+                "lattes-entretoises": {300: 3.35, 400: 2.90, 600: 2.37}
+            },
+            "38x235": {
+                "lattes-continues": {300: 3.67, 400: 3.49, 600: 2.89},
+                "entretoises": {300: 3.91, 400: 3.54, 600: 2.89},
+                "lattes-entretoises": {300: 4.06, 400: 3.54, 600: 2.89}
+            },
+            "38x286": {
+                "lattes-continues": {300: 4.19, 400: 3.98, 600: 3.36},
+                "entretoises": {300: 4.42, 400: 4.11, 600: 3.36},
+                "lattes-entretoises": {300: 4.55, 400: 4.11, 600: 3.36}
+            }
+        },
+        "construction": {
+            "38x89": {
+                "lattes-continues": {300: 1.54, 400: 1.43, 600: 1.32},
+                "entretoises": {300: 1.74, 400: 1.57, 600: 1.40},
+                "lattes-entretoises": {300: 1.76, 400: 1.60, 600: 1.40}
+            }
+        },
+        "standard": {
+            "38x89": {
+                "lattes-continues": {300: 1.48, 400: 1.37, 600: 1.15},
+                "entretoises": {300: 1.63, 400: 1.41, 600: 1.15},
+                "lattes-entretoises": {300: 1.63, 400: 1.41, 600: 1.15}
+            }
+        }
+    }
+};
+
 // Fonctions utilitaires
 function parseSpan(spanStr) {
     if (!spanStr || spanStr === "n/d") return 0;
@@ -982,6 +1374,185 @@ function resetResultsA() {
     `;
 }
 
+// Fonctions pour les solives CCQ
+function convertMetersToFeetInches(meters) {
+    const totalFeet = meters * 3.28084;
+    const feet = Math.floor(totalFeet);
+    const inches = Math.round((totalFeet - feet) * 12);
+    return `${feet}'-${inches}"`;
+}
+
+function calculerSolivesCCQ() {
+    // Récupération des valeurs d'entrée
+    const porteePieds = parseFloat(document.getElementById('porteePieds-ccq').value) || 0;
+    const porteePouces = parseFloat(document.getElementById('porteePouces-ccq').value) || 0;
+    const porteeMeters = (porteePieds + (porteePouces / 12)) * 0.3048; // Conversion en mètres
+    
+    const essence = document.getElementById('essence-ccq').value;
+    const qualite = document.getElementById('qualite-ccq').value;
+    const dimensions = document.getElementById('dimensions-ccq').value;
+    const espacement = parseInt(document.getElementById('espacement-ccq').value);
+    const support = document.getElementById('support-ccq').value;
+    const special = document.querySelector('input[name="special-ccq"]:checked').value;
+
+    // Validation des entrées
+    if (porteeMeters <= 0 || !essence || !qualite || !dimensions || !espacement || !support) {
+        resetResultsCCQ();
+        return;
+    }
+
+    // Affichage de la portée demandée
+    document.getElementById('resultPorteeDemandee-ccq').textContent = `${porteePieds}'-${porteePouces}"`;
+
+    // Recherche des solives viables
+    const solvesViables = trouverSolivesCCQ(essence, qualite, dimensions, espacement, support, porteeMeters, special);
+    afficherResultatsSolivesCCQ(solvesViables, porteeMeters, essence, qualite, dimensions, espacement, support);
+}
+
+function trouverSolivesCCQ(essence, qualite, dimensions, espacement, support, porteeMeters, special) {
+    const solvesViables = [];
+    
+    // Vérifier si la combinaison existe dans les données CCQ
+    if (!ccqJoistData[essence] || !ccqJoistData[essence][qualite] || !ccqJoistData[essence][qualite][dimensions]) {
+        return solvesViables;
+    }
+    
+    const dimensionData = ccqJoistData[essence][qualite][dimensions];
+    
+    if (!dimensionData[support]) {
+        return solvesViables;
+    }
+    
+    const porteeMaximale = dimensionData[support][espacement];
+    
+    if (porteeMaximale && porteeMaximale >= porteeMeters) {
+        const ratio = porteeMaximale / porteeMeters;
+        solvesViables.push({
+            essence: essence,
+            qualite: qualite,
+            dimensions: dimensions,
+            espacement: espacement,
+            support: support,
+            porteeMaximale: porteeMaximale,
+            ratio: ratio
+        });
+    }
+    
+    return solvesViables;
+}
+
+function afficherResultatsSolivesCCQ(solvesViables, porteeMeters, essence, qualite, dimensions, espacement, support) {
+    const container = document.getElementById('soliveResults-ccq');
+    const statusBox = document.getElementById('status-box-ccq');
+    const statusElement = document.getElementById('resultStatut-ccq');
+    
+    if (solvesViables.length === 0) {
+        statusElement.textContent = 'NON CONFORME';
+        statusBox.className = 'result-card status-error';
+        container.innerHTML = `
+            <div class="no-solution">
+                <h3>Aucune solution trouvée</h3>
+                <p>La combinaison sélectionnée ne peut supporter cette portée.</p>
+                <p>Suggestions :</p>
+                <ul style="text-align: left; margin-top: 10px;">
+                    <li>Choisir une qualité de bois supérieure</li>
+                    <li>Augmenter les dimensions de la solive</li>
+                    <li>Réduire l'espacement entre solives</li>
+                </ul>
+            </div>
+        `;
+        return;
+    }
+
+    const bestOption = solvesViables[0];
+    
+    if (bestOption.ratio >= 1.0) {
+        statusElement.textContent = 'CONFORME';
+        statusBox.className = 'result-card status-success';
+    } else {
+        statusElement.textContent = 'NON CONFORME';
+        statusBox.className = 'result-card status-error';
+    }
+
+    const utilizationPercent = ((1 / bestOption.ratio) * 100).toFixed(0);
+    const porteeMaxStr = convertMetersToFeetInches(bestOption.porteeMaximale);
+    
+    // Traduction des valeurs pour l'affichage
+    const essenceLabels = {
+        'douglas-fir-larch': 'Douglas Fir - Larch',
+        'hem-fir': 'Hem - Fir',
+        'spruce-pine-fir': 'Spruce - Pine - Fir',
+        'northern-species': 'Northern Species'
+    };
+    
+    const qualiteLabels = {
+        'select-structural': 'Select Structural',
+        'no1-2': 'N°s 1 et 2',
+        'no3': 'N° 3',
+        'construction': 'Construction',
+        'standard': 'Standard'
+    };
+    
+    const dimensionsLabels = {
+        '38x89': '1½" x 3½"',
+        '38x140': '1½" x 5½"',
+        '38x184': '1½" x 7¼"',
+        '38x235': '1½" x 9¼"',
+        '38x286': '1½" x 11¼"'
+    };
+    
+    const supportLabels = {
+        'lattes-continues': 'Lattes continues',
+        'entretoises': 'Entretoises',
+        'lattes-entretoises': 'Lattes continues et entretoises'
+    };
+
+    let html = `
+        <div class="poutrelle-options">
+            <h3 style="margin-bottom: 20px; color: #D2691E;">
+                Résultat de calcul CCQ
+            </h3>
+            
+            <div class="poutrelle-option ${bestOption.ratio >= 1.0 ? 'status-success' : 'status-error'}">
+                <div class="poutrelle-title">
+                    ${essenceLabels[essence]} - ${qualiteLabels[qualite]}
+                </div>
+                <div class="poutrelle-specs">
+                    <div><strong>Dimensions:</strong> ${dimensionsLabels[dimensions]}</div>
+                    <div><strong>Espacement:</strong> ${espacement} mm</div>
+                    <div><strong>Support:</strong> ${supportLabels[support]}</div>
+                    <div><strong>Portée max:</strong> ${porteeMaxStr}</div>
+                    <div><strong>Ratio:</strong> ${bestOption.ratio.toFixed(2)}</div>
+                    <div><strong>Utilisation:</strong> ${utilizationPercent}%</div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 20px; padding: 15px; background: #fff3cd; border-radius: 8px; font-size: 0.9em;">
+            <strong>Paramètres de conception:</strong><br>
+            Essence: ${essenceLabels[essence]} | 
+            Qualité: ${qualiteLabels[qualite]} | 
+            Portée demandée: ${convertMetersToFeetInches(porteeMeters)}
+        </div>
+    `;
+
+    container.innerHTML = html;
+}
+
+function resetResultsCCQ() {
+    document.getElementById('resultPorteeDemandee-ccq').textContent = '-';
+    const statusBox = document.getElementById('status-box-ccq');
+    const statusElement = document.getElementById('resultStatut-ccq');
+    statusElement.textContent = '-';
+    statusBox.className = 'result-card';
+    
+    document.getElementById('soliveResults-ccq').innerHTML = `
+        <p style="text-align: center; color: #A0522D; margin-top: 50px;">
+            Entrez les paramètres pour voir les options de solives CCQ.
+        </p>
+    `;
+}
+
 // Initialisation
 document.addEventListener('DOMContentLoaded', function() {
     // Test initial
@@ -1026,6 +1597,26 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             console.warn(`Element ${inputId} non trouvé`);
         }
+    });
+    
+    // Ajout des écouteurs d'événements pour les solives CCQ
+    const inputsCCQ = ['porteePieds-ccq', 'porteePouces-ccq', 'essence-ccq', 'qualite-ccq', 'dimensions-ccq', 'espacement-ccq', 'support-ccq'];
+    inputsCCQ.forEach(inputId => {
+        const element = document.getElementById(inputId);
+        if (element) {
+            element.addEventListener('input', function() {
+                clearTimeout(this.timer);
+                this.timer = setTimeout(calculerSolivesCCQ, 300);
+            });
+            element.addEventListener('change', calculerSolivesCCQ);
+        } else {
+            console.warn(`Element ${inputId} non trouvé`);
+        }
+    });
+    
+    // Boutons radio pour les solives CCQ
+    document.querySelectorAll('input[name="special-ccq"]').forEach(input => {
+        input.addEventListener('change', calculerSolivesCCQ);
     });
     
     // Appel initial pour tester
